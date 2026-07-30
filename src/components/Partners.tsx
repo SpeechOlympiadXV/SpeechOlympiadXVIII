@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Image from 'next/image'
+import Image from './Image'
 import { ShieldQuestion } from 'lucide-react'
 
 // Logo imports
@@ -76,7 +76,7 @@ export function PartnersDisplay({}: PartnersDisplayProps) {
     {
       id: 10,
       name: 'Platinum Partner',
-      imageUrl: platinumLogo.src || platinumLogo,
+      imageUrl: platinumLogo,
       partnershipType: 'Platinum',
       bgStyle: 'bg-white',
     },
@@ -84,21 +84,21 @@ export function PartnersDisplay({}: PartnersDisplayProps) {
     {
       id: 11,
       name: 'Gold Partner 1',
-      imageUrl: gold1Logo.src || gold1Logo,
+      imageUrl: gold1Logo,
       partnershipType: 'Gold',
       bgStyle: 'bg-white',
     },
     {
       id: 12,
       name: 'Gold Partner 2',
-      imageUrl: gold2Logo.src || gold2Logo,
+      imageUrl: gold2Logo,
       partnershipType: 'Gold',
       bgStyle: 'bg-white',
     },
     {
       id: 13,
       name: 'Gold Partner 3',
-      imageUrl: gold3Logo.src || gold3Logo,
+      imageUrl: gold3Logo,
       partnershipType: 'Gold',
       bgStyle: 'bg-white',
     },
@@ -106,7 +106,7 @@ export function PartnersDisplay({}: PartnersDisplayProps) {
     {
       id: 14,
       name: 'Silver Partner',
-      imageUrl: silverLogo.src || silverLogo,
+      imageUrl: silverLogo,
       partnershipType: 'Silver',
       bgStyle: 'bg-white',
     },
@@ -114,28 +114,28 @@ export function PartnersDisplay({}: PartnersDisplayProps) {
     {
       id: 22,
       name: 'Gift Partner',
-      imageUrl: normal2Logo.src || normal2Logo,
+      imageUrl: normal2Logo,
       partnershipType: 'Gift',
       bgStyle: 'bg-white',
     },
     {
       id: 21,
       name: 'Wristband Partner',
-      imageUrl: normal3Logo.src || normal3Logo,
+      imageUrl: normal3Logo,
       partnershipType: 'Wristband',
       bgStyle: 'bg-white',
     },
     {
       id: 20,
       name: 'Leisure Partner',
-      imageUrl: normal1Logo.src || normal1Logo,
+      imageUrl: normal1Logo,
       partnershipType: 'Leisure',
       bgStyle: 'bg-white',
     },
     {
       id: 23,
       name: 'Education Partner',
-      imageUrl: educationLogo.src || educationLogo,
+      imageUrl: educationLogo,
       partnershipType: 'Education',
       bgStyle: 'bg-white',
     },

@@ -1,105 +1,59 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { Navigation } from '@/components/Navigation'
+import React, { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { Navigation } from '@/components/navbar'
 import { Footer } from '@/components/Footer'
 
 // Page imports
-import PageHome from '@/pages/PageHome'
-import PageAbout from '@/pages/PageAbout'
-import PageChampionsStory from '@/pages/PageChampionsStory'
-import PageTechnicalTips from '@/pages/PageTechnicalTips'
-import PageGallery from '@/pages/PageGallery'
-import PageBlogs from '@/pages/PageBlogs'
-import PageRules from '@/pages/PageRules'
-import PageFinalists from '@/pages/PageFinalists'
-import PageVote from '@/pages/PageVote'
-import Page404 from '@/pages/Page404'
+import { HomePage } from '@/pages/Home'
+import { AboutPage } from '@/pages/About'
+import { ChampionsStory } from '@/pages/ChampionsStory'
+import { PageTechnicalTips } from '@/pages/TechTips'
+import { Gallery } from '@/pages/Gallery'
+import { Blogs } from '@/pages/Blog'
+import { Rules } from '@/pages/Rules'
+import { Finalists } from '@/pages/Finalists'
+import { Vote } from '@/pages/Vote'
+import { Register } from '@/pages/Register'
+import { NotFoundPage } from '@/pages/Page404'
 
-// Sanity setup
-import { createClient } from 'next-sanity'
+// Sanity setup moved to lib/sanity.ts
 
-const sanityClient = createClient({
-  projectId: 'i32b0q2c',
-  dataset: 'production',
-  useCdn: true,
-  apiVersion: '2024-01-01',
-})
+// ScrollToTop component to handle scroll on navigation
+function ScrollToTop() {
+  const { pathname } = useLocation();
 
-type RouteKey = '/' | '/about' | '/champions-story' | '/technical-tips' | '/gallery' | '/blogs' | '/rules' | '/finalists' | '/thulasithan' | '/aloka' | '/amirthavarshani' | '/neelayadhakshi' | '/afrah'
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-const ROUTES: Record<RouteKey, React.ComponentType> = {
-  '/': PageHome,
-  '/about': PageAbout,
-  '/champions-story': PageChampionsStory,
-  '/technical-tips': PageTechnicalTips,
-  '/gallery': PageGallery,
-  '/blogs': PageBlogs,
-  '/rules': PageRules,
-  '/finalists': PageFinalists,
-  '/thulasithan': PageVote,
-  '/aloka': PageVote,
-  '/amirthavarshani': PageVote,
-  '/neelayadhakshi': PageVote,
-  '/afrah': PageVote,
+  return null;
 }
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState<string>('')
-  const [currentView, setCurrentView] = useState<React.ComponentType>(PageHome)
-
-  // Get the hash route
-  const getHash = (): string => {
-    if (typeof window !== 'undefined') {
-      return window.location.hash.split('/')[0]
-    }
-    return ''
-  }
-
-  // Get nth parameter from hash
-  const getNthParam = (n: number): string => {
-    if (typeof window !== 'undefined') {
-      return window.location.hash.split('/')[n] || ''
-    }
-    return ''
-  }
-
-  // Update current view based on path
-  useEffect(() => {
-    // Scroll to top when path changes
-    window.scrollTo({ top: 0, behavior: 'auto' })
-
-    // Get path from hash
-    const hash = window.location.hash
-    const path = ('/' + hash.slice(1)) as RouteKey
-
-    // Get the component, fallback to 404
-    const component = ROUTES[path] || Page404
-    setCurrentView(() => component)
-  }, [currentPath])
-
-  // Listen for hash changes
-  useEffect(() => {
-    const handleHashChange = () => {
-      setCurrentPath(window.location.hash)
-    }
-
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
-  }, [])
-
-  // Set initial path on mount
-  useEffect(() => {
-    setCurrentPath(window.location.hash)
-  }, [])
-
-  const CurrentView = currentView
-
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <Navigation />
       <main className="flex-grow">
-        <CurrentView />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/champions-story" element={<ChampionsStory />} />
+          <Route path="/technical-tips" element={<PageTechnicalTips />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/rules" element={<Rules />} />
+          <Route path="/finalists" element={<Finalists />} />
+          <Route path="/thulasithan" element={<Vote />} />
+          <Route path="/aloka" element={<Vote />} />
+          <Route path="/amirthavarshani" element={<Vote />} />
+          <Route path="/neelayadhakshi" element={<Vote />} />
+          <Route path="/afrah" element={<Vote />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
       <Footer />
     </div>

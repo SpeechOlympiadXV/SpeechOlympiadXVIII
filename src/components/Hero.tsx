@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 interface Star {
   id: number
@@ -11,19 +12,15 @@ interface Star {
   }
 }
 
-interface HeroProps {}
-
-export function Hero({}: HeroProps) {
+export function Hero() {
   const [textAnimationDone, setTextAnimationDone] = useState(false)
   const [stars, setStars] = useState<Star[]>([])
 
   useEffect(() => {
-    // Trigger text animation and stars after 3 seconds
     const textTimer = setTimeout(() => {
       setTextAnimationDone(true)
     }, 3000)
 
-    // Generate stars
     const starCount = 100
     const generatedStars: Star[] = []
 
@@ -41,7 +38,6 @@ export function Hero({}: HeroProps) {
     }
 
     setStars(generatedStars)
-
     return () => clearTimeout(textTimer)
   }, [])
 
@@ -49,31 +45,9 @@ export function Hero({}: HeroProps) {
     <>
       <style>{`
         @keyframes twinkle {
-          0% {
-            opacity: 0;
-            transform: scale(1);
-            translate: 0 0;
-          }
-          50% {
-            opacity: 0.7;
-            transform: scale(1.5);
-          }
-          100% {
-            opacity: 0;
-            transform: scale(1);
-            translate: 0 -30px;
-          }
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
+          0% { opacity: 0; transform: scale(1); translate: 0 0; }
+          50% { opacity: 0.7; transform: scale(1.5); }
+          100% { opacity: 0; transform: scale(1); translate: 0 -30px; }
         }
 
         .star {
@@ -93,33 +67,6 @@ export function Hero({}: HeroProps) {
         .unbound-text-shadow {
           text-shadow: 0 0 20px rgba(237, 192, 1, 0.8), 0 0 40px rgba(237, 192, 1, 0.4);
         }
-
-        .golden-glow {
-          box-shadow: 0 0 20px rgba(237, 192, 1, 0.6), 0 0 40px rgba(237, 192, 1, 0.3);
-        }
-
-        .animate-fade-in {
-          animation: fadeIn 1.2s ease-out;
-          animation-fill-mode: forwards;
-        }
-
-        .animation-delay-500 {
-          animation-delay: 0.5s;
-        }
-
-        .animation-delay-1000 {
-          animation-delay: 1s;
-        }
-
-        .animation-delay-1500 {
-          animation-delay: 1.5s;
-        }
-
-        @media (max-width: 640px) {
-          h1, h2 {
-            line-height: 1.1;
-          }
-        }
       `}</style>
 
       <div
@@ -132,7 +79,7 @@ export function Hero({}: HeroProps) {
       >
         {/* Twinkling Stars Background */}
         {textAnimationDone && (
-          <div className="absolute inset-0">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }} className="absolute inset-0">
             {stars.map((star) => (
               <div
                 key={star.id}
@@ -146,40 +93,51 @@ export function Hero({}: HeroProps) {
                 }}
               />
             ))}
-          </div>
+          </motion.div>
         )}
 
         {/* Main Text Container */}
         <div className="w-full max-w-6xl h-full flex flex-col items-center justify-center p-4 z-10 relative">
           
           {/* First Line: "Own Your Voice" */}
-          <div className="flex flex-col items-center mb-8">
-            <div className="animate-fade-in animation-delay-500">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white text-center leading-tight tracking-tight">
-                OWN YOUR
-                <span className="block unleashed-shadow text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-                  VOICE
-                </span>
-              </h1>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, ease: 'easeOut', delay: 0.5 }}
+            className="flex flex-col items-center mb-8"
+          >
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white text-center leading-tight tracking-tight">
+              OWN YOUR
+              <span className="block unleashed-shadow text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mt-2">
+                VOICE
+              </span>
+            </h1>
+          </motion.div>
 
           {/* Golden Separator Line */}
-          <div className="animate-fade-in animation-delay-1000 my-6">
-            <div className="w-32 md:w-48 h-1 bg-gradient-to-r from-transparent via-[#EDC001] to-transparent golden-glow" />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: '12rem' }}
+            transition={{ duration: 1.2, ease: 'easeOut', delay: 1 }}
+            className="my-6"
+          >
+            <div className="h-1 bg-gradient-to-r from-transparent via-[#EDC001] to-transparent shadow-[0_0_20px_rgba(237,192,1,0.6)] w-full" />
+          </motion.div>
 
           {/* Second Line: "Earn Your Crown" */}
-          <div className="flex flex-col items-center mt-8">
-            <div className="animate-fade-in animation-delay-1500">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#EDC001] text-center leading-tight tracking-tight">
-                EARN YOUR
-                <span className="block unbound-text-shadow text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-                  CROWN
-                </span>
-              </h2>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, ease: 'easeOut', delay: 1.5 }}
+            className="flex flex-col items-center mt-8"
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#EDC001] text-center leading-tight tracking-tight">
+              EARN YOUR
+              <span className="block unbound-text-shadow text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mt-2">
+                CROWN
+              </span>
+            </h2>
+          </motion.div>
         </div>
       </div>
     </>

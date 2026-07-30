@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
+import Image from '../components/Image'
 
 // Component imports
 import { Hero } from '../components/Hero.tsx'
@@ -49,28 +49,28 @@ export function HomePage({}: HomePageProps) {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([
     {
       key: '1',
-      imageSrc: sirimevantestimonialmobileImage.src || sirimevantestimonialmobileImage,
+      imageSrc: sirimevantestimonialmobileImage,
       title: 'Sirimevan Jayasundera',
       subtitle: 'Champion - SOVI',
       body: 'Speech Olympiad is more than a mere speaking contest, it is a culmination of people, experiences and exposure. I cherish to this date, every moment of the competition which was a gateway to self-reflection that enhanced my capabilities in the corporate world and beyond.',
     },
     {
       key: '2',
-      imageSrc: malindtestimonialmobileImage.src || malindtestimonialmobileImage,
+      imageSrc: malindtestimonialmobileImage,
       title: 'Malindi Jayathunga',
       subtitle: '1st Runner-Up and Best Prepared Speaker - SOXI',
       body: 'My Speech Olympiad experience has enabled me to become the storyteller I am today. I work in advertising where I get to present new ideas and unique concepts to both my team and clients on a daily basis. I developed my presenting skills thanks to the support and knowledge I got from Speech Olympiad and the Gavel Club of University of Moratuwa.',
     },
     {
       key: '3',
-      imageSrc: asithatestimonialmobileImage.src || asithatestimonialmobileImage,
+      imageSrc: asithatestimonialmobileImage,
       title: 'Asitha Rathnayake',
       subtitle: 'Champion – SOXII',
       body: 'Speech Olympiad is a good place to win, but more than that, it is a great place to lose. The Gavel Mora family helped me a lot to improve myself as a speaker and a leader during the course of three Speech Olympiads, which helped me become the overall champion at Speech Olympiad XII.',
     },
     {
       key: '4',
-      imageSrc: amayatestimonialmobileImage.src || amayatestimonialmobileImage,
+      imageSrc: amayatestimonialmobileImage,
       title: 'Amaya Dharmasiri',
       subtitle: '1st Runner-Up and Best Impromptu Speaker – SOXII',
       body: 'I was not new to the stage, but I was new to public speaking when I took part in Speech Olympiad. Everyone at the Gavel Club was willing to help us become the best version of ourselves. Not only did I become more confident in communicating in English, but I also learnt about my capabilities and understood myself better, thanks to Speech Olympiad.',
@@ -84,15 +84,15 @@ export function HomePage({}: HomePageProps) {
       heading: 'What is Speech Olympiad?',
       headingEnd: '',
       text: 'Speech Olympiad stands as the flagship occasion hosted by the Gavel Club at the University of Moratuwa. As the sole English language speech competition within the university...',
-      image: homePageAbout.src || homePageAbout,
+      image: homePageAbout,
       urlString: '#about',
     },
   ]
 
   const galleryImages = [
-    prelis1.src || prelis1,
-    prelis2.src || prelis2,
-    prelis3.src || prelis3,
+    prelis1,
+    prelis2,
+    prelis3,
   ]
 
   // Rotate testimonials on desktop every 10 seconds

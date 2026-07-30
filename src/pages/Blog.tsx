@@ -1,10 +1,10 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import Image from 'next/image'
+import Image from '../components/Image'
 import { ChevronLeft, X } from 'lucide-react'
-import { SanityBlocks } from 'sanity-blocks-vue-component'
-import sanity from '../assets/client'
+import { PortableText } from '@portabletext/react'
+import { sanityClient as sanity } from '../lib/sanity'
 import imageUrlBuilder from '@sanity/image-url'
 
 const imageBuilder = imageUrlBuilder(sanity)
@@ -275,10 +275,9 @@ export function Blogs({
 
                   {/* Blog Content */}
                   <div className="blog-container">
-                    <div className="max-w-[920px] mx-auto">
-                      <SanityBlocks
-                        blocks={blocks}
-                        className="prose prose-invert prose-lg blog-content"
+                    <div className="max-w-[920px] mx-auto prose prose-invert prose-lg blog-content">
+                      <PortableText
+                        value={blocks}
                       />
                     </div>
                   </div>

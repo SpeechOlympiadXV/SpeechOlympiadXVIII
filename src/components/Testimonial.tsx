@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import Image from './Image'
 
 interface AppTestimonialCardProps {
   imageSrc: string

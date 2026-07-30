@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Image from 'next/image'
+import Image from './Image'
 import { X } from 'lucide-react'
 
 const IMAGES_PER_ROW = 4
