@@ -40,7 +40,7 @@ export function CompetitionTimeline({}: CompetitionTimelineProps) {
   ])
 
   return (
-    <div className="p-9 m-9 bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-xl w-[90%] ml-[5%] md:w-[80%] md:ml-[10%] mr-auto">
+    <div className="p-9 my-9 bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-xl w-full">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tighter leading-tight w-[80%]">

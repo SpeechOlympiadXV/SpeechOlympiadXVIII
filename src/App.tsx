@@ -33,7 +33,7 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#181818] text-white">
       <ScrollToTop />
       <Navigation />
       <main className="flex-grow">

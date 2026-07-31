@@ -67,7 +67,7 @@ export function PageTechnicalTips() {
   return (
     <div className="w-full flex justify-center items-center py-10">
       {activeKey === '0' ? (
-        <div className="w-[90%] bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+        <div className="w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
           <div className="text-3xl mb-9 lg:text-4xl font-semibold tracking-tight text-[#EDC001]">
             Technical Tips
           </div>

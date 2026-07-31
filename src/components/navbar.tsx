@@ -74,7 +74,7 @@ export function Navigation({}: NavigationProps) {
 
   return (
     <nav className="bg-[#181818] sticky top-0 w-full z-50 border-b border-white/5 shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">

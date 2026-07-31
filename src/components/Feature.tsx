@@ -25,34 +25,34 @@ export function Feature({
   return (
     <div className="my-10 flex flex-col md:flex-row gap-6 w-full rounded-2xl mx-auto bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm shadow-black relative">
       {/* Content Section */}
-      <div className="flex-1 space-y-4 p-9">
-        <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tighter leading-tight">
+      <div className="flex-1 space-y-6 p-12 lg:p-16 flex flex-col justify-center">
+        <h2 className="text-4xl lg:text-5xl xl:text-6xl font-semibold text-white tracking-tighter leading-tight">
           {heading}
           {headingEnd && <span>{headingEnd}</span>}
         </h2>
 
-        <div className="text-gray-300 leading-6 text-left text-lg font-light">
+        <div className="text-gray-300 leading-relaxed text-left text-xl lg:text-2xl font-light">
           {text}
         </div>
 
         <button
           onClick={handleClick}
-          className="flex h-10 font-semibold mt-10 items-center px-4 py-2 bg-[#EDC001cc] text-gray-100 rounded-lg hover-effect transition-all duration-300 hover:bg-[#EDC001aa] hover:text-shadow-sm group"
+          className="flex h-14 w-fit font-semibold mt-10 items-center px-8 py-4 text-lg bg-[#EDC001cc] text-gray-100 rounded-lg hover-effect transition-all duration-300 hover:bg-[#EDC001aa] hover:text-shadow-sm group"
         >
           Read More
-          <ChevronRight className="h-4 w-4 ml-2 mt-[2px] group-hover:translate-x-1 transition-transform" />
+          <ChevronRight className="h-5 w-5 ml-2 mt-[2px] group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
 
       {/* Image Section */}
-      <div className="w-full md:w-1/3 h-full flex flex-col justify-center">
+      <div className="w-full md:w-[45%] lg:w-[40%] h-full flex flex-col justify-center">
         <Image
           src={image}
           alt={heading}
-          width={500}
-          height={400}
-          className="w-full h-64 object-cover rounded-lg"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          width={800}
+          height={600}
+          className="w-full h-80 md:h-full min-h-[300px] md:min-h-[400px] lg:min-h-[500px] object-cover rounded-r-2xl rounded-l-none md:rounded-l-lg"
+          sizes="(max-width: 768px) 100vw, 50vw"
           priority={index === 0}
         />
       </div>

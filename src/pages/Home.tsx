@@ -100,13 +100,11 @@ export function HomePage({}: HomePageProps) {
     const isMobile = window.matchMedia('(max-width: 768px)').matches
 
     if (!isMobile) {
-      let testimonialOut = testimonials[testimonials.length - 1]
-
       const shiftTestimonial = () => {
         setDisplayedTestimonials((prev) => {
-          const temp = testimonialOut
-          testimonialOut = prev[0]
-          return [...prev.slice(1), temp]
+          if (prev.length === 0) return prev
+          const first = prev[0]
+          return [...prev.slice(1), first]
         })
       }
 
@@ -121,7 +119,7 @@ export function HomePage({}: HomePageProps) {
       <Hero />
 
       {/* Marketing Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="w-full px-4 sm:px-8 lg:px-12 py-12">
         {/* Doodle Element */}
         <Doodle />
 

@@ -209,11 +209,7 @@ export function Blogs({
   return (
     <div
       ref={componentRef}
-      className={`transition-all bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm text-gray-100 mt-10 mb-10 rounded-lg mr-auto ${
-        post
-          ? 'w-[98%] ml-[1%] md:w-[95%] md:ml-[2.5%]'
-          : 'w-[90%] ml-[5%]'
-      }`}
+      className={`transition-all bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm text-gray-100 mt-10 mb-10 rounded-lg w-full`}
     >
       <div className="container mx-auto px-4 py-8 w-full">
         {/* Header */}

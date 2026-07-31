@@ -147,10 +147,10 @@ export function PartnersDisplay({}: PartnersDisplayProps) {
 
   return (
     <div className="w-full flex justify-center items-center mb-9">
-      <div className="w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+      <div className="w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-2xl p-12 lg:p-16 shadow-2xl">
         {/* Header */}
-        <div className="w-full flex flex-col items-start mb-9">
-          <h1 className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white">
+        <div className="w-full flex flex-col items-start mb-12">
+          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-tighter leading-tight text-white">
             Our Partners
           </h1>
         </div>
