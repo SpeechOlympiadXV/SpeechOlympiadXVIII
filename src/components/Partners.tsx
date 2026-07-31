@@ -147,7 +147,7 @@ export function PartnersDisplay({}: PartnersDisplayProps) {
 
   return (
     <div className="w-full flex justify-center items-center mb-9">
-      <div className="w-[90%] md:w-[80%] bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+      <div className="w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
         {/* Header */}
         <div className="w-full flex flex-col items-start mb-9">
           <h1 className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white">

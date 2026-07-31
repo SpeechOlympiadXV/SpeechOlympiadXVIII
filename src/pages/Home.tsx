@@ -161,7 +161,7 @@ export function HomePage({}: HomePageProps) {
         </div>
 
         {/* Testimonials Section */}
-        <div className="m-8 px-4 py-8 w-[90%] ml-auto mr-auto md:w-[80%] md:ml-[10%] bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-lg">
+        <div className="my-8 px-4 py-8 w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-lg">
           <div className="pl-4 text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-8">
             Testimonials
           </div>
@@ -185,7 +185,7 @@ export function HomePage({}: HomePageProps) {
         </div>
 
         {/* Gallery Section */}
-        <div className="m-9 px-4 py-8 w-[90%] ml-[5%] mr-auto md:w-[80%] md:ml-[10%] bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-lg">
+        <div className="my-9 px-4 py-8 w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-lg">
           <div className="pl-4 text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-4">
             Gallery
           </div>

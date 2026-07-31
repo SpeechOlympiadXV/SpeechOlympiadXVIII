@@ -23,7 +23,7 @@ export function Feature({
   }
 
   return (
-    <div className="m-10 flex flex-col md:flex-row gap-6 w-[90%] md:w-[80%] rounded-2xl mx-auto bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm shadow-black relative">
+    <div className="my-10 flex flex-col md:flex-row gap-6 w-full rounded-2xl mx-auto bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm shadow-black relative">
       {/* Content Section */}
       <div className="flex-1 space-y-4 p-9">
         <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tighter leading-tight">
