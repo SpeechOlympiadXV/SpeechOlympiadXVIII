@@ -79,7 +79,7 @@ export function Navigation({ }: NavigationProps) {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link to="/">
-              <SOLogo className="w-auto h-24" />
+              <SOLogo className="w-auto h-14" />
             </Link>
           </div>
 

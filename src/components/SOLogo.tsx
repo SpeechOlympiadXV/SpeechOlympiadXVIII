@@ -1,4 +1,4 @@
-import SOXVIIILogo from '@/assets/images/SOXVIII_LOGO_White.png'
+import SOXVIIILogo from '@/assets/images/SO_XIX_Logo_White_on_Transparent.png'
 
 interface SOLogoProps {
   className?: string
