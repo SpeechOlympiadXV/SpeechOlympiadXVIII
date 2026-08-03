@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
+
 interface FireParticle {
   id: number
   style: any
@@ -19,22 +20,34 @@ export function Hero() {
     const generatedParticles: FireParticle[] = []
 
     for (let i = 0; i < particleCount; i++) {
-      const isBlue = Math.random() > 0.85
+      const rand = Math.random();
+      let coreColor, midColor, endColor;
 
-      const coreColor = isBlue ? '#FFF9C4' : '#EDC001'
-      const midColor = isBlue ? '#EDC001' : '#EDC001'
-      const endColor = isBlue ? '#B8860B' : '#8B6508'
+      if (rand > 0.95) {
+        // Blue (5%)
+        coreColor = '#E0FFFF'; 
+        midColor = '#00BFFF';
+        endColor = '#0000CD';
+      } else if (rand > 0.88) {
+        // Red (7%)
+        coreColor = '#FFC0CB';
+        midColor = '#FF0000';
+        endColor = '#8B0000';
+      } else {
+        // Golden Yellow (88%)
+        coreColor = '#FFFDE7';
+        midColor = '#FFD700';
+        endColor = '#DAA520';
+      }
 
-      const size = Math.random() * 15 + 4
-      const duration = Math.random() * 5 + 4
-      const delay = Math.random() * -8
+      const size = Math.random() * 6 + 2
+      const duration = Math.random() * 10 + 8
+      const delay = Math.random() * -12
 
-      const isLeft = Math.random() > 0.5;
-
-      const startX = isLeft ? `calc(0% - 20px)` : `calc(100% + 20px)`;
+      const startX = `${Math.random() * 120 - 10}%`;
       const startY = `calc(100% + 20px)`;
 
-      const driftX = isLeft ? `${Math.random() * 40 + 10}vw` : `-${Math.random() * 40 + 10}vw`;
+      const driftX = `${(Math.random() - 0.5) * 50}vw`;
       const driftY = `-${Math.random() * 80 + 50}vh`;
       
       const rotStart = Math.random() * 360;
@@ -49,7 +62,6 @@ export function Hero() {
           height: `${size * (Math.random() * 0.4 + 0.2)}px`,
           animationDelay: `${delay}s`,
           animationDuration: `${duration}s`,
-          filter: `blur(${Math.random() * 2}px)`,
           '--core-color': coreColor,
           '--mid-color': midColor,
           '--end-color': endColor,
@@ -73,18 +85,18 @@ export function Hero() {
             transform: translate(0, 0) scale(1.2) rotate(var(--rot-start));
             opacity: 1;
             background-color: var(--core-color);
-            box-shadow: 0 0 10px var(--core-color);
+            box-shadow: 0 0 2px var(--core-color);
           }
           40% {
             background-color: var(--mid-color);
             opacity: 0.9;
-            box-shadow: 0 0 15px var(--mid-color);
+            box-shadow: 0 0 4px var(--mid-color);
           }
           100% {
             transform: translate(var(--drift-x), var(--drift-y)) scale(0.2) rotate(var(--rot-end));
             opacity: 0;
             background-color: var(--end-color);
-            box-shadow: 0 0 5px var(--end-color);
+            box-shadow: 0 0 2px var(--end-color);
           }
         }
 
@@ -123,6 +135,7 @@ export function Hero() {
             />
           ))}
         </div>
+
 
         {/* Main Text Container */}
         <div className="w-full max-w-6xl h-full flex flex-col items-center justify-center p-4 z-10 relative">
