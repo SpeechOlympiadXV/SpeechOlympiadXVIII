@@ -1,63 +1,99 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-interface Star {
+interface FireParticle {
   id: number
-  style: {
-    left: string
-    top: string
-    animationDelay: string
-    filter: string
-    backgroundColor: string
-  }
+  style: any
 }
 
 export function Hero() {
   const [textAnimationDone, setTextAnimationDone] = useState(false)
-  const [stars, setStars] = useState<Star[]>([])
+  const [particles, setParticles] = useState<FireParticle[]>([])
 
   useEffect(() => {
     const textTimer = setTimeout(() => {
       setTextAnimationDone(true)
     }, 3000)
 
-    const starCount = 100
-    const generatedStars: Star[] = []
+    const particleCount = 200
+    const generatedParticles: FireParticle[] = []
 
-    for (let i = 0; i < starCount; i++) {
-      generatedStars.push({
+    for (let i = 0; i < particleCount; i++) {
+      const isBlue = Math.random() > 0.85
+
+      const coreColor = isBlue ? '#FFF9C4' : '#EDC001'
+      const midColor = isBlue ? '#EDC001' : '#EDC001'
+      const endColor = isBlue ? '#B8860B' : '#8B6508'
+
+      const size = Math.random() * 15 + 4
+      const duration = Math.random() * 5 + 4
+      const delay = Math.random() * -8
+
+      const isLeft = Math.random() > 0.5;
+
+      const startX = isLeft ? `calc(0% - 20px)` : `calc(100% + 20px)`;
+      const startY = `calc(100% + 20px)`;
+
+      const driftX = isLeft ? `${Math.random() * 40 + 10}vw` : `-${Math.random() * 40 + 10}vw`;
+      const driftY = `-${Math.random() * 80 + 50}vh`;
+      
+      const rotStart = Math.random() * 360;
+      const rotEnd = rotStart + (Math.random() * 720 - 360);
+
+      generatedParticles.push({
         id: i,
         style: {
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-          animationDelay: `${Math.random() * 5}s`,
-          filter: `blur(${Math.random() * 5}px)`,
-          backgroundColor: Math.random() > 0.5 ? 'white' : '#EDC001',
+          left: startX,
+          top: startY,
+          width: `${size}px`,
+          height: `${size * (Math.random() * 0.4 + 0.2)}px`,
+          animationDelay: `${delay}s`,
+          animationDuration: `${duration}s`,
+          filter: `blur(${Math.random() * 2}px)`,
+          '--core-color': coreColor,
+          '--mid-color': midColor,
+          '--end-color': endColor,
+          '--drift-x': driftX,
+          '--drift-y': driftY,
+          '--rot-start': `${rotStart}deg`,
+          '--rot-end': `${rotEnd}deg`,
         },
       })
     }
 
-    setStars(generatedStars)
+    setParticles(generatedParticles)
     return () => clearTimeout(textTimer)
   }, [])
 
   return (
     <>
       <style>{`
-        @keyframes twinkle {
-          0% { opacity: 0; transform: scale(1); translate: 0 0; }
-          50% { opacity: 0.7; transform: scale(1.5); }
-          100% { opacity: 0; transform: scale(1); translate: 0 -30px; }
+        @keyframes phoenixFireRise {
+          0% {
+            transform: translate(0, 0) scale(1.2) rotate(var(--rot-start));
+            opacity: 1;
+            background-color: var(--core-color);
+            box-shadow: 0 0 10px var(--core-color);
+          }
+          40% {
+            background-color: var(--mid-color);
+            opacity: 0.9;
+            box-shadow: 0 0 15px var(--mid-color);
+          }
+          100% {
+            transform: translate(var(--drift-x), var(--drift-y)) scale(0.2) rotate(var(--rot-end));
+            opacity: 0;
+            background-color: var(--end-color);
+            box-shadow: 0 0 5px var(--end-color);
+          }
         }
 
-        .star {
+        .phoenix-fire-particle {
           position: absolute;
-          width: 0.25rem;
-          height: 0.25rem;
-          border-radius: 9999px;
-          backdrop-filter: blur(100%);
-          opacity: 0;
-          animation: twinkle 5s infinite;
+          border-radius: 2px;
+          mix-blend-mode: screen;
+          animation: phoenixFireRise linear infinite;
+          pointer-events: none;
         }
 
         .unleashed-shadow {
@@ -77,40 +113,29 @@ export function Hero() {
           backgroundPosition: '0px 0px',
         }}
       >
-        {/* Twinkling Stars Background */}
-        {textAnimationDone && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }} className="absolute inset-0">
-            {stars.map((star) => (
-              <div
-                key={star.id}
-                className="star"
-                style={{
-                  left: star.style.left,
-                  top: star.style.top,
-                  backgroundColor: star.style.backgroundColor,
-                  animationDelay: star.style.animationDelay,
-                  filter: star.style.filter,
-                }}
-              />
-            ))}
-          </motion.div>
-        )}
+        {/* Phoenix Fire Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          {particles.map((particle) => (
+            <div
+              key={particle.id}
+              className="phoenix-fire-particle"
+              style={particle.style}
+            />
+          ))}
+        </div>
 
         {/* Main Text Container */}
         <div className="w-full max-w-6xl h-full flex flex-col items-center justify-center p-4 z-10 relative">
-          
-          {/* First Line: "Own Your Voice" */}
+
+          {/* First Line: "Rise Within" */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.2, ease: 'easeOut', delay: 0.5 }}
             className="flex flex-col items-center mb-8"
           >
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white text-center leading-tight tracking-tight">
-              OWN YOUR
-              <span className="block unleashed-shadow text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mt-2">
-                VOICE
-              </span>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white text-center leading-tight tracking-tight unleashed-shadow">
+              RISE WITHIN
             </h1>
           </motion.div>
 
@@ -124,18 +149,15 @@ export function Hero() {
             <div className="h-1 bg-gradient-to-r from-transparent via-[#EDC001] to-transparent shadow-[0_0_20px_rgba(237,192,1,0.6)] w-full" />
           </motion.div>
 
-          {/* Second Line: "Earn Your Crown" */}
+          {/* Second Line: "Reign Beyond" */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.2, ease: 'easeOut', delay: 1.5 }}
             className="flex flex-col items-center mt-8"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#EDC001] text-center leading-tight tracking-tight">
-              EARN YOUR
-              <span className="block unbound-text-shadow text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mt-2">
-                CROWN
-              </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#EDC001] text-center leading-tight tracking-tight unbound-text-shadow">
+              REIGN BEYOND
             </h2>
           </motion.div>
         </div>
