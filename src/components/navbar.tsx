@@ -17,15 +17,15 @@ const navigation: NavItem[] = [
   { name: 'About', href: '/about', current: false, className: 'text-white' },
   { name: "Champion's Story", href: "/champions-story", current: false, className: 'text-white' },
   { name: 'Technical Tips', href: '/technical-tips', current: false, className: 'text-white' },
-  { name: 'Finalists', href: '/finalists', current: false, className: 'text-white' },
+  /*{ name: 'Finalists', href: '/finalists', current: false, className: 'text-white' },*/
   { name: 'Gallery', href: '/gallery', current: false, className: 'text-white' },
   { name: 'Rules & Regulations', href: '/rules', current: false, className: 'text-white' },
   { name: 'Blogs', href: '/blogs', current: false, className: 'text-white' },
 ]
 
-interface NavigationProps {}
+interface NavigationProps { }
 
-export function Navigation({}: NavigationProps) {
+export function Navigation({ }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
   const activeURL = location.pathname
@@ -38,8 +38,8 @@ export function Navigation({}: NavigationProps) {
         className={`
           px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200
           ${item.className}
-          ${isActive 
-            ? 'bg-white/10 shadow-lg' 
+          ${isActive
+            ? 'bg-white/10 shadow-lg'
             : 'text-gray-300 hover:bg-white/5 hover:shadow-md'
           }
         `}
@@ -60,8 +60,8 @@ export function Navigation({}: NavigationProps) {
         className={`
           block px-3 py-2 rounded-md text-base font-medium transition-all duration-200
           ${item.className}
-          ${isActive 
-            ? 'bg-white/10 shadow-lg' 
+          ${isActive
+            ? 'bg-white/10 shadow-lg'
             : 'text-gray-300 hover:bg-white/5 hover:shadow-md'
           }
         `}
@@ -106,8 +106,8 @@ export function Navigation({}: NavigationProps) {
                   <X className="hidden h-6 w-6 xl:block" />
                 </Button>
               </SheetTrigger>
-              <SheetContent 
-                side="right" 
+              <SheetContent
+                side="right"
                 className="w-[300px] sm:w-[400px] bg-gradient-to-br from-[#181818] via-[#181818] to-[#282828] border-none rounded-b-none"
               >
                 <div className="px-2 pt-2 pb-3 space-y-1">

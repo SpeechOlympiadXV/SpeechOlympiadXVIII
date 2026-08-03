@@ -9,14 +9,14 @@ interface Stage {
   diamondStyle: string
 }
 
-interface CompetitionTimelineProps {}
+interface CompetitionTimelineProps { }
 
-export function CompetitionTimeline({}: CompetitionTimelineProps) {
+export function CompetitionTimeline({ }: CompetitionTimelineProps) {
   const [stages] = useState<Stage[]>([
     {
       id: 1,
       name: 'Preliminary Round',
-      date: '31st August, 2025',
+      date: '6th September, 2026',
       upcoming: false,
       lineStyle: 'bg-gradient-to-b from-[#edc00133] to-[#edc00133]',
       diamondStyle: 'bg-[#594d1b]',
@@ -24,7 +24,7 @@ export function CompetitionTimeline({}: CompetitionTimelineProps) {
     {
       id: 2,
       name: 'Semi Finals',
-      date: '14th September, 2025',
+      date: '20th September, 2026',
       upcoming: false,
       lineStyle: 'bg-gradient-to-b from-[#edc00133] to-[#edc001]',
       diamondStyle: 'bg-[#594d1b]',
@@ -32,7 +32,7 @@ export function CompetitionTimeline({}: CompetitionTimelineProps) {
     {
       id: 3,
       name: 'Finals',
-      date: '30th September, 2025',
+      date: '1st October, 2026',
       upcoming: true,
       lineStyle: 'bg-gradient-to-t from-[#edc00133] to-[#edc001]',
       diamondStyle: 'color-pulse',
@@ -61,9 +61,8 @@ export function CompetitionTimeline({}: CompetitionTimelineProps) {
             >
               {/* Vertical Line */}
               <div
-                className={`absolute overflow-visible top-12 sm:left-[52%] md:left-[51.5%] lg:left-[50.5%] xl:left-[48.5%] transform sm:-translate-x-1/2 w-[1px] ${
-                  stage.id === stages.length ? 'h-0' : 'h-[120%]'
-                } ${stage.lineStyle}`}
+                className={`absolute overflow-visible top-12 sm:left-[52%] md:left-[51.5%] lg:left-[50.5%] xl:left-[48.5%] transform sm:-translate-x-1/2 w-[1px] ${stage.id === stages.length ? 'h-0' : 'h-[120%]'
+                  } ${stage.lineStyle}`}
               />
 
               {/* Diamond Shape */}
@@ -80,32 +79,27 @@ export function CompetitionTimeline({}: CompetitionTimelineProps) {
               <div className="sm:ml-8 flex flex-col sm:flex-row items-center sm:justify-between sm:items-start mb-4">
                 <div className="pl-[10%] w-[90%] sm:pl-8">
                   <div
-                    className={`flex w-[100%] items-center mb-2 ${
-                      stage.id % 2 === 0 ? 'justify-start' : 'justify-end'
-                    }`}
+                    className={`flex w-[100%] items-center mb-2 ${stage.id % 2 === 0 ? 'justify-start' : 'justify-end'
+                      }`}
                   >
                     <div
-                      className={`ml-0 w-full sm:w-[45%] p-4 flex flex-col mb-5 rounded-lg ${
-                        stage.id % 2 === 0 ? 'sm:text-end' : ''
-                      } ${
-                        stage.upcoming
+                      className={`ml-0 w-full sm:w-[45%] p-4 flex flex-col mb-5 rounded-lg ${stage.id % 2 === 0 ? 'sm:text-end' : ''
+                        } ${stage.upcoming
                           ? 'backdrop-brightness-200 border-[1px] border-[#edc00155]'
                           : 'backdrop-brightness-125'
-                      }`}
+                        }`}
                     >
                       <h3
-                        className={`text-xl md:text-2xl lg:text-3xl font-semibold mb-4 ${
-                          stage.upcoming
+                        className={`text-xl md:text-2xl lg:text-3xl font-semibold mb-4 ${stage.upcoming
                             ? 'text-transparent bg-clip-text bg-gradient-to-r from-white to-[#EDC001]'
                             : 'text-gray-400'
-                        }`}
+                          }`}
                       >
                         {stage.name}
                       </h3>
                       <time
-                        className={`text-sm xl:text-base ${
-                          stage.upcoming ? 'text-gray-200' : 'text-gray-400'
-                        }`}
+                        className={`text-sm xl:text-base ${stage.upcoming ? 'text-gray-200' : 'text-gray-400'
+                          }`}
                       >
                         {stage.date}
                       </time>

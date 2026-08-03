@@ -4,7 +4,7 @@ export function Rules() {
       <h1 className="text-3xl font-semibold mb-6 text-center">Speech Olympiad XVIII</h1>
       <h3 className="text-lg font-thin mb-6 text-center">Intra-University Speech Competition - University of Moratuwa</h3>
       <h1 className="text-xl font-semibold mb-6 text-center">Contest Rules: Preliminaries</h1>
-      
+
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">1. Eligibility</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
@@ -50,7 +50,7 @@ export function Rules() {
         <h2 className="text-2xl font-semibold mb-4">4. Competition Procedure</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal pt-1 pb-2 border-none">
-            The preliminaries will be happening on the <span className="font-bold text-white">31st of August</span> at the University Premises. For verification purposes, all contestants must bring their <span className="font-bold text-white">University ID</span> or the <span className="font-bold text-white">Student Record Book</span>.
+            The preliminaries will be happening on the <span className="font-bold text-white">6th of September</span> at the University Premises. For verification purposes, all contestants must bring their <span className="font-bold text-white">University ID</span> or the <span className="font-bold text-white">Student Record Book</span>.
           </li>
           <li className="text-gray-300 font-normal pt-1 pb-2 border-none">
             Prior to the contest, each speaker will be allocated a time slot at which the contestant must deliver the speech.
@@ -182,8 +182,8 @@ export function Rules() {
           <li className="text-gray-300 font-bold pt-1 pb-2 border-none">
             If the contestant has any issue or requires further details with the given procedure, please contact:
             <ul className="list-disc pl-6 mt-2 space-y-1 border-none" style={{ listStyleType: 'circle' }}>
-              <li className="text-gray-300 p-1 font-bold border-none">Neelayadhakshi Priyadhakshan +94 76 317 5352 (Co-Chair- SO XVIII)</li>
-              <li className="text-gray-300 p-1 font-bold border-none">Sandavi Nuthara +94 75 317 1438 (Education Pillar Head- SO XVIII)</li>
+              <li className="text-gray-300 p-1 font-bold border-none">Ranuja Jayawardena +94 71 172 3936 (Co-Chair- SO XIX)</li>
+              <li className="text-gray-300 p-1 font-bold border-none">Hansali Kariyawasam +94 70 151 8194 (Education Pillar Head- SO XIX)</li>
             </ul>
           </li>
         </ul>

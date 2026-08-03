@@ -5,7 +5,7 @@ import Image from '../components/Image'
 import { Hero } from '../components/Hero.tsx'
 import { Feature } from '../components/Feature.tsx'
 import { Doodle } from '../components/Doodle.tsx'
-import { PartnersDisplay } from '../components/Partners.tsx'
+//import { PartnersDisplay } from '../components/Partners.tsx'
 import { CompetitionTimeline } from '../components/Timeline.tsx'
 import { AppGallery } from '../components/Gallery.tsx'
 import { AppTestimonialCard } from '../components/Testimonial.tsx'
@@ -43,9 +43,9 @@ interface Testimonial {
   body: string
 }
 
-interface HomePageProps {}
+interface HomePageProps { }
 
-export function HomePage({}: HomePageProps) {
+export function HomePage({ }: HomePageProps) {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([
     {
       key: '1',
@@ -138,7 +138,7 @@ export function HomePage({}: HomePageProps) {
         </div>
 
         {/* Partners Section */}
-        <PartnersDisplay />
+        {/* <PartnersDisplay /> */}
 
         {/* Timeline Section */}
         <CompetitionTimeline />

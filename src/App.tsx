@@ -45,12 +45,12 @@ export default function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/rules" element={<Rules />} />
-          <Route path="/finalists" element={<Finalists />} />
+          {/*<Route path="/finalists" element={<Finalists />} />
           <Route path="/thulasithan" element={<Vote />} />
           <Route path="/aloka" element={<Vote />} />
           <Route path="/amirthavarshani" element={<Vote />} />
           <Route path="/neelayadhakshi" element={<Vote />} />
-          <Route path="/afrah" element={<Vote />} />
+          <Route path="/afrah" element={<Vote />} />*/}
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
