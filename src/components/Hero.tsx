@@ -108,12 +108,20 @@ export function Hero() {
           pointer-events: none;
         }
 
-        .unleashed-shadow {
-          text-shadow: 0 0 20px rgba(188, 156, 35, 0.8), 0 0 40px rgba(188, 156, 35, 0.4);
+        .silver-metallic-text {
+          background: linear-gradient(to bottom right, #a1a1aa 0%, #f4f4f5 30%, #71717a 70%, #e4e4e7 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke: 1.5px #bf953f;
+          filter: drop-shadow(0 0 20px rgba(161, 161, 170, 0.5)) drop-shadow(0 0 40px rgba(161, 161, 170, 0.3));
         }
 
-        .unbound-text-shadow {
-          text-shadow: 0 0 20px rgba(237, 192, 1, 0.8), 0 0 40px rgba(237, 192, 1, 0.4);
+        .golden-metallic-text {
+          background: linear-gradient(to bottom right, #bf953f 0%, #fcf6ba 30%, #b38728 70%, #fbf5b7 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke: 1.5px #bf953f;
+          filter: drop-shadow(0 0 20px rgba(237, 192, 1, 0.5)) drop-shadow(0 0 40px rgba(237, 192, 1, 0.3));
         }
       `}</style>
 
@@ -140,14 +148,14 @@ export function Hero() {
         {/* Main Text Container */}
         <div className="w-full max-w-6xl h-full flex flex-col items-center justify-center p-4 z-10 relative">
 
-          {/* First Line: "Rise Within" */}
+          {/* First Line: "Rise Within, Shine In" */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.2, ease: 'easeOut', delay: 0.5 }}
             className="flex flex-col items-center mb-8"
           >
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white text-center leading-tight tracking-tight unleashed-shadow">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-thin text-center leading-tight tracking-tight silver-metallic-text uppercase">
               RISE WITHIN
             </h1>
           </motion.div>
@@ -169,7 +177,7 @@ export function Hero() {
             transition={{ duration: 1.2, ease: 'easeOut', delay: 1.5 }}
             className="flex flex-col items-center mt-8"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#EDC001] text-center leading-tight tracking-tight unbound-text-shadow">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium text-center leading-tight tracking-tight golden-metallic-text uppercase">
               REIGN BEYOND
             </h2>
           </motion.div>
