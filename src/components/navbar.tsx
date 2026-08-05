@@ -9,7 +9,8 @@ interface NavItem {
   name: string
   href: string
   current: boolean
-  className: string
+  className?: string
+  isButton?: boolean
 }
 
 const navigation: NavItem[] = [
@@ -21,7 +22,7 @@ const navigation: NavItem[] = [
   { name: 'Gallery', href: '/gallery', current: false, className: 'text-white' },
   { name: 'Rules & Regulations', href: '/rules', current: false, className: 'text-white' },
   { name: 'Blogs', href: '/blogs', current: false, className: 'text-white' },
-  { name: 'Register', href: '/register', current: false, className: 'text-[#EDC001] font-bold' },
+  { name: 'Register', href: '/register', current: false, isButton: true },
 ]
 
 interface NavigationProps { }
@@ -33,15 +34,27 @@ export function Navigation({ }: NavigationProps) {
 
   const NavLink = ({ item }: { item: NavItem }) => {
     const isActive = item.href === '/' ? activeURL === '/' : activeURL.startsWith(item.href)
+    
+    if (item.isButton) {
+      return (
+        <Link
+          to={item.href}
+          className="ml-2 px-6 py-2 rounded-md text-sm font-bold text-black inline-block register-btn"
+        >
+          {item.name}
+        </Link>
+      )
+    }
+
     return (
       <Link
         to={item.href}
         className={`
           px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200
-          ${item.className}
+          ${item.className || ''}
           ${isActive
-            ? 'bg-white/10 shadow-lg'
-            : 'text-gray-300 hover:bg-white/5 hover:shadow-md'
+            ? 'bg-white/10 shadow-lg text-white'
+            : 'text-gray-300 hover:bg-white/5 hover:shadow-md hover:text-white'
           }
         `}
         aria-current={isActive ? 'page' : undefined}
@@ -53,6 +66,20 @@ export function Navigation({ }: NavigationProps) {
 
   const MobileNavLink = ({ item }: { item: NavItem }) => {
     const isActive = item.href === '/' ? activeURL === '/' : activeURL.startsWith(item.href)
+    
+    if (item.isButton) {
+      return (
+        <Link
+          key={item.name}
+          to={item.href}
+          onClick={() => setMobileMenuOpen(false)}
+          className="block w-fit mt-4 px-6 py-2 rounded-md text-base font-bold text-black register-btn"
+        >
+          {item.name}
+        </Link>
+      )
+    }
+
     return (
       <Link
         key={item.name}
@@ -60,10 +87,10 @@ export function Navigation({ }: NavigationProps) {
         onClick={() => setMobileMenuOpen(false)}
         className={`
           block px-3 py-2 rounded-md text-base font-medium transition-all duration-200
-          ${item.className}
+          ${item.className || ''}
           ${isActive
-            ? 'bg-white/10 shadow-lg'
-            : 'text-gray-300 hover:bg-white/5 hover:shadow-md'
+            ? 'bg-white/10 shadow-lg text-white'
+            : 'text-gray-300 hover:bg-white/5 hover:shadow-md hover:text-white'
           }
         `}
         aria-current={isActive ? 'page' : undefined}

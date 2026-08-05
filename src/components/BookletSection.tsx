@@ -3,7 +3,7 @@ import React from 'react'
 export function BookletSection() {
   return (
     <div className="w-full flex justify-center items-center mb-9">
-      <div className="w-[90%] md:w-[80%] bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+      <div className="w-[90%] md:w-[80%] bg-[#121212] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
         <div>
           <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-[-2px] leading-2 w-[80%]">
             Path to the Crown

@@ -209,7 +209,7 @@ export function Blogs({
   return (
     <div
       ref={componentRef}
-      className={`transition-all bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm text-gray-100 my-12 rounded-lg w-full`}
+      className={`transition-all bg-[#121212] backdrop-blur-sm text-gray-100 my-12 rounded-lg w-full`}
     >
       <div className="container mx-auto px-4 py-8 md:py-12 w-full">
         {/* Header */}
@@ -263,7 +263,7 @@ export function Blogs({
 
                 {/* Main Content Card */}
                 <div className="flex justify-center w-full">
-                  <div className="w-[90%] md:w-[80%] bg-gradient-to-br from-[#282828] to-[#EDC00111] border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-lg font-light leading-relaxed">
+                  <div className="w-[90%] md:w-[80%] bg-[#121212] border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-lg font-light leading-relaxed">
                     
                     {/* Title */}
                     <div className="text-center mb-12">
@@ -391,7 +391,8 @@ export function Blogs({
                   </p>
                   <button
                     onClick={() => handleReadmore(post.slug.current)}
-                    className="bg-[#EDC001cc] hover:bg-[#EDC001] text-gray-100 font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+                    className="text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md"
+                    style={{ background: 'radial-gradient(circle at center, #ffd700 0%, #d4af37 50%, #996515 100%)' }}
                   >
                     Read more
                   </button>

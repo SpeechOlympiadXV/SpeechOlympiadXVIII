@@ -16,7 +16,7 @@ export function AppTestimonialCard({
   body,
 }: AppTestimonialCardProps) {
   return (
-    <div className="testimonial-card w-full flex flex-col mb-3 md:mb-0 bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm border border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <div className="testimonial-card w-full flex flex-col mb-3 md:mb-0 bg-[#121212] backdrop-blur-sm border border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
       {/* Image Section */}
       <div className="flex justify-center my-4 pt-3">
         <Image

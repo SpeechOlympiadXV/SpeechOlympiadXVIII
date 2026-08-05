@@ -18,7 +18,7 @@ export function SemiFinalists() {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null)
 
   return (
-    <div className="w-[90%] sm:w-[80%] rounded-xl mx-auto my-9 bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm mt-20 text-white">
+    <div className="w-[90%] sm:w-[80%] rounded-xl mx-auto my-9 bg-[#121212] backdrop-blur-sm mt-20 text-white">
       <div className="px-9 py-9 mx-auto">
         <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
           Semi Finalists

@@ -40,7 +40,7 @@ export function AboutPage({}: AboutPageProps) {
             rounded-2xl 
             p-8 md:p-12 
             my-12
-            bg-gradient-to-br from-[#282828] to-[#EDC00111]
+            bg-[#121212]
             border border-[#585858]
             flex 
             flex-col

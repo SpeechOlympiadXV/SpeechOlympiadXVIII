@@ -6,6 +6,7 @@ import Image from '../components/Image'
 import { Hero } from '../components/Hero.tsx'
 import { Feature } from '../components/Feature.tsx'
 import { Doodle } from '../components/Doodle.tsx'
+import { RegistrationCTA } from '../components/RegistrationCTA.tsx'
 //import { PartnersDisplay } from '../components/Partners.tsx'
 import { CompetitionTimeline } from '../components/Timeline.tsx'
 import { AppGallery } from '../components/Gallery.tsx'
@@ -112,22 +113,7 @@ export function HomePage({ }: HomePageProps) {
         <Doodle />
 
         {/* Registration CTA Section */}
-        <div className="mb-16 relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#EDC001] to-[#B08D00] shadow-2xl">
-          <div className="absolute inset-0 bg-black/10 opacity-20"></div>
-          <div className="relative px-6 py-16 sm:px-12 sm:py-20 flex flex-col items-center text-center">
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-[#181818] tracking-tight mb-4">
-              Ready to Take the Stage?
-            </h2>
-            <p className="max-w-2xl text-lg sm:text-xl text-[#181818]/80 font-medium mb-8">
-              Join Speech Olympiad XVIII today. Register now and let your voice be heard by the world.
-            </p>
-            <Link to="/register" className="inline-block">
-              <button className="bg-[#181818] text-white hover:bg-black px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                Register Now
-              </button>
-            </Link>
-          </div>
-        </div>
+        <RegistrationCTA />
 
         {/* Features Section */}
         <div className="mb-16">
@@ -178,7 +164,7 @@ export function HomePage({ }: HomePageProps) {
         </div>
 
         {/* Testimonials Section */}
-        <div className="my-12 px-4 md:px-8 py-10 w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-xl border border-[#585858]/30">
+        <div className="my-12 px-4 md:px-8 py-10 w-full bg-[#121212] backdrop-blur-sm rounded-xl border border-[#585858]/30">
           <div className="pl-4 text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-8">
             Testimonials
           </div>
@@ -204,7 +190,7 @@ export function HomePage({ }: HomePageProps) {
         </div>
 
         {/* Gallery Section */}
-        <div className="my-12 px-4 md:px-8 py-10 w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-xl border border-[#585858]/30">
+        <div className="my-12 px-4 md:px-8 py-10 w-full bg-[#121212] backdrop-blur-sm rounded-xl border border-[#585858]/30">
           <div className="pl-4 text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-6">
             Gallery
           </div>

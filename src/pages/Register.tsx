@@ -98,7 +98,7 @@ export function Register() {
 
   return (
     <div className="w-full flex justify-center items-center mt-20 mb-10">
-      <div className="w-[90%] md:w-[80%] bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+      <div className="w-[90%] md:w-[80%] bg-[#121212] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
         <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tight leading-tight w-[80%]">
           Register Now
         </h2>

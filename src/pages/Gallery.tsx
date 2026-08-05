@@ -48,7 +48,7 @@ export function Gallery() {
   return (
     <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8 mt-16">
       <h1 className="text-4xl font-bold text-center text-white mb-10">Gallery</h1>
-      <div className="bg-[#282828] bg-gradient-to-br from-[#282828] to-[#EDC00111] p-4 sm:p-8 rounded-lg shadow-xl backdrop-blur-sm">
+      <div className="bg-[#282828] bg-[#121212] p-4 sm:p-8 rounded-lg shadow-xl backdrop-blur-sm">
         <AppGallery images={images} />
       </div>
     </div>

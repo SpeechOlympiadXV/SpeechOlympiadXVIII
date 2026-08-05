@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { TechnicalTipsCard } from '../components/TechnicalTipsCard'
 
 // Child components
@@ -21,9 +22,29 @@ const BackButton = ({ onClick }: { onClick: () => void }) => (
 )
 
 export function ChampionsStory() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
   const [activeKey, setActiveKey] = useState('0')
 
-  const closePost = () => setActiveKey('0')
+  useEffect(() => {
+    if (location.state?.activeKey) {
+      setActiveKey(location.state.activeKey)
+    }
+  }, [location.state?.activeKey])
+
+  const handleCardClick = (key: string) => {
+    if (location.pathname === '/') {
+      navigate('/champions-story', { state: { activeKey: key } })
+    } else {
+      setActiveKey(key)
+    }
+  }
+
+  const closePost = () => {
+    setActiveKey('0')
+    navigate(location.pathname, { replace: true, state: {} })
+  }
 
   const stories = [
     {
@@ -45,7 +66,7 @@ export function ChampionsStory() {
   return (
     <div className="w-full flex justify-center items-center py-10">
       {activeKey === '0' ? (
-        <div className="w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+        <div className="w-full bg-[#121212] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
           <div className="text-3xl mb-9 lg:text-4xl font-semibold tracking-tight text-[#EDC001]">
             Champion's Story
           </div>
@@ -57,7 +78,7 @@ export function ChampionsStory() {
                 imageSrc={story.imageSrc}
                 subtitle={story.subtitle}
                 backgroundColorClass={story.backgroundColorClass}
-                onClick={() => setActiveKey(story.key)}
+                onClick={() => handleCardClick(story.key)}
               />
             ))}
           </div>

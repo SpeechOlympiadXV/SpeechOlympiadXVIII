@@ -7,6 +7,7 @@ interface Stage {
   upcoming: boolean
   lineStyle: string
   diamondStyle: string
+  highlightStyle?: 'gold' | 'silver'
 }
 
 interface CompetitionTimelineProps { }
@@ -28,6 +29,7 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
       upcoming: false,
       lineStyle: 'bg-gradient-to-b from-[#edc00133] to-[#edc001]',
       diamondStyle: 'bg-[#594d1b]',
+      highlightStyle: 'silver',
     },
     {
       id: 3,
@@ -36,11 +38,12 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
       upcoming: true,
       lineStyle: 'bg-gradient-to-t from-[#edc00133] to-[#edc001]',
       diamondStyle: 'color-pulse',
+      highlightStyle: 'gold',
     },
   ])
 
   return (
-    <div className="p-9 my-9 bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-xl w-full">
+    <div className="p-9 my-9 bg-[#121212] backdrop-blur-sm rounded-xl w-full border border-[#282828]">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tighter leading-tight w-[80%]">
@@ -83,22 +86,29 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
                       }`}
                   >
                     <div
-                      className={`ml-0 w-full sm:w-[45%] p-4 flex flex-col mb-5 rounded-lg ${stage.id % 2 === 0 ? 'sm:text-end' : ''
-                        } ${stage.upcoming
-                          ? 'backdrop-brightness-200 border-[1px] border-[#edc00155]'
-                          : 'backdrop-brightness-125'
+                      className={`ml-0 w-full sm:w-[45%] p-6 flex flex-col mb-5 rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${stage.id % 2 === 0 ? 'sm:text-end' : ''
+                        } ${stage.highlightStyle === 'gold'
+                          ? 'bg-gradient-to-br from-[#282828] to-[#d4af3744] backdrop-blur-md border-[#d4af37]/50 shadow-[0_0_20px_rgba(212,175,55,0.15)]'
+                          : stage.highlightStyle === 'silver'
+                          ? 'bg-gradient-to-br from-[#282828] to-[#a1a1aa44] backdrop-blur-md border-[#a1a1aa]/50 shadow-[0_0_20px_rgba(161,161,170,0.15)]'
+                          : 'bg-[#121212] backdrop-blur-sm border-[#585858]/30 shadow-lg'
                         }`}
                     >
                       <h3
-                        className={`text-xl md:text-2xl lg:text-3xl font-semibold mb-4 ${stage.upcoming
-                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-white to-[#EDC001]'
+                        className={`text-xl md:text-2xl lg:text-3xl font-semibold mb-2 ${stage.highlightStyle
+                            ? 'text-transparent bg-clip-text'
                             : 'text-gray-400'
                           }`}
+                        style={
+                          stage.highlightStyle === 'gold' ? { backgroundImage: 'linear-gradient(to bottom right, #ffe55c 0%, #d4af37 50%, #996515 100%)' } :
+                          stage.highlightStyle === 'silver' ? { backgroundImage: 'linear-gradient(to bottom right, #f4f4f5 0%, #a1a1aa 50%, #52525b 100%)' } :
+                          {}
+                        }
                       >
                         {stage.name}
                       </h3>
                       <time
-                        className={`text-sm xl:text-base ${stage.upcoming ? 'text-gray-200' : 'text-gray-400'
+                        className={`text-sm xl:text-base font-light ${stage.highlightStyle ? 'text-gray-200' : 'text-gray-500'
                           }`}
                       >
                         {stage.date}
