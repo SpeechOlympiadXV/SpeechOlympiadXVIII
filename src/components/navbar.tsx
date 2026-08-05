@@ -21,6 +21,7 @@ const navigation: NavItem[] = [
   { name: 'Gallery', href: '/gallery', current: false, className: 'text-white' },
   { name: 'Rules & Regulations', href: '/rules', current: false, className: 'text-white' },
   { name: 'Blogs', href: '/blogs', current: false, className: 'text-white' },
+  { name: 'Register', href: '/register', current: false, className: 'text-[#EDC001] font-bold' },
 ]
 
 interface NavigationProps { }

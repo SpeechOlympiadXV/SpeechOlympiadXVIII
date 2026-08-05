@@ -8,7 +8,7 @@ import { supabase } from '../lib/supabase'
 const formSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
-  registrationNumber: z.string().min(1, 'Registration Number is required'),
+  registrationNumber: z.string().min(1, 'University ID is required'),
   nameOnCertificate: z.string().min(1, 'Name on certificate is required'),
   batch: z.string().min(1, 'Batch is required'),
   faculty: z.string().min(1, 'Faculty is required'),
@@ -147,13 +147,13 @@ export function Register() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Registration Number */}
+            {/* University ID */}
             <div>
-              <label className="block text-white mb-2">Registration Number</label>
+              <label className="block text-white mb-2">University ID</label>
               <input
                 {...register('registrationNumber')}
                 type="text"
-                placeholder="Registration Number"
+                placeholder="University ID"
                 className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
               />
               {errors.registrationNumber && <p className="text-red-400 text-sm mt-1">{errors.registrationNumber.message}</p>}
@@ -180,11 +180,11 @@ export function Register() {
                 {...register('batch')}
                 className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none"
               >
-                <option value="">Select Batch (21-24)</option>
-                <option value="21">21</option>
+                <option value="">Select Batch (22-25)</option>
                 <option value="22">22</option>
                 <option value="23">23</option>
                 <option value="24">24</option>
+                <option value="25">25</option>
               </select>
               {errors.batch && <p className="text-red-400 text-sm mt-1">{errors.batch.message}</p>}
             </div>
