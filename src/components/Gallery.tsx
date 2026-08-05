@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { createPortal } from 'react-dom'
 import Image from './Image'
 import { X } from 'lucide-react'
 
@@ -37,11 +38,12 @@ export function AppGallery({
   return (
     <>
       {/* Gallery Grid */}
-      <div className="flex flex-wrap gap-[10px] mx-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[10px] mx-1">
         {images.map((image, i) => (
           <div
             key={i}
-            className="w-1/4 lg:w-1/4 md:w-1/2 sm:w-full p-[10px] relative flex justify-center items-center cursor-pointer group transition-all"
+            className="relative flex justify-center items-center group transition-all cursor-pointer select-none"
+            onClick={() => preview(image)}
             style={{
               // @ts-ignore
               '--order': i % IMAGES_PER_ROW,
@@ -49,7 +51,6 @@ export function AppGallery({
           >
             {/* Overlay */}
             <div
-              onClick={() => preview(image)}
               className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20 flex items-center justify-center rounded"
             >
               <h5 className="text-white text-center font-semibold">
@@ -72,7 +73,7 @@ export function AppGallery({
 
         {/* View Gallery Link */}
         {showLink && (
-          <div className="w-full sm:w-1/3 md:w-1/4 p-[10px] flex items-center justify-center">
+          <div className="flex items-center justify-center">
             <Link
               to="/gallery"
               className="font-bold text-lg text-gray-200 hover:text-blue-400 no-underline transition-colors"
@@ -84,33 +85,35 @@ export function AppGallery({
       </div>
 
       {/* Image Modal */}
-      {isShowModal && (
+      {isShowModal && typeof document !== 'undefined' && createPortal(
         <div
-          className="fixed inset-0 bg-black/50 w-full h-screen z-50 flex items-center justify-center"
+          className="fixed inset-0 bg-black/50 w-[100vw] h-[100vh] z-[9999] flex items-center justify-center m-0 p-0"
           onClick={closeModal}
+          style={{ top: 0, left: 0 }}
         >
           {/* Close Button */}
           <button
             onClick={() => setCurrentImage('')}
-            className="absolute top-[5vh] right-0 transform translate-x-1/2 -translate-y-1/2 h-12 w-12 bg-transparent border-none text-white text-2xl cursor-pointer hover:bg-gray-700 rounded-full transition-colors z-50 flex items-center justify-center"
+            className="absolute top-[5vh] right-[5vw] bg-transparent border-none text-white text-4xl cursor-pointer hover:text-gray-300 transition-colors z-[10000] flex items-center justify-center"
             aria-label="Close"
           >
-            <X className="w-8 h-8" />
+            &#x2715;
           </button>
 
           {/* Modal Image */}
-          <div className="flex items-center justify-center max-h-[75vh] max-w-[75vw]">
+          <div className="flex items-center justify-center max-h-[90vh] max-w-[90vw]">
             <Image
               src={previewImage}
               alt="Preview"
               width={1200}
               height={1200}
-              className="max-h-[75vh] max-w-[75vw] object-contain"
+              className="max-h-[90vh] max-w-[90vw] object-contain rounded-md"
               loading="lazy"
-              sizes="75vw"
+              sizes="90vw"
             />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )

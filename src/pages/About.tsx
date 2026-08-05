@@ -66,7 +66,7 @@ export function AboutPage({}: AboutPageProps) {
             <div className="my-6" />
 
             <p className="font-light text-justify leading-relaxed">
-              Throughout the span of the last 15 years, there has been a 
+              Throughout the span of the last 18 years, there has been a 
               consistent demonstration of the event's ability to unveil hidden 
               talents within the university's undergraduates. The recipients of awards 
               and those who reach the final stages encompass a broad spectrum of backgrounds, 

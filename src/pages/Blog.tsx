@@ -307,15 +307,15 @@ export function Blogs({
                         return (
                           <div
                             key={index}
-                            className="aspect-square cursor-pointer"
+                            className="cursor-pointer aspect-video flex items-center justify-center rounded-lg"
                           >
                             <Image
                               src={imageUrl}
                               alt={`Blog photo ${index + 1}`}
-                              width={400}
-                              height={400}
+                              width={800}
+                              height={600}
                               onClick={() => showImageModal(imageUrl)}
-                              className="w-full h-full object-cover rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
+                              className="max-w-full max-h-full object-contain rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
                               sizes="(max-width: 768px) 50vw, 33vw"
                             />
                           </div>
@@ -395,38 +395,34 @@ export function Blogs({
       <style>{`
         .blog-container {
           width: 100%;
-          max-width: none;
-          text-align: left;
-          margin: 0;
-          padding: 0 2rem;
+          max-width: 920px;
+          margin: 0 auto;
+          padding: 0 1rem;
         }
 
         .prose {
           color: rgb(243 244 246);
-          font-size: 1.25rem;
-          line-height: 2;
+          font-size: 1.2rem;
+          line-height: 1.8;
           text-align: left;
           max-width: none !important;
         }
 
         .prose p {
-          margin: 2rem 0;
-          text-align: justify;
-          text-justify: inter-word;
-          max-width: 75ch;
-          padding-right: 1.5rem;
+          margin: 1.5rem 0;
+          text-align: left;
           font-weight: 400;
         }
 
         .prose p:first-of-type {
-          font-size: 1.4rem;
+          font-size: 1.35rem;
           font-weight: 400;
           color: rgb(229 231 235);
           line-height: 1.7;
           font-style: italic;
           border-left: 4px solid rgb(251 191 36);
           padding-left: 1.5rem;
-          margin: 2.5rem 0;
+          margin: 2rem 0;
         }
 
         .prose h2 {
