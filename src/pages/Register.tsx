@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../lib/firebase'
+import { supabase } from '../lib/supabase'
+
 
 const formSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -60,11 +60,28 @@ export function Register() {
     setSuccessMessage('')
 
     try {
-      const docRef = await addDoc(collection(db, 'registrations'), {
-        ...data,
-        createdAt: serverTimestamp(),
-      })
-      console.log('Registration submitted with ID: ', docRef.id)
+      const { error } = await supabase
+        .from('registrations')
+        .insert([
+          {
+            first_name: data.firstName,
+            last_name: data.lastName,
+            registration_number: data.registrationNumber,
+            name_on_certificate: data.nameOnCertificate,
+            batch: data.batch,
+            faculty: data.faculty,
+            department: data.department,
+            email: data.email,
+            phone: data.phone,
+            previous_participation: data.previousParticipation,
+            hear_about: data.hearAbout,
+            hear_about_other: data.hearAboutOther || null
+          }
+        ])
+
+      if (error) throw error
+
+      console.log('Registration submitted with data: ', data)
       setSuccessMessage('Registration submitted successfully! Welcome to Speech Olympiad!')
       reset()
     } catch (error: any) {
