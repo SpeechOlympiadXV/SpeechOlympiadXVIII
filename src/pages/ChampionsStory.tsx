@@ -9,6 +9,17 @@ import { Niru } from '../ChampStory/Niru'
 import yasirPortrait from '../assets/images/PathOfChampion_portrait.jpg'
 import niruthikaPortrait from '../assets/images/Niru_profile_img.png'
 
+const BackButton = ({ onClick }: { onClick: () => void }) => (
+  <button
+    onClick={onClick}
+    className="bg-[#EDC001] m-4 text-[#181818] p-3 w-16 h-16 rounded-full hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 flex items-center justify-center transition-transform hover:scale-105"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+      <path fillRule="evenodd" d="M9.293 5.293a1 1 0 011.414 1.414L7.414 10l3.293 3.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 010 1.414z" clipRule="evenodd" />
+    </svg>
+  </button>
+)
+
 export function ChampionsStory() {
   const [activeKey, setActiveKey] = useState('0')
 
@@ -30,18 +41,6 @@ export function ChampionsStory() {
       backgroundColorClass: "bg-orange-400/20",
     }
   ]
-
-  // Render the back button
-  const BackButton = () => (
-    <button
-      onClick={closePost}
-      className="bg-[#EDC001] m-4 text-[#181818] p-3 w-16 h-16 rounded-full hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 flex items-center justify-center transition-transform hover:scale-105"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" d="M9.293 5.293a1 1 0 011.414 1.414L7.414 10l3.293 3.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 010 1.414z" clipRule="evenodd" />
-      </svg>
-    </button>
-  )
 
   return (
     <div className="w-full flex justify-center items-center py-10">
@@ -67,16 +66,16 @@ export function ChampionsStory() {
         <div className="w-full max-w-5xl">
           {activeKey === '1' && (
             <>
-              <BackButton />
+              <BackButton onClick={closePost} />
               <Yasir />
-              <BackButton />
+              <BackButton onClick={closePost} />
             </>
           )}
           {activeKey === '2' && (
             <>
-              <BackButton />
+              <BackButton onClick={closePost} />
               <Niru />
-              <BackButton />
+              <BackButton onClick={closePost} />
             </>
           )}
         </div>
