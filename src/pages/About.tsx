@@ -38,8 +38,8 @@ export function AboutPage({}: AboutPageProps) {
           className="
             w-11/12 md:w-4/5 
             rounded-2xl 
-            p-9 md:p-14 
-            my-9
+            p-8 md:p-12 
+            my-12
             bg-gradient-to-br from-[#282828] to-[#EDC00111]
             border border-[#585858]
             flex 

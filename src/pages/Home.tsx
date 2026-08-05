@@ -99,23 +99,7 @@ export function HomePage({ }: HomePageProps) {
     prelis3,
   ]
 
-  // Rotate testimonials on desktop every 10 seconds
-  useEffect(() => {
-    const isMobile = window.matchMedia('(max-width: 768px)').matches
-
-    if (!isMobile) {
-      const shiftTestimonial = () => {
-        setDisplayedTestimonials((prev) => {
-          if (prev.length === 0) return prev
-          const first = prev[0]
-          return [...prev.slice(1), first]
-        })
-      }
-
-      const interval = setInterval(shiftTestimonial, 10000)
-      return () => clearInterval(interval)
-    }
-  }, [testimonials])
+  // Removed manual rotation useEffect since we use CSS marquee
 
   return (
     <main>
@@ -194,32 +178,34 @@ export function HomePage({ }: HomePageProps) {
         </div>
 
         {/* Testimonials Section */}
-        <div className="my-8 px-4 py-8 w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-lg">
+        <div className="my-12 px-4 md:px-8 py-10 w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-xl border border-[#585858]/30">
           <div className="pl-4 text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-8">
             Testimonials
           </div>
 
-          {/* Testimonial Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-3">
-            {displayedTestimonials.map((testimonial) => (
-              <div
-                key={`testimonial-${testimonial.key}`}
-                className="transform transition-all duration-500 ease-out"
-              >
-                <AppTestimonialCard
-                  title={testimonial.title}
-                  imageSrc={testimonial.imageSrc}
-                  body={testimonial.body}
-                  subtitle={testimonial.subtitle}
-                />
-              </div>
-            ))}
+          {/* Testimonial Cards Marquee */}
+          <div className="overflow-hidden relative w-full p-3">
+            <div className="flex w-max animate-marquee gap-6 hover:pause">
+              {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <div
+                  key={`testimonial-${testimonial.key}-${index}`}
+                  className="w-[300px] md:w-[400px] flex-shrink-0 flex items-stretch"
+                >
+                  <AppTestimonialCard
+                    title={testimonial.title}
+                    imageSrc={testimonial.imageSrc}
+                    body={testimonial.body}
+                    subtitle={testimonial.subtitle}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Gallery Section */}
-        <div className="my-9 px-4 py-8 w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-lg">
-          <div className="pl-4 text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-4">
+        <div className="my-12 px-4 md:px-8 py-10 w-full bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-xl border border-[#585858]/30">
+          <div className="pl-4 text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-6">
             Gallery
           </div>
           <div className="p-2">

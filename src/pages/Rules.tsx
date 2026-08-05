@@ -1,6 +1,6 @@
 export function Rules() {
   return (
-    <div className="container mt-20 mx-auto p-10 w-[90%] max-w-4xl bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-lg mb-20 text-white">
+    <div className="container my-12 mx-auto p-8 md:p-12 w-full md:w-[90%] max-w-4xl bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm rounded-xl text-white border border-[#585858]/30">
       <h1 className="text-3xl font-semibold mb-6 text-center">Speech Olympiad XVIII</h1>
       <h3 className="text-lg font-thin mb-6 text-center">Intra-University Speech Competition - University of Moratuwa</h3>
       <h1 className="text-xl font-semibold mb-6 text-center">Contest Rules: Preliminaries</h1>
