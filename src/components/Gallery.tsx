@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Image from './Image'
 import { X } from 'lucide-react'
 
@@ -72,12 +73,12 @@ export function AppGallery({
         {/* View Gallery Link */}
         {showLink && (
           <div className="w-full sm:w-1/3 md:w-1/4 p-[10px] flex items-center justify-center">
-            <a
-              href="#gallery"
+            <Link
+              to="/gallery"
               className="font-bold text-lg text-gray-200 hover:text-blue-400 no-underline transition-colors"
             >
               View Gallery
-            </a>
+            </Link>
           </div>
         )}
       </div>

@@ -1,5 +1,6 @@
 import { ChevronRight } from 'lucide-react'
 import Image from './Image'
+import { useNavigate } from 'react-router-dom'
 
 interface FeatureProps {
   index?: number
@@ -18,8 +19,14 @@ export function Feature({
   image,
   urlString,
 }: FeatureProps) {
+  const navigate = useNavigate()
+
   const handleClick = () => {
-    window.location.href = urlString
+    if (urlString.startsWith('http') || urlString.startsWith('mailto:')) {
+      window.location.href = urlString
+    } else {
+      navigate(urlString)
+    }
   }
 
   return (

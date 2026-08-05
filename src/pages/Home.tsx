@@ -13,6 +13,9 @@ import { AppTestimonialCard } from '../components/Testimonial.tsx'
 import { Blogs } from './Blog.tsx'
 import { PageTechnicalTips } from './TechTips.tsx'
 import { ChampionsStory } from './ChampionsStory.tsx'
+// import { BookletSection } from '../components/BookletSection.tsx'
+// import { SemiFinalists } from './SemiFinalists.tsx'
+// import { Finalists } from './Finalists.tsx'
 
 // Image imports - Testimonials
 import sirimevantestimonialmobileImage from '../assets/images/HomePage_testimonial_sirimevan.jpg'
@@ -86,7 +89,7 @@ export function HomePage({ }: HomePageProps) {
       headingEnd: '',
       text: 'Speech Olympiad stands as the flagship occasion hosted by the Gavel Club at the University of Moratuwa. As the sole English language speech competition within the university...',
       image: homePageAbout,
-      urlString: '#about',
+      urlString: '/about',
     },
   ]
 
@@ -166,6 +169,19 @@ export function HomePage({ }: HomePageProps) {
         <div className="mb-16">
           <Blogs limit={2} />
         </div>
+
+        {/* Booklet Section */}
+        {/* <BookletSection /> */}
+
+        {/* Semi Finalists Section */}
+        {/* <div className="mb-16">
+          <SemiFinalists />
+        </div> */}
+
+        {/* Finalists Section */}
+        {/* <div className="mb-16">
+          <Finalists />
+        </div> */}
 
         {/* Technical Tips Section */}
         <div className="mb-16">
