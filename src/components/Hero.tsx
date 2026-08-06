@@ -126,7 +126,7 @@ export function Hero() {
       `}</style>
 
       <div
-        className="w-full h-[78vh] sm:h-[82vh] md:h-[86vh] lg:h-[90vh] flex flex-col items-center justify-center relative overflow-hidden"
+        className="w-full h-[78vh] sm:h-[82vh] md:h-[86vh] lg:h-[90vh] flex flex-col items-center justify-center relative overflow-hidden z-10"
         style={{
           backgroundImage: 'radial-gradient(75% 75% at 50% 50%, #000000 59%, #181818 100%)',
           backgroundSize: '100% 100%',

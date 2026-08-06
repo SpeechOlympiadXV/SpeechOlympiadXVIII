@@ -43,7 +43,7 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
   ])
 
   return (
-    <div className="p-9 my-9 bg-[#121212] backdrop-blur-sm rounded-xl w-full border border-[#282828]">
+    <div className="p-9 my-9 bg-[#121212]/80 backdrop-blur-sm rounded-xl w-full border border-[#282828]">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tighter leading-tight w-[80%]">

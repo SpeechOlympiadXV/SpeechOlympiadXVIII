@@ -44,7 +44,7 @@ export function ArticleLayout({
 
       {/* Article Content */}
       <div className="flex justify-center w-full">
-        <div className="w-[90%] md:w-[80%] bg-[#121212] border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-xl font-light leading-normal">
+        <div className="w-[90%] md:w-[80%] bg-[#121212]/80 border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-xl font-light leading-normal">
           <div className="article-content prose prose-invert max-w-none">
             {children}
           </div>

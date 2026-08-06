@@ -164,7 +164,7 @@ export function HomePage({ }: HomePageProps) {
         </div>
 
         {/* Testimonials Section */}
-        <div className="my-12 p-9 w-full bg-[#121212] backdrop-blur-sm rounded-xl border border-[#282828]">
+        <div className="my-12 p-9 w-full bg-[#121212]/80 backdrop-blur-sm rounded-xl border border-[#282828]">
           <div className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-8">
             Testimonials
           </div>
@@ -190,7 +190,7 @@ export function HomePage({ }: HomePageProps) {
         </div>
 
         {/* Gallery Section */}
-        <div className="my-12 p-9 w-full bg-[#121212] backdrop-blur-sm rounded-xl border border-[#282828]">
+        <div className="my-12 p-9 w-full bg-[#121212]/80 backdrop-blur-sm rounded-xl border border-[#282828]">
           <div className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-8">
             Gallery
           </div>

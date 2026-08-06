@@ -40,7 +40,7 @@ export function AboutPage({}: AboutPageProps) {
             rounded-2xl 
             p-8 md:p-12 
             my-12
-            bg-[#121212]
+            bg-[#121212]/80
             border border-[#585858]
             flex 
             flex-col

@@ -79,7 +79,7 @@ export function Vote() {
   }
 
   return (
-    <div className="px-8 py-10 w-[90%] sm:w-[80%] md:w-[60%] h-auto mx-auto my-10 bg-[#121212] mt-20">
+    <div className="px-8 py-10 w-[90%] sm:w-[80%] md:w-[60%] h-auto mx-auto my-10 bg-[#121212]/80 mt-20">
       <div className="w-[100%] max-w-[400px] mx-auto h-auto rounded-md overflow-hidden">
         <img
           src={currentData.image}

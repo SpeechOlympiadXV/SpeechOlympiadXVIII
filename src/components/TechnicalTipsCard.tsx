@@ -6,7 +6,6 @@ interface TechnicalTipsCardProps {
   title: string
   subtitle: string
   backgroundColorClass?: string
-  backgroundColorHash?: string
   onClick: () => void
 }
 
@@ -15,7 +14,6 @@ export function TechnicalTipsCard({
   title,
   subtitle,
   backgroundColorClass = '',
-  backgroundColorHash,
   onClick
 }: TechnicalTipsCardProps) {
   return (
@@ -29,7 +27,6 @@ export function TechnicalTipsCard({
         transition-all duration-300 ease-in-out transform hover:scale-105
         flex flex-col shadow-lg hover:shadow-xl
       `}
-      style={backgroundColorHash ? { backgroundColor: backgroundColorHash } : {}}
     >
       <div className="w-full text-left flex flex-col h-full">
         <h5 

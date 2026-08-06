@@ -37,24 +37,20 @@ export function Doodle({}: DoodleProps) {
 
   // Draw paths on scroll
   useEffect(() => {
-    const paths = pathsRef.current
+    if (!svgRef.current) return
+    const paths = Array.from(svgRef.current.querySelectorAll('path'))
 
+    // Initialize lengths and dashes
     paths.forEach((path) => {
-      // Get length of path
       const pathLength = path.getTotalLength()
-
-      // Make very long dashes (the length of the path itself)
       path.style.strokeDasharray = `${pathLength}`
-
-      // Offset the dashes so it appears hidden entirely
       path.style.strokeDashoffset = `${pathLength}`
     })
 
     const handleScroll = () => {
-      const scrollPercentage =
-        (document.documentElement.scrollTop + document.body.scrollTop) /
-        (document.documentElement.scrollHeight -
-          document.documentElement.clientHeight)
+      const scrollY = window.scrollY || document.documentElement.scrollTop || 0
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
+      const scrollPercentage = scrollHeight > 0 ? scrollY / scrollHeight : 0
 
       paths.forEach((path) => {
         const pathLength = path.getTotalLength()
@@ -72,19 +68,22 @@ export function Doodle({}: DoodleProps) {
       })
     }
 
-    window.addEventListener('scroll', handleScroll)
+    // Call once to initialize
+    handleScroll()
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <div className="fixed right-[2%] top-[10%] bottom-[5%] my-auto z-[-1] opacity-[0.125] md:left-[2%] md:bottom-[1%]">
+    <div className="fixed right-0 translate-x-1/4 md:translate-x-1/3 top-[10%] bottom-[5%] my-auto z-[0] pointer-events-none opacity-[0.125]">
       <svg
         ref={svgRef}
         id="Layer_1"
         data-name="Layer 1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 331.13 537.58"
-        className="h-full w-auto object-contain md:w-[120%] md:h-auto"
+        className="h-full w-auto object-contain"
       >
         <g id="Layer_1-2" data-name="Layer 1">
           <path

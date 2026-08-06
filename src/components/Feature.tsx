@@ -30,7 +30,7 @@ export function Feature({
   }
 
   return (
-    <div className="my-10 flex flex-col md:flex-row gap-6 w-full rounded-2xl mx-auto bg-[#121212] backdrop-blur-sm shadow-black relative border border-[#282828]">
+    <div className="my-10 flex flex-col md:flex-row gap-6 w-full rounded-2xl mx-auto bg-[#121212]/80 backdrop-blur-sm shadow-black relative border border-[#282828]">
       {/* Content Section */}
       <div className="flex-1 space-y-6 p-12 lg:p-16 flex flex-col justify-center">
         <h2 className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white">

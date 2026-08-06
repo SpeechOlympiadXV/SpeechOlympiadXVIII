@@ -56,38 +56,35 @@ export function PageTechnicalTips() {
       imageSrc: samadhiPortrait,
       title: 'A guide <br/>  to becoming a  <br/> better speaker',
       subtitle: 'Tips from Dr.Samadhi Poornima, champion of Speech Olympiad IX',
-      backgroundColorClass: 'bg-amber-900/40',
-      backgroundColorHash: '#FFF2CC',
+      backgroundColorClass: 'bg-[#FFF2CC]/80',
     },
     {
       key: '2',
       imageSrc: madushikaPortrait,
       title: 'Embarking <br/> On <br/> Eloquence',
       subtitle: 'Tips from Toastmaster Madushika Munasinghe, Semi Finalist of Speech Olympiad XIII, Former Vice President Membership',
-      backgroundColorHash: '#FFD966',
+      backgroundColorClass: 'bg-[#FFD966]/80',
     },
     {
       key: '3',
       imageSrc: yasirPortrait,
       title: 'Crafting <br/>  Compelling <br/>  Speeches',
       subtitle: 'Tips on how to craft and structure your speech from DTM Mohamed Yasir, Champion of Speech Olympiad VIII',
-      backgroundColorClass: 'bg-amber-900/40',
-      backgroundColorHash: '#F4B183',
+      backgroundColorClass: 'bg-[#F4B183]/80',
     },
     {
       key: '4',
       imageSrc: kasunPortrait,
       title: 'The Art  <br/> Of <br/>  Winning',
       subtitle: 'Tips from Kasun Ranasinghe, Champion of Speech Olympiad X',
-      backgroundColorClass: 'bg-amber-900/40',
-      backgroundColorHash: '#DFA67B',
+      backgroundColorClass: 'bg-[#DFA67B]/80',
     },
   ]
 
   return (
     <div className="w-full flex justify-center items-center py-10">
       {activeKey === '0' ? (
-        <div className="w-full bg-[#121212] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+        <div className="w-full bg-[#121212]/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
           <div className="text-3xl mb-9 lg:text-4xl font-semibold tracking-tight text- white">
             Technical Tips
           </div>
@@ -99,7 +96,6 @@ export function PageTechnicalTips() {
                 imageSrc={tip.imageSrc}
                 subtitle={tip.subtitle}
                 backgroundColorClass={tip.backgroundColorClass}
-                backgroundColorHash={tip.backgroundColorHash}
                 onClick={() => handleCardClick(tip.key)}
               />
             ))}
