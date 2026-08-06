@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { PhoenixLogo } from './PhoenixLogo'
 
 
 interface FireParticle {
@@ -16,32 +17,28 @@ export function Hero() {
       setTextAnimationDone(true)
     }, 3000)
 
-    const particleCount = 200
+    const particleCount = 80
     const generatedParticles: FireParticle[] = []
 
     for (let i = 0; i < particleCount; i++) {
       const rand = Math.random();
       let coreColor, midColor, endColor;
 
-      if (rand > 0.95) {
-        // Blue (5%)
-        coreColor = '#E0FFFF'; 
-        midColor = '#00BFFF';
-        endColor = '#0000CD';
-      } else if (rand > 0.88) {
-        // Red (7%)
+      if (rand > 0.92) {
+        // Red (8%)
         coreColor = '#FFC0CB';
         midColor = '#FF0000';
         endColor = '#8B0000';
       } else {
-        // Golden Yellow (88%)
+        // Golden Yellow (92%)
         coreColor = '#FFFDE7';
         midColor = '#FFD700';
         endColor = '#DAA520';
       }
 
       const size = Math.random() * 6 + 2
-      const duration = Math.random() * 10 + 8
+      const isMobile = window.innerWidth < 768;
+      const duration = (Math.random() * 10 + 8) * (isMobile ? 1.8 : 1)
       const delay = Math.random() * -12
 
       const startX = `${Math.random() * 120 - 10}%`;
@@ -84,19 +81,10 @@ export function Hero() {
           0% {
             transform: translate(0, 0) scale(1.2) rotate(var(--rot-start));
             opacity: 1;
-            background-color: var(--core-color);
-            box-shadow: 0 0 2px var(--core-color);
-          }
-          40% {
-            background-color: var(--mid-color);
-            opacity: 0.9;
-            box-shadow: 0 0 4px var(--mid-color);
           }
           100% {
             transform: translate(var(--drift-x), var(--drift-y)) scale(0.2) rotate(var(--rot-end));
             opacity: 0;
-            background-color: var(--end-color);
-            box-shadow: 0 0 2px var(--end-color);
           }
         }
 
@@ -104,8 +92,11 @@ export function Hero() {
           position: absolute;
           border-radius: 2px;
           mix-blend-mode: screen;
+          background-color: var(--mid-color);
+          box-shadow: 0 0 4px var(--mid-color);
           animation: phoenixFireRise linear infinite;
           pointer-events: none;
+          will-change: transform, opacity;
         }
 
         .silver-metallic-text {
@@ -134,7 +125,12 @@ export function Hero() {
         }}
       >
         {/* Phoenix Fire Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, ease: 'easeOut', delay: 0.5 }}
+          className="absolute inset-0 overflow-hidden pointer-events-none z-0"
+        >
           {particles.map((particle) => (
             <div
               key={particle.id}
@@ -142,8 +138,10 @@ export function Hero() {
               style={particle.style}
             />
           ))}
-        </div>
+        </motion.div>
 
+        {/* Phoenix SVG Line Animation */}
+        <PhoenixLogo />
 
         {/* Main Text Container */}
         <div className="w-full max-w-6xl h-full flex flex-col items-center justify-center p-4 z-10 relative">
