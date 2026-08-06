@@ -20,9 +20,37 @@ import img_2024_5 from '../assets/images/gallery/2024.5.jpg'
 import img_2024_6 from '../assets/images/gallery/2024.6.jpg'
 import img_2024_7 from '../assets/images/gallery/2024.7.jpg'
 import img_2024_8 from '../assets/images/gallery/2024.8.jpg'
+import new_img_1 from '../assets/images/gallery/new_image_1.jpg'
+import new_img_2 from '../assets/images/gallery/new_image_2.jpg'
+import new_img_3 from '../assets/images/gallery/new_image_3.jpg'
+import new_img_4 from '../assets/images/gallery/new_image_4.jpg'
+import new_img_5 from '../assets/images/gallery/new_image_5.jpg'
+import new_img_6 from '../assets/images/gallery/new_image_6.jpg'
+import new_img_7 from '../assets/images/gallery/new_image_7.jpg'
+import new_img_8 from '../assets/images/gallery/new_image_8.jpg'
+import new_img_9 from '../assets/images/gallery/new_image_9.jpg'
+import new_img_10 from '../assets/images/gallery/new_image_10.jpg'
+import new_img_11 from '../assets/images/gallery/new_image_11.jpg'
+import new_img_12 from '../assets/images/gallery/new_image_12.jpg'
+import new_img_13 from '../assets/images/gallery/new_image_13.jpg'
+import new_img_14 from '../assets/images/gallery/new_image_14.jpg'
 
 export function Gallery() {
   const images = [
+    new_img_1,
+    new_img_2,
+    new_img_3,
+    new_img_4,
+    new_img_5,
+    new_img_6,
+    new_img_7,
+    new_img_8,
+    new_img_9,
+    new_img_10,
+    new_img_11,
+    new_img_12,
+    new_img_13,
+    new_img_14,
     c_1,
     c_2,
     c_3,
