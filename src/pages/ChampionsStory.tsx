@@ -50,16 +50,16 @@ export function ChampionsStory() {
     {
       key: '1',
       imageSrc: yasirPortrait,
-      title: "Walk the Path of a <br className='hidden md:block' /> Champion",
+      title: "Walk the Path of a <br/> Champion",
       subtitle: "The story of Mohamed Yasir, champion of Speech Olympiad VIII",
-      backgroundColorClass: "bg-[#D4B34C]/80",
+      backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
     },
     {
       key: '2',
       imageSrc: niruthikaPortrait,
       title: 'The Transformative Journey<br/> of a Champion',
       subtitle: "The story of Niruththika Sritharan, Champion of Speech Olympiad XIV",
-      backgroundColorClass: "bg-[#CA8553]/80",
+      backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
     }
   ]
 

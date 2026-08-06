@@ -54,30 +54,30 @@ export function PageTechnicalTips() {
     {
       key: '1',
       imageSrc: samadhiPortrait,
-      title: 'A guide <br/>  to becoming a  <br/> better speaker',
+      title: 'A guide to becoming <br/> a better speaker',
       subtitle: 'Tips from Dr.Samadhi Poornima, champion of Speech Olympiad IX',
-      backgroundColorClass: 'bg-[#FFF2CC]/80',
+      backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
     },
     {
       key: '2',
       imageSrc: madushikaPortrait,
-      title: 'Embarking <br/> On <br/> Eloquence',
+      title: 'Embarking On <br/> Eloquence',
       subtitle: 'Tips from Toastmaster Madushika Munasinghe, Semi Finalist of Speech Olympiad XIII, Former Vice President Membership',
-      backgroundColorClass: 'bg-[#FFD966]/80',
+      backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
     },
     {
       key: '3',
       imageSrc: yasirPortrait,
-      title: 'Crafting <br/>  Compelling <br/>  Speeches',
+      title: 'Crafting Compelling <br/> Speeches',
       subtitle: 'Tips on how to craft and structure your speech from DTM Mohamed Yasir, Champion of Speech Olympiad VIII',
-      backgroundColorClass: 'bg-[#F4B183]/80',
+      backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
     },
     {
       key: '4',
       imageSrc: kasunPortrait,
-      title: 'The Art  <br/> Of <br/>  Winning',
+      title: 'The Art Of <br/> Winning',
       subtitle: 'Tips from Kasun Ranasinghe, Champion of Speech Olympiad X',
-      backgroundColorClass: 'bg-[#DFA67B]/80',
+      backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
     },
   ]
 
