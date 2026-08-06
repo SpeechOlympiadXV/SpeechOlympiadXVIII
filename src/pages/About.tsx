@@ -44,10 +44,11 @@ export function AboutPage({}: AboutPageProps) {
             border border-[#585858]
             flex 
             flex-col
+            text-xl
           "
         >
           <div className="w-full pb-2">
-            <p className="font-light text-justify pt-1 leading-relaxed">
+            <p className="font-light text-justify pt-1 leading-normal">
               <span className="font-semibold text-xl text-[#EDC001] drop-shadow-lg">
                 Speech Olympiad
               </span>
@@ -65,7 +66,7 @@ export function AboutPage({}: AboutPageProps) {
 
             <div className="my-6" />
 
-            <p className="font-light text-justify leading-relaxed">
+            <p className="font-light text-justify leading-normal">
               Throughout the span of the last 18 years, there has been a 
               consistent demonstration of the event's ability to unveil hidden 
               talents within the university's undergraduates. The recipients of awards 

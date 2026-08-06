@@ -88,7 +88,7 @@ export function PageTechnicalTips() {
     <div className="w-full flex justify-center items-center py-10">
       {activeKey === '0' ? (
         <div className="w-full bg-[#121212] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
-          <div className="text-3xl mb-9 lg:text-4xl font-semibold tracking-tight text-[#EDC001]">
+          <div className="text-3xl mb-9 lg:text-4xl font-semibold tracking-tight text- white">
             Technical Tips
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -106,7 +106,7 @@ export function PageTechnicalTips() {
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-5xl">
+        <div className="w-full">
           {activeKey === '1' && (
             <>
               <BackButton onClick={closePost} />

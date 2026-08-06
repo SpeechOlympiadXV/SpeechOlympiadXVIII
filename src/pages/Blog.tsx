@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Image from '../components/Image'
 import { ChevronLeft, X } from 'lucide-react'
 import { PortableText } from '@portabletext/react'
@@ -46,6 +47,9 @@ export function Blogs({
   const observerRef = useRef<IntersectionObserver | null>(null)
   const componentRef = useRef<HTMLDivElement>(null)
 
+  const location = useLocation()
+  const navigate = useNavigate()
+
   // Image URL converter
   const convertImageUrl = (imageRef: string): string => {
     let modifiedUrl = imageRef.replace('image-', '').replace(/-(?!.*-)/, '.')
@@ -89,6 +93,11 @@ export function Blogs({
 
   // Fetch single post
   const handleReadmore = useCallback((postSlug: string) => {
+    if (location.pathname === '/') {
+      navigate('/blogs', { state: { slug: postSlug } })
+      return
+    }
+
     const query = `*[slug.current == $slug] {
       _id, title, slug, body, 
       "image": mainImage.asset->,
@@ -113,7 +122,15 @@ export function Blogs({
         setLoading2(false)
       }
     )
-  }, [])
+  }, [location.pathname, navigate])
+
+  // Handle incoming state from navigation
+  useEffect(() => {
+    if (location.state && location.state.slug) {
+      handleReadmore(location.state.slug)
+      window.history.replaceState({}, document.title)
+    }
+  }, [location.state, handleReadmore])
 
   // Close post
   const closePost = useCallback(() => {
@@ -209,12 +226,12 @@ export function Blogs({
   return (
     <div
       ref={componentRef}
-      className={`transition-all bg-[#121212] backdrop-blur-sm text-gray-100 my-12 rounded-lg w-full`}
+      className={`transition-all p-9 bg-[#121212] backdrop-blur-sm text-gray-100 my-12 rounded-xl w-full border border-[#282828]`}
     >
-      <div className="container mx-auto px-4 py-8 md:py-12 w-full">
+      <div className="w-full">
         {/* Header */}
-        <div className="w-full flex flex-col items-start mb-9">
-          <div className="pl-5 text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white">
+        <div className="w-full flex flex-col items-start mb-8">
+          <div className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white">
             Past Experiences
           </div>
         </div>
@@ -263,7 +280,7 @@ export function Blogs({
 
                 {/* Main Content Card */}
                 <div className="flex justify-center w-full">
-                  <div className="w-[90%] md:w-[80%] bg-[#121212] border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-lg font-light leading-relaxed">
+                  <div className="w-[90%] md:w-[80%] bg-[#121212] border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-lg font-light leading-normal">
                     
                     {/* Title */}
                     <div className="text-center mb-12">
@@ -391,8 +408,7 @@ export function Blogs({
                   </p>
                   <button
                     onClick={() => handleReadmore(post.slug.current)}
-                    className="text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md"
-                    style={{ background: 'radial-gradient(circle at center, #ffd700 0%, #d4af37 50%, #996515 100%)' }}
+                    className="text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md bg-[#D4B34C]"
                   >
                     Read more
                   </button>
@@ -456,7 +472,7 @@ export function Blogs({
 
         .article-content li {
           margin-bottom: 0.75rem;
-          line-height: 1.6;
+          line-height: 1.5;
         }
 
         .article-content li::marker {

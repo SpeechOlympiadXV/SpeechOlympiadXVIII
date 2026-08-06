@@ -132,13 +132,14 @@
 }
 
 .register-btn {
-  background: radial-gradient(circle at center, #ffd700 0%, #d4af37 50%, #996515 100%);
+  background: #D4B34C;
+  color: #121212;
   transition: all 0.3s ease;
 }
 
 .register-btn:hover {
-  background: linear-gradient(to right, #ffd700, #d4af37, #996515);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.4);
+  background: #BD9F43;
+  box-shadow: 0 0 20px rgba(212, 179, 76, 0.6), 0 0 40px rgba(189, 159, 67, 0.4);
   transform: scale(1.05) translateY(-2px);
   filter: brightness(1.1);
 }

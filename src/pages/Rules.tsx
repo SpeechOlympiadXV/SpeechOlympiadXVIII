@@ -1,7 +1,7 @@
 export function Rules() {
   return (
-    <div className="container my-12 mx-auto p-8 md:p-12 w-full md:w-[90%] max-w-4xl bg-[#121212] backdrop-blur-sm rounded-xl text-white border border-[#585858]/30">
-      <h1 className="text-3xl font-semibold mb-6 text-center">Speech Olympiad XVIII</h1>
+    <div className="container my-12 mx-auto p-8 md:p-12 w-11/12 md:w-4/5 bg-[#121212] backdrop-blur-sm rounded-xl text-white border border-[#585858]/30">
+      <h1 className="text-3xl font-semibold mb-6 text-center">Speech Olympiad XIX</h1>
       <h3 className="text-lg font-thin mb-6 text-center">Intra-University Speech Competition - University of Moratuwa</h3>
       <h1 className="text-xl font-semibold mb-6 text-center">Contest Rules: Preliminaries</h1>
 
@@ -9,7 +9,7 @@ export function Rules() {
         <h2 className="text-2xl font-semibold mb-4">1. Eligibility</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal border-none">
-            The contestant should be an undergraduate studying in any of the following faculties<sup>1</sup> of University of Moratuwa to be eligible to participate in Speech Olympiad XVIII.
+            The contestant should be an undergraduate studying in any of the following faculties<sup>1</sup> of University of Moratuwa to be eligible to participate in Speech Olympiad XIX.
             <ul className="list-disc pl-6 mt-2 space-y-1 border-none" style={{ listStyleType: 'circle' }}>
               <li className="text-gray-300 p-1 border-none">Faculty of Engineering</li>
               <li className="text-gray-300 p-1 border-none">Faculty of Architecture</li>

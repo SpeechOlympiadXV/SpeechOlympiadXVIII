@@ -38,14 +38,13 @@ export function Feature({
           {headingEnd && <span>{headingEnd}</span>}
         </h2>
 
-        <div className="text-gray-300 leading-relaxed text-left text-lg font-light">
+        <div className="text-gray-300 leading-normal text-left text-xl font-light">
           {text}
         </div>
 
         <button
           onClick={handleClick}
-          className="flex h-14 w-fit font-bold mt-10 items-center px-8 py-4 text-lg text-black rounded-lg transition-all duration-300 hover:brightness-110 hover:scale-105 group shadow-lg"
-          style={{ background: 'radial-gradient(circle at center, #ffd700 0%, #d4af37 50%, #996515 100%)' }}
+          className="flex h-14 w-fit font-bold mt-10 items-center px-8 py-4 text-lg text-black rounded-lg transition-all duration-300 hover:brightness-110 hover:scale-105 group shadow-lg bg-[#D4B34C]"
         >
           Read More
           <ChevronRight className="h-5 w-5 ml-2 mt-[2px] group-hover:translate-x-1 transition-transform" />

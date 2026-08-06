@@ -44,7 +44,7 @@ export function ArticleLayout({
 
       {/* Article Content */}
       <div className="flex justify-center w-full">
-        <div className="w-[90%] md:w-[80%] bg-[#121212] border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-lg font-light leading-relaxed">
+        <div className="w-[90%] md:w-[80%] bg-[#121212] border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-xl font-light leading-normal">
           <div className="article-content prose prose-invert max-w-none">
             {children}
           </div>
@@ -99,13 +99,16 @@ export function ArticleLayout({
           width: 100%;
           height: auto;
           object-fit: cover;
-          margin: 2rem 0;
+          margin: 2rem auto;
+          display: block;
           border-radius: 8px;
         }
         @media (min-width: 768px) {
-          .article-content img.article-img-resize {
+          .article-content img.article-img {
             width: 50%;
-            margin-left: 25%;
+          }
+          .article-content img.article-img-resize {
+            width: 40%;
           }
         }
       `}</style>

@@ -50,16 +50,16 @@ export function ChampionsStory() {
     {
       key: '1',
       imageSrc: yasirPortrait,
-      title: "Walk the Path <br className='hidden md:block' /> of a <br className='hidden md:block' /> Champion",
+      title: "Walk the Path of a <br className='hidden md:block' /> Champion",
       subtitle: "The story of Mohamed Yasir, champion of Speech Olympiad VIII",
-      backgroundColorClass: "bg-yellow-400",
+      backgroundColorClass: "bg-[#D4B34C]",
     },
     {
       key: '2',
       imageSrc: niruthikaPortrait,
       title: 'The Transformative Journey<br/> of a Champion',
       subtitle: "The story of Niruththika Sritharan, Champion of Speech Olympiad XIV",
-      backgroundColorClass: "bg-orange-400",
+      backgroundColorClass: "bg-[#CA8553]",
     }
   ]
 
@@ -67,7 +67,7 @@ export function ChampionsStory() {
     <div className="w-full flex justify-center items-center py-10">
       {activeKey === '0' ? (
         <div className="w-full bg-[#121212] backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
-          <div className="text-3xl mb-9 lg:text-4xl font-semibold tracking-tight text-[#EDC001]">
+          <div className="text-3xl mb-9 lg:text-4xl font-semibold tracking-tight text-white">
             Champion's Story
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -84,7 +84,7 @@ export function ChampionsStory() {
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-5xl">
+        <div className="w-full">
           {activeKey === '1' && (
             <>
               <BackButton onClick={closePost} />

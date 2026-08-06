@@ -90,25 +90,25 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
                         } ${stage.highlightStyle === 'gold'
                           ? 'bg-gradient-to-br from-[#282828] to-[#d4af3744] backdrop-blur-md border-[#d4af37]/50 shadow-[0_0_20px_rgba(212,175,55,0.15)]'
                           : stage.highlightStyle === 'silver'
-                          ? 'bg-gradient-to-br from-[#282828] to-[#a1a1aa44] backdrop-blur-md border-[#a1a1aa]/50 shadow-[0_0_20px_rgba(161,161,170,0.15)]'
-                          : 'bg-[#121212] backdrop-blur-sm border-[#585858]/30 shadow-lg'
+                          ? 'bg-gradient-to-br from-[#2a2a2a] to-[#c0c0c044] backdrop-blur-md border-[#c0c0c0]/60 shadow-[0_0_20px_rgba(192,192,192,0.2)]'
+                          : 'bg-[#1e1e1e] backdrop-blur-sm border border-[#4a4a4a] shadow-lg'
                         }`}
                     >
                       <h3
                         className={`text-xl md:text-2xl lg:text-3xl font-semibold mb-2 ${stage.highlightStyle
                             ? 'text-transparent bg-clip-text'
-                            : 'text-gray-400'
+                            : 'text-gray-200'
                           }`}
                         style={
                           stage.highlightStyle === 'gold' ? { backgroundImage: 'linear-gradient(to bottom right, #ffe55c 0%, #d4af37 50%, #996515 100%)' } :
-                          stage.highlightStyle === 'silver' ? { backgroundImage: 'linear-gradient(to bottom right, #f4f4f5 0%, #a1a1aa 50%, #52525b 100%)' } :
+                          stage.highlightStyle === 'silver' ? { backgroundImage: 'linear-gradient(to bottom right, #ffffff 0%, #c0c0c0 50%, #808080 100%)' } :
                           {}
                         }
                       >
                         {stage.name}
                       </h3>
                       <time
-                        className={`text-sm xl:text-base font-light ${stage.highlightStyle ? 'text-gray-200' : 'text-gray-500'
+                        className={`text-sm xl:text-base font-light ${stage.highlightStyle ? 'text-gray-200' : 'text-gray-400'
                           }`}
                       >
                         {stage.date}

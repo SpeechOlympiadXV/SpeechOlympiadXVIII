@@ -167,7 +167,7 @@ export function Hero() {
             transition={{ duration: 1.2, ease: 'easeOut', delay: 1 }}
             className="my-6"
           >
-            <div className="h-1 bg-gradient-to-r from-transparent via-[#EDC001] to-transparent shadow-[0_0_20px_rgba(237,192,1,0.6)] w-full" />
+            <div className="h-1 bg-gradient-to-r from-transparent via-[#D4B34C] to-transparent shadow-[0_0_20px_rgba(212,179,76,0.6)] w-full" />
           </motion.div>
 
           {/* Second Line: "Reign Beyond" */}

@@ -24,19 +24,19 @@ export function TechnicalTipsCard({
       className={`
         ${backgroundColorClass}
         border border-gray-700
-        rounded-lg p-4 my-3 md:my-0 w-full
+        rounded-lg p-4 my-3 md:my-0 w-full h-full
         cursor-pointer
-        opacity-90 hover:opacity-100 transition-opacity
-        flex flex-col md:flex-row shadow-lg hover:shadow-xl
+        transition-all duration-300 ease-in-out transform hover:scale-105
+        flex flex-col shadow-lg hover:shadow-xl
       `}
       style={backgroundColorHash ? { backgroundColor: backgroundColorHash } : {}}
     >
-      <div className="w-full text-left">
+      <div className="w-full text-left flex flex-col h-full">
         <h5 
           className="font-bold text-zinc-900 text-2xl sm:text-3xl xl:text-4xl mb-2 border-b-2 border-zinc-700/50 pb-2 drop-shadow-md"
           dangerouslySetInnerHTML={{ __html: title }} 
         />
-        <div className="flex flex-col md:flex-row mt-4">
+        <div className="flex flex-col md:flex-row mt-auto pt-4">
           <div className="md:w-1/3 flex justify-center mb-4 md:mb-0">
             <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/20 shadow-inner">
               <Image 
