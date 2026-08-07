@@ -14,11 +14,16 @@ interface Props {
 }
 
 const StaticPhoenix = memo(({ cleanedSvgRaw }: { cleanedSvgRaw: string }) => (
-  <div
-    className="absolute top-0 bottom-0 right-0 w-[200vw] sm:w-[150vw] md:w-[100vw] lg:w-[80vw] flex justify-center items-center translate-x-1/2"
-    id="registration-phoenix-svg-container"
-    dangerouslySetInnerHTML={{ __html: cleanedSvgRaw }}
-  />
+  <>
+    <div
+      className="registration-phoenix-svg-container absolute top-0 bottom-0 left-0 w-[200vw] sm:w-[150vw] md:w-[100vw] lg:w-[80vw] flex justify-center items-center -translate-x-[75%] md:-translate-x-[60%] scale-x-[-1]"
+      dangerouslySetInnerHTML={{ __html: cleanedSvgRaw }}
+    />
+    <div
+      className="registration-phoenix-svg-container absolute top-0 bottom-0 right-0 w-[200vw] sm:w-[150vw] md:w-[100vw] lg:w-[80vw] flex justify-center items-center translate-x-[75%] md:translate-x-[60%]"
+      dangerouslySetInnerHTML={{ __html: cleanedSvgRaw }}
+    />
+  </>
 ), () => true);
 
 export const RegistrationPhoenixLogo = memo(function RegistrationPhoenixLogo({ progress, isSuccess }: Props) {
@@ -30,29 +35,39 @@ export const RegistrationPhoenixLogo = memo(function RegistrationPhoenixLogo({ p
   useEffect(() => {
     if (initialized.current) return;
 
-    const container = document.getElementById('registration-phoenix-svg-container');
-    if (!container) return;
+    const containers = Array.from(document.querySelectorAll('.registration-phoenix-svg-container'));
+    if (containers.length === 0) return;
 
-    const svgElement = container.querySelector('svg')
-    if (!svgElement) return
+    let updateScaleFns: (() => void)[] = [];
+    let allPaths: SVGPathElement[] = [];
 
-    svgElement.style.width = '100%'
-    svgElement.style.height = '100%'
-    svgElement.style.objectFit = 'contain'
+    containers.forEach(container => {
+      const svgElement = container.querySelector('svg')
+      if (!svgElement) return
 
-    const updateScale = () => {
-      const scale = window.innerWidth < 768 ? 1.8 : 2;
-      svgElement.style.transform = `scale(${scale})`;
-    };
-    updateScale();
-    window.addEventListener('resize', updateScale);
+      svgElement.style.width = '100%'
+      svgElement.style.height = '100%'
+      svgElement.style.objectFit = 'contain'
 
-    svgElement.style.transformOrigin = 'center 40%'
+      const updateScale = () => {
+        const scale = window.innerWidth < 768 ? 0.8 : 2;
+        svgElement.style.transform = `scale(${scale})`;
+      };
+      updateScale();
+      updateScaleFns.push(updateScale);
 
-    const paths = Array.from(svgElement.querySelectorAll('path'))
-    if (paths.length === 0) return
+      svgElement.style.transformOrigin = 'center 40%'
 
-    const pathsWithData = paths.map(path => {
+      const paths = Array.from(svgElement.querySelectorAll('path'))
+      allPaths.push(...paths)
+    });
+
+    const updateAllScales = () => updateScaleFns.forEach(fn => fn());
+    window.addEventListener('resize', updateAllScales);
+
+    if (allPaths.length === 0) return
+
+    const pathsWithData = allPaths.map(path => {
       const length = path.getTotalLength() || 1000
       return { path, length }
     })
@@ -64,7 +79,7 @@ export const RegistrationPhoenixLogo = memo(function RegistrationPhoenixLogo({ p
       path.style.strokeDasharray = length.toString()
       path.style.strokeDashoffset = length.toString() // Initially hidden
 
-      path.style.stroke = '#FFD700'
+      path.style.stroke = '#A9A9A9'
       path.style.strokeWidth = '1.5'
       path.style.fill = 'transparent'
 
@@ -72,7 +87,7 @@ export const RegistrationPhoenixLogo = memo(function RegistrationPhoenixLogo({ p
     })
 
     // Force reflow
-    svgElement.getBoundingClientRect()
+    containers.forEach(c => c.getBoundingClientRect())
 
     requestAnimationFrame(() => {
       pathsRef.current.forEach(({ path }) => {
@@ -83,7 +98,7 @@ export const RegistrationPhoenixLogo = memo(function RegistrationPhoenixLogo({ p
     })
 
     return () => {
-      window.removeEventListener('resize', updateScale);
+      window.removeEventListener('resize', updateAllScales);
     }
   }, []) // Initialize once
 
@@ -146,7 +161,7 @@ export const RegistrationPhoenixLogo = memo(function RegistrationPhoenixLogo({ p
   if (animationState === 'idle') {
     containerClasses += "opacity-10"
   } else if (animationState === 'glow') {
-    containerClasses += "opacity-40 drop-shadow-[0_0_8px_#EDC001]"
+    containerClasses += "opacity-40 drop-shadow-[0_0_8px_#A9A9A9]"
   }
 
   return (
