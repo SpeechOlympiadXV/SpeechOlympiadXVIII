@@ -387,7 +387,7 @@ export function Blogs({
             {posts.map((post) => (
               <div
                 key={post._id}
-                className="backdrop-brightness-150 bg-opacity-50 rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105"
+                className="flex flex-col h-full backdrop-brightness-150 bg-opacity-50 rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105"
               >
                 <div className="p-4">
                   <Image
@@ -399,16 +399,16 @@ export function Blogs({
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <h2 className="text-xl font-semibold mb-2 text-white">
                     {post.title}
                   </h2>
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-gray-300 mb-4 flex-grow">
                     {post.description || post.excerpt}
                   </p>
                   <button
                     onClick={() => handleReadmore(post.slug.current)}
-                    className="text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md bg-[#c8a009]"
+                    className="mt-auto self-start text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md bg-[#c8a009]"
                   >
                     Read more
                   </button>
