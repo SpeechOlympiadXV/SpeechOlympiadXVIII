@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { SOLogo } from './SOLogo' // Assuming SOLogo is converted to React component
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -8,86 +9,111 @@ interface NavItem {
   name: string
   href: string
   current: boolean
-  className: string
+  className?: string
+  isButton?: boolean
 }
 
 const navigation: NavItem[] = [
-  { name: 'Home', href: '#', current: true, className: 'text-white' },
-  { name: 'About', href: '#about', current: false, className: 'text-white' },
-  { name: "Champion's Story", href: "#champions-story", current: false, className: 'text-white' },
-  { name: 'Technical Tips', href: '#technical-tips', current: false, className: 'text-white' },
-  { name: 'Finalists', href: '#finalists', current: false, className: 'text-white' },
-  { name: 'Gallery', href: '#gallery', current: false, className: 'text-white' },
-  { name: 'Rules & Regulations', href: '#rules', current: false, className: 'text-white' },
-  { name: 'Blogs', href: '#blogs', current: false, className: 'text-white' },
+  { name: 'Home', href: '/', current: true, className: 'text-white' },
+  { name: 'About', href: '/about', current: false, className: 'text-white' },
+  { name: "Champion's Story", href: "/champions-story", current: false, className: 'text-white' },
+  { name: 'Technical Tips', href: '/technical-tips', current: false, className: 'text-white' },
+  /*{ name: 'Finalists', href: '/finalists', current: false, className: 'text-white' },*/
+  { name: 'Gallery', href: '/gallery', current: false, className: 'text-white' },
+  { name: 'Rules & Regulations', href: '/rules', current: false, className: 'text-white' },
+  { name: 'Blogs', href: '/blogs', current: false, className: 'text-white' },
+  { name: 'Register', href: '/register', current: false, isButton: true },
 ]
 
-interface NavigationProps {}
+interface NavigationProps { }
 
-export function Navigation({}: NavigationProps) {
-  const [activeURL, setActiveURL] = useState('#')
+export function Navigation({ }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const location = useLocation()
+  const activeURL = location.pathname
 
-  useEffect(() => {
-    const handleHashChange = () => {
-      setActiveURL(window.location.hash || '#')
+  const NavLink = ({ item }: { item: NavItem }) => {
+    const isActive = item.href === '/' ? activeURL === '/' : activeURL.startsWith(item.href)
+    
+    if (item.isButton) {
+      return (
+        <Link
+          to={item.href}
+          className="ml-2 px-6 py-2 rounded-md text-sm font-bold text-black inline-block register-btn"
+        >
+          {item.name}
+        </Link>
+      )
     }
 
-    window.addEventListener('hashchange', handleHashChange)
-    handleHashChange() // Set initial state
+    return (
+      <Link
+        to={item.href}
+        className={`
+          px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200
+          ${item.className || ''}
+          ${isActive
+            ? 'bg-white/10 shadow-lg text-white'
+            : 'text-gray-300 hover:bg-white/5 hover:shadow-md hover:text-white'
+          }
+        `}
+        aria-current={isActive ? 'page' : undefined}
+      >
+        {item.name}
+      </Link>
+    )
+  }
 
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange)
+  const MobileNavLink = ({ item }: { item: NavItem }) => {
+    const isActive = item.href === '/' ? activeURL === '/' : activeURL.startsWith(item.href)
+    
+    if (item.isButton) {
+      return (
+        <Link
+          key={item.name}
+          to={item.href}
+          onClick={() => setMobileMenuOpen(false)}
+          className="block w-fit mt-4 px-6 py-2 rounded-md text-base font-bold text-black register-btn"
+        >
+          {item.name}
+        </Link>
+      )
     }
-  }, [])
 
-  const NavLink = ({ item }: { item: NavItem }) => (
-    <a
-      href={item.href}
-      className={`
-        px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200
-        ${item.className}
-        ${activeURL === item.href 
-          ? 'backdrop-brightness-150 shadow-lg' 
-          : 'hover:backdrop-brightness-150 hover:shadow-md'
-        }
-      `}
-      aria-current={activeURL === item.href ? 'page' : undefined}
-    >
-      {item.name}
-    </a>
-  )
-
-  const MobileNavLink = ({ item }: { item: NavItem }) => (
-    <a
-      key={item.name}
-      href={item.href}
-      onClick={() => setMobileMenuOpen(false)}
-      className={`
-        block px-3 py-2 rounded-md text-base font-medium transition-all duration-200
-        ${activeURL === item.href 
-          ? 'backdrop-brightness-75 bg-white/10 shadow-lg' 
-          : 'hover:backdrop-brightness-75 hover:bg-white/5'
-        }
-      `}
-      aria-current={activeURL === item.href ? 'page' : undefined}
-    >
-      {item.name}
-    </a>
-  )
+    return (
+      <Link
+        key={item.name}
+        to={item.href}
+        onClick={() => setMobileMenuOpen(false)}
+        className={`
+          block px-3 py-2 rounded-md text-base font-medium transition-all duration-200
+          ${item.className || ''}
+          ${isActive
+            ? 'bg-white/10 shadow-lg text-white'
+            : 'text-gray-300 hover:bg-white/5 hover:shadow-md hover:text-white'
+          }
+        `}
+        aria-current={isActive ? 'page' : undefined}
+      >
+        {item.name}
+      </Link>
+    )
+  }
 
   return (
-    <nav className="bg-inherit sticky top-0 w-full z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <nav className="bg-[#181818] sticky top-0 w-full z-50 border-b border-white/5 shadow-md">
+      <div className="w-full px-4 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <SOLogo className="w-auto h-24" />
+            <Link to="/">
+              <SOLogo className="w-auto h-14" />
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden xl:block ml-auto">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-1 lg:space-x-2">
               {navigation.map((item) => (
                 <NavLink key={item.name} item={item} />
               ))}
@@ -108,8 +134,8 @@ export function Navigation({}: NavigationProps) {
                   <X className="hidden h-6 w-6 xl:block" />
                 </Button>
               </SheetTrigger>
-              <SheetContent 
-                side="right" 
+              <SheetContent
+                side="right"
                 className="w-[300px] sm:w-[400px] bg-gradient-to-br from-[#181818] via-[#181818] to-[#282828] border-none rounded-b-none"
               >
                 <div className="px-2 pt-2 pb-3 space-y-1">

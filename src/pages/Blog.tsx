@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import Image from 'next/image'
+import { useLocation, useNavigate } from 'react-router-dom'
+import Image from '../components/Image'
 import { ChevronLeft, X } from 'lucide-react'
-import { SanityBlocks } from 'sanity-blocks-vue-component'
-import sanity from '../assets/client'
+import { PortableText } from '@portabletext/react'
+import { sanityClient as sanity } from '../lib/sanity'
 import imageUrlBuilder from '@sanity/image-url'
 
 const imageBuilder = imageUrlBuilder(sanity)
@@ -45,6 +46,9 @@ export function Blogs({
 
   const observerRef = useRef<IntersectionObserver | null>(null)
   const componentRef = useRef<HTMLDivElement>(null)
+
+  const location = useLocation()
+  const navigate = useNavigate()
 
   // Image URL converter
   const convertImageUrl = (imageRef: string): string => {
@@ -89,6 +93,11 @@ export function Blogs({
 
   // Fetch single post
   const handleReadmore = useCallback((postSlug: string) => {
+    if (location.pathname === '/') {
+      navigate('/blogs', { state: { slug: postSlug } })
+      return
+    }
+
     const query = `*[slug.current == $slug] {
       _id, title, slug, body, 
       "image": mainImage.asset->,
@@ -113,7 +122,15 @@ export function Blogs({
         setLoading2(false)
       }
     )
-  }, [])
+  }, [location.pathname, navigate])
+
+  // Handle incoming state from navigation
+  useEffect(() => {
+    if (location.state && location.state.slug) {
+      handleReadmore(location.state.slug)
+      window.history.replaceState({}, document.title)
+    }
+  }, [location.state, handleReadmore])
 
   // Close post
   const closePost = useCallback(() => {
@@ -209,16 +226,12 @@ export function Blogs({
   return (
     <div
       ref={componentRef}
-      className={`transition-all bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm text-gray-100 mt-10 mb-10 rounded-lg mr-auto ${
-        post
-          ? 'w-[98%] ml-[1%] md:w-[95%] md:ml-[2.5%]'
-          : 'w-[90%] ml-[5%]'
-      }`}
+      className={`transition-all p-9 bg-[#121212]/80 backdrop-blur-sm text-gray-100 my-12 rounded-xl w-full border border-[#282828]`}
     >
-      <div className="container mx-auto px-4 py-8 w-full">
+      <div className="w-full">
         {/* Header */}
-        <div className="w-full flex flex-col items-start mb-9">
-          <div className="pl-5 text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white">
+        <div className="w-full flex flex-col items-start mb-8">
+          <div className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white">
             Past Experiences
           </div>
         </div>
@@ -241,11 +254,11 @@ export function Blogs({
             )}
 
             {post && (
-              <div className="backdrop-brightness-150 bg-opacity-50 rounded-lg shadow-lg overflow-hidden relative">
+              <div className="relative w-full text-gray-100 pb-16 rounded-lg shadow-lg overflow-hidden bg-black/20">
                 {/* Close Button */}
                 <button
                   onClick={closePost}
-                  className="absolute z-30 top-4 left-4 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-600 transition duration-300 ease-in-out"
+                  className="absolute z-30 top-4 left-4 bg-gray-900/60 backdrop-blur-md text-white p-2 rounded-full hover:bg-gray-700 transition duration-300 ease-in-out"
                   aria-label="Close post"
                 >
                   <ChevronLeft className="w-6 h-6" />
@@ -253,82 +266,92 @@ export function Blogs({
 
                 {/* Cover Image */}
                 {post.coverImage && (
-                  <div className="p-4 mt-4">
+                  <div className="relative text-center w-full">
                     <Image
                       src={imageUrlFor(post.coverImage)}
                       alt={post.title}
                       width={1200}
-                      height={400}
-                      className="w-full h-64 object-cover rounded-lg"
+                      height={600}
+                      className="w-full h-64 md:h-[450px] object-cover"
                       sizes="100vw"
                     />
                   </div>
                 )}
 
-                {/* Title */}
-                <div className="p-6">
-                  <div className="text-center mb-12">
-                    <h1 className="text-4xl font-bold text-white border-b border-[#edc001] pb-2 inline-block">
-                      {post.title}
-                    </h1>
-                  </div>
+                {/* Main Content Card */}
+                <div className="flex justify-center w-full">
+                  <div className="w-[90%] md:w-[80%] bg-[#121212]/80 border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-lg font-light leading-normal">
+                    
+                    {/* Title */}
+                    <div className="text-center mb-12">
+                      <h1 className="text-4xl md:text-5xl font-bold text-white border-b border-[#edc001] pb-2 inline-block">
+                        {post.title}
+                      </h1>
+                    </div>
 
-                  {/* Blog Content */}
-                  <div className="blog-container">
-                    <div className="max-w-[920px] mx-auto">
-                      <SanityBlocks
-                        blocks={blocks}
-                        className="prose prose-invert prose-lg blog-content"
+                    {/* Blog Content */}
+                    <div className="article-content prose prose-invert max-w-none">
+                      <PortableText
+                        value={blocks}
                       />
                     </div>
-                  </div>
 
-                  {/* Author Info */}
-                  <div className="mt-8 flex items-center">
-                    {post.authorImage && (
-                      <Image
-                        src={imageUrlFor(post.authorImage)}
-                        alt={post.name}
-                        width={48}
-                        height={48}
-                        className="w-12 h-12 rounded-full mr-4"
-                      />
+                    {/* Author Info */}
+                    {post.name && (
+                      <div className="mt-12 border-t border-gray-600 pt-8">
+                        <p className="text-gray-400 mb-4 text-base">Words by</p>
+                        <div className="flex items-center mb-4">
+                          {post.authorImage && (
+                            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden bg-gray-600 mr-6">
+                              <Image
+                                src={imageUrlFor(post.authorImage)}
+                                alt={post.name}
+                                width={96}
+                                height={96}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          )}
+                          <div className="text-xl md:text-2xl font-medium text-[#EDC001]">
+                            {post.name}
+                          </div>
+                        </div>
+                      </div>
                     )}
-                    <p className="text-sm text-gray-300">By: {post.name}</p>
+
+                    {/* Blog Photos Gallery */}
+                    {post.images && post.images.length > 0 && (
+                      <div className="mt-12 border-t border-gray-600 pt-8">
+                        <h2 className="text-2xl font-semibold mb-6 text-white">
+                          Blog Photos
+                        </h2>
+                        <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
+                          {post.images.map((imageC, index) => {
+                            const imageUrl = convertImageUrl(
+                              imageC.image.asset._ref
+                            )
+                            return (
+                              <div
+                                key={index}
+                                className="cursor-pointer break-inside-avoid mb-4 overflow-hidden rounded-lg"
+                                onClick={() => showImageModal(imageUrl)}
+                              >
+                                <Image
+                                  src={imageUrl}
+                                  alt={`Blog photo ${index + 1}`}
+                                  width={800}
+                                  height={600}
+                                  className="w-full h-auto rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
+                                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                />
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-
-                {/* Blog Photos Gallery */}
-                {post.images && post.images.length > 0 && (
-                  <div className="px-6 py-4">
-                    <h2 className="text-2xl font-semibold mb-4 text-white">
-                      Blog Photos
-                    </h2>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                      {post.images.map((imageC, index) => {
-                        const imageUrl = convertImageUrl(
-                          imageC.image.asset._ref
-                        )
-                        return (
-                          <div
-                            key={index}
-                            className="aspect-square cursor-pointer"
-                          >
-                            <Image
-                              src={imageUrl}
-                              alt={`Blog photo ${index + 1}`}
-                              width={400}
-                              height={400}
-                              onClick={() => showImageModal(imageUrl)}
-                              className="w-full h-full object-cover rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
-                              sizes="(max-width: 768px) 50vw, 33vw"
-                            />
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-                )}
               </div>
             )}
 
@@ -364,7 +387,7 @@ export function Blogs({
             {posts.map((post) => (
               <div
                 key={post._id}
-                className="backdrop-brightness-150 bg-opacity-50 rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105"
+                className="flex flex-col h-full backdrop-brightness-150 bg-opacity-50 rounded-lg shadow-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105"
               >
                 <div className="p-4">
                   <Image
@@ -372,20 +395,20 @@ export function Blogs({
                     alt={post.title}
                     width={400}
                     height={300}
-                    className="w-full h-48 object-cover rounded-lg"
+                    className="w-full h-56 object-cover rounded-t-lg"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <h2 className="text-xl font-semibold mb-2 text-white">
                     {post.title}
                   </h2>
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-gray-300 mb-4 flex-grow">
                     {post.description || post.excerpt}
                   </p>
                   <button
                     onClick={() => handleReadmore(post.slug.current)}
-                    className="bg-[#EDC001cc] hover:bg-[#EDC001] text-gray-100 font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+                    className="mt-auto self-start text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md bg-[#c8a009]"
                   >
                     Read more
                   </button>
@@ -398,43 +421,35 @@ export function Blogs({
 
       {/* Global Styles */}
       <style>{`
-        .blog-container {
-          width: 100%;
-          max-width: none;
-          text-align: left;
-          margin: 0;
-          padding: 0 2rem;
-        }
-
-        .prose {
+        .article-content p {
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+          font-weight: 300;
           color: rgb(243 244 246);
-          font-size: 1.25rem;
-          line-height: 2;
+        }
+        
+        .article-content p:first-of-type::first-letter {
+          font-size: 250%;
+          line-height: 100%;
+          color: #EDC001;
+        }
+
+        .article-content blockquote {
+          background-color: rgba(255, 255, 255, 0.05);
+          padding: 1.5rem;
           text-align: left;
-          max-width: none !important;
-        }
-
-        .prose p {
-          margin: 2rem 0;
-          text-align: justify;
-          text-justify: inter-word;
-          max-width: 75ch;
-          padding-right: 1.5rem;
-          font-weight: 400;
-        }
-
-        .prose p:first-of-type {
-          font-size: 1.4rem;
-          font-weight: 400;
-          color: rgb(229 231 235);
-          line-height: 1.7;
           font-style: italic;
-          border-left: 4px solid rgb(251 191 36);
-          padding-left: 1.5rem;
-          margin: 2.5rem 0;
+          border-left: 4px solid #EDC001;
+          margin: 1.5rem 0;
+          border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .article-content blockquote p {
+          font-style: italic;
+          color: rgb(209 213 219);
         }
 
-        .prose h2 {
+        .article-content h2 {
           font-size: 1.875rem;
           font-weight: 700;
           color: rgb(255 255 255);
@@ -443,41 +458,28 @@ export function Blogs({
           padding-bottom: 0.5rem;
         }
 
-        .prose h3 {
+        .article-content h3 {
           font-size: 1.5rem;
           font-weight: 600;
           color: rgb(251 191 36);
           margin: 2rem 0 1rem 0;
         }
 
-        .prose ul, .prose ol {
+        .article-content ul, .article-content ol {
           margin: 1.5rem 0 1.5rem 2rem;
           color: rgb(229 231 235);
         }
 
-        .prose li {
+        .article-content li {
           margin-bottom: 0.75rem;
-          line-height: 1.6;
+          line-height: 1.5;
         }
 
-        .prose li::marker {
+        .article-content li::marker {
           color: rgb(251 191 36);
         }
 
-        .prose blockquote {
-          border-left: 4px solid rgb(251 191 36);
-          padding: 1.5rem 2rem;
-          margin: 2rem 0;
-          background: linear-gradient(135deg, rgba(237, 192, 1, 0.1), rgba(0, 0, 0, 0));
-          border-radius: 0 0.5rem 0.5rem 0;
-        }
-
-        .prose blockquote p {
-          font-style: italic;
-          color: rgb(209 213 219);
-        }
-
-        .prose img {
+        .article-content img {
           border-radius: 0.75rem;
           box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
           margin: 2.5rem auto;
@@ -486,24 +488,11 @@ export function Blogs({
         }
 
         @media (max-width: 768px) {
-          .blog-container {
-            padding: 0 1rem;
-          }
-
-          .prose {
-            font-size: 1.125rem;
-            line-height: 1.8;
-          }
-
-          .prose p:first-of-type {
-            font-size: 1.25rem;
-          }
-
-          .prose h2 {
+          .article-content h2 {
             font-size: 1.5rem;
           }
 
-          .prose h3 {
+          .article-content h3 {
             font-size: 1.25rem;
           }
         }

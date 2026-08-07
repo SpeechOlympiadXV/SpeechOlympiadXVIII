@@ -1,185 +1,184 @@
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { PhoenixLogo } from './PhoenixLogo'
 
-interface Star {
+
+interface FireParticle {
   id: number
-  style: {
-    left: string
-    top: string
-    animationDelay: string
-    filter: string
-    backgroundColor: string
-  }
+  style: any
 }
 
-interface HeroProps {}
-
-export function Hero({}: HeroProps) {
+export function Hero() {
   const [textAnimationDone, setTextAnimationDone] = useState(false)
-  const [stars, setStars] = useState<Star[]>([])
+  const [particles, setParticles] = useState<FireParticle[]>([])
 
   useEffect(() => {
-    // Trigger text animation and stars after 3 seconds
     const textTimer = setTimeout(() => {
       setTextAnimationDone(true)
     }, 3000)
 
-    // Generate stars
-    const starCount = 100
-    const generatedStars: Star[] = []
+    const particleCount = 80
+    const generatedParticles: FireParticle[] = []
 
-    for (let i = 0; i < starCount; i++) {
-      generatedStars.push({
+    for (let i = 0; i < particleCount; i++) {
+      const rand = Math.random();
+      let coreColor, midColor, endColor;
+
+      if (rand > 0.92) {
+        // Red (8%)
+        coreColor = '#FFC0CB';
+        midColor = '#FF0000';
+        endColor = '#8B0000';
+      } else {
+        // Golden Yellow (92%)
+        coreColor = '#FFFDE7';
+        midColor = '#FFD700';
+        endColor = '#DAA520';
+      }
+
+      const size = Math.random() * 6 + 2
+      const isMobile = window.innerWidth < 768;
+      const duration = (Math.random() * 10 + 8) * (isMobile ? 1.8 : 1)
+      const delay = Math.random() * -12
+
+      const startX = `${Math.random() * 120 - 10}%`;
+      const startY = `calc(100% + 20px)`;
+
+      const driftX = `${(Math.random() - 0.5) * 50}vw`;
+      const driftY = `-${Math.random() * 80 + 50}vh`;
+      
+      const rotStart = Math.random() * 360;
+      const rotEnd = rotStart + (Math.random() * 720 - 360);
+
+      generatedParticles.push({
         id: i,
         style: {
-          left: `${Math.random() * 100}%`,
-          top: `${Math.random() * 100}%`,
-          animationDelay: `${Math.random() * 5}s`,
-          filter: `blur(${Math.random() * 5}px)`,
-          backgroundColor: Math.random() > 0.5 ? 'white' : '#EDC001',
+          left: startX,
+          top: startY,
+          width: `${size}px`,
+          height: `${size * (Math.random() * 0.4 + 0.2)}px`,
+          animationDelay: `${delay}s`,
+          animationDuration: `${duration}s`,
+          '--core-color': coreColor,
+          '--mid-color': midColor,
+          '--end-color': endColor,
+          '--drift-x': driftX,
+          '--drift-y': driftY,
+          '--rot-start': `${rotStart}deg`,
+          '--rot-end': `${rotEnd}deg`,
         },
       })
     }
 
-    setStars(generatedStars)
-
+    setParticles(generatedParticles)
     return () => clearTimeout(textTimer)
   }, [])
 
   return (
     <>
       <style>{`
-        @keyframes twinkle {
+        @keyframes phoenixFireRise {
           0% {
-            opacity: 0;
-            transform: scale(1);
-            translate: 0 0;
-          }
-          50% {
-            opacity: 0.7;
-            transform: scale(1.5);
+            transform: translate(0, 0) scale(1.2) rotate(var(--rot-start));
+            opacity: 1;
           }
           100% {
+            transform: translate(var(--drift-x), var(--drift-y)) scale(0.2) rotate(var(--rot-end));
             opacity: 0;
-            transform: scale(1);
-            translate: 0 -30px;
           }
         }
 
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        .star {
+        .phoenix-fire-particle {
           position: absolute;
-          width: 0.25rem;
-          height: 0.25rem;
-          border-radius: 9999px;
-          backdrop-filter: blur(100%);
-          opacity: 0;
-          animation: twinkle 5s infinite;
+          border-radius: 2px;
+          mix-blend-mode: screen;
+          background-color: var(--mid-color);
+          box-shadow: 0 0 4px var(--mid-color);
+          animation: phoenixFireRise linear infinite;
+          pointer-events: none;
+          will-change: transform, opacity;
         }
 
-        .unleashed-shadow {
-          text-shadow: 0 0 20px rgba(188, 156, 35, 0.8), 0 0 40px rgba(188, 156, 35, 0.4);
+        .silver-metallic-text {
+          background: linear-gradient(to bottom right, #a1a1aa 0%, #f4f4f5 30%, #71717a 70%, #e4e4e7 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke: 1.5px #bf953f;
+          filter: drop-shadow(0 0 20px rgba(161, 161, 170, 0.5)) drop-shadow(0 0 40px rgba(161, 161, 170, 0.3));
         }
 
-        .unbound-text-shadow {
-          text-shadow: 0 0 20px rgba(237, 192, 1, 0.8), 0 0 40px rgba(237, 192, 1, 0.4);
-        }
-
-        .golden-glow {
-          box-shadow: 0 0 20px rgba(237, 192, 1, 0.6), 0 0 40px rgba(237, 192, 1, 0.3);
-        }
-
-        .animate-fade-in {
-          animation: fadeIn 1.2s ease-out;
-          animation-fill-mode: forwards;
-        }
-
-        .animation-delay-500 {
-          animation-delay: 0.5s;
-        }
-
-        .animation-delay-1000 {
-          animation-delay: 1s;
-        }
-
-        .animation-delay-1500 {
-          animation-delay: 1.5s;
-        }
-
-        @media (max-width: 640px) {
-          h1, h2 {
-            line-height: 1.1;
-          }
+        .golden-metallic-text {
+          background: linear-gradient(to bottom right, #bf953f 0%, #fcf6ba 30%, #b38728 70%, #fbf5b7 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke: 1.5px #bf953f;
+          filter: drop-shadow(0 0 20px rgba(237, 192, 1, 0.5)) drop-shadow(0 0 40px rgba(237, 192, 1, 0.3));
         }
       `}</style>
 
       <div
-        className="w-full h-[78vh] sm:h-[82vh] md:h-[86vh] lg:h-[90vh] flex flex-col items-center justify-center relative overflow-hidden"
+        className="w-full h-[78vh] sm:h-[82vh] md:h-[86vh] lg:h-[90vh] flex flex-col items-center justify-center relative overflow-hidden z-10"
         style={{
           backgroundImage: 'radial-gradient(75% 75% at 50% 50%, #000000 59%, #181818 100%)',
           backgroundSize: '100% 100%',
           backgroundPosition: '0px 0px',
         }}
       >
-        {/* Twinkling Stars Background */}
-        {textAnimationDone && (
-          <div className="absolute inset-0">
-            {stars.map((star) => (
-              <div
-                key={star.id}
-                className="star"
-                style={{
-                  left: star.style.left,
-                  top: star.style.top,
-                  backgroundColor: star.style.backgroundColor,
-                  animationDelay: star.style.animationDelay,
-                  filter: star.style.filter,
-                }}
-              />
-            ))}
-          </div>
-        )}
+        {/* Phoenix Fire Background */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, ease: 'easeOut', delay: 0.5 }}
+          className="absolute inset-0 overflow-hidden pointer-events-none z-0"
+        >
+          {particles.map((particle) => (
+            <div
+              key={particle.id}
+              className="phoenix-fire-particle"
+              style={particle.style}
+            />
+          ))}
+        </motion.div>
+
+        {/* Phoenix SVG Line Animation */}
+        <PhoenixLogo />
 
         {/* Main Text Container */}
         <div className="w-full max-w-6xl h-full flex flex-col items-center justify-center p-4 z-10 relative">
-          
-          {/* First Line: "Own Your Voice" */}
-          <div className="flex flex-col items-center mb-8">
-            <div className="animate-fade-in animation-delay-500">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white text-center leading-tight tracking-tight">
-                OWN YOUR
-                <span className="block unleashed-shadow text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-                  VOICE
-                </span>
-              </h1>
-            </div>
-          </div>
+
+          {/* First Line: "Rise Within, Shine In" */}
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, ease: 'easeOut', delay: 0.5 }}
+            className="flex flex-col items-center mb-8"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-thin text-center leading-tight tracking-tight silver-metallic-text uppercase">
+              RISE WITHIN
+            </h1>
+          </motion.div>
 
           {/* Golden Separator Line */}
-          <div className="animate-fade-in animation-delay-1000 my-6">
-            <div className="w-32 md:w-48 h-1 bg-gradient-to-r from-transparent via-[#EDC001] to-transparent golden-glow" />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: '12rem' }}
+            transition={{ duration: 1.2, ease: 'easeOut', delay: 1 }}
+            className="my-6"
+          >
+            <div className="h-1 bg-gradient-to-r from-transparent via-[#D4B34C] to-transparent shadow-[0_0_20px_rgba(212,179,76,0.6)] w-full" />
+          </motion.div>
 
-          {/* Second Line: "Earn Your Crown" */}
-          <div className="flex flex-col items-center mt-8">
-            <div className="animate-fade-in animation-delay-1500">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#EDC001] text-center leading-tight tracking-tight">
-                EARN YOUR
-                <span className="block unbound-text-shadow text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-                  CROWN
-                </span>
-              </h2>
-            </div>
-          </div>
+          {/* Second Line: "Reign Beyond" */}
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, ease: 'easeOut', delay: 1.5 }}
+            className="flex flex-col items-center mt-8"
+          >
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium text-center leading-tight tracking-tight golden-metallic-text uppercase">
+              REIGN BEYOND
+            </h2>
+          </motion.div>
         </div>
       </div>
     </>

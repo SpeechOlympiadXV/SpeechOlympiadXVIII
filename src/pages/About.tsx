@@ -38,16 +38,17 @@ export function AboutPage({}: AboutPageProps) {
           className="
             w-11/12 md:w-4/5 
             rounded-2xl 
-            p-9 md:p-14 
-            my-9
-            bg-gradient-to-br from-[#282828] to-[#EDC00111]
+            p-8 md:p-12 
+            my-12
+            bg-[#121212]/80
             border border-[#585858]
             flex 
             flex-col
+            text-xl
           "
         >
           <div className="w-full pb-2">
-            <p className="font-light text-justify pt-1 leading-relaxed">
+            <p className="font-light text-justify pt-1 leading-normal">
               <span className="font-semibold text-xl text-[#EDC001] drop-shadow-lg">
                 Speech Olympiad
               </span>
@@ -65,8 +66,8 @@ export function AboutPage({}: AboutPageProps) {
 
             <div className="my-6" />
 
-            <p className="font-light text-justify leading-relaxed">
-              Throughout the span of the last 15 years, there has been a 
+            <p className="font-light text-justify leading-normal">
+              Throughout the span of the last 18 years, there has been a 
               consistent demonstration of the event's ability to unveil hidden 
               talents within the university's undergraduates. The recipients of awards 
               and those who reach the final stages encompass a broad spectrum of backgrounds, 

@@ -1,4 +1,4 @@
-import SOXVIIILogo from '@/assets/images/SOXVIII_LOGO_White.png'
+import SOXIXLogo from '@/assets/images/SO_XIX_Logo_White_on_Transparent.png'
 
 interface SOLogoProps {
   className?: string
@@ -7,7 +7,7 @@ interface SOLogoProps {
 export function SOLogo({ className = '' }: SOLogoProps) {
   return (
     <img
-      src={SOXVIIILogo}
+      src={SOXIXLogo}
       alt="Speech Olympiad Logo"
       className={`object-cover ${className}`}
     />
