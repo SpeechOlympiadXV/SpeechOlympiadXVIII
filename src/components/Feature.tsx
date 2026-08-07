@@ -44,7 +44,7 @@ export function Feature({
 
         <button
           onClick={handleClick}
-          className="flex h-14 w-fit font-bold mt-10 items-center px-8 py-4 text-lg text-black rounded-lg transition-all duration-300 hover:brightness-110 hover:scale-105 group shadow-lg bg-[#D4B34C]"
+          className="flex h-14 w-fit font-bold mt-10 items-center px-8 py-4 text-lg text-black rounded-lg transition-all duration-300 hover:brightness-110 hover:scale-105 group shadow-lg bg-[#c8a009]"
         >
           Read More
           <ChevronRight className="h-5 w-5 ml-2 mt-[2px] group-hover:translate-x-1 transition-transform" />

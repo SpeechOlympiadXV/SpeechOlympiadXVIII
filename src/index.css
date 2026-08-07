@@ -132,14 +132,14 @@
 }
 
 .register-btn {
-  background: #D4B34C;
+  background: #c8a009;
   color: #121212;
   transition: all 0.3s ease;
 }
 
 .register-btn:hover {
-  background: #BD9F43;
-  box-shadow: 0 0 20px rgba(212, 179, 76, 0.6), 0 0 40px rgba(189, 159, 67, 0.4);
+  background: #aa8808;
+  box-shadow: 0 0 20px rgba(200, 160, 9, 0.6), 0 0 40px rgba(170, 136, 8, 0.4);
   transform: scale(1.05) translateY(-2px);
   filter: brightness(1.1);
 }

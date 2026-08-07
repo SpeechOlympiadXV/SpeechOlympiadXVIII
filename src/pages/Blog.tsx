@@ -408,7 +408,7 @@ export function Blogs({
                   </p>
                   <button
                     onClick={() => handleReadmore(post.slug.current)}
-                    className="text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md bg-[#D4B34C]"
+                    className="text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md bg-[#c8a009]"
                   >
                     Read more
                   </button>
