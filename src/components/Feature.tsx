@@ -1,5 +1,6 @@
 import { ChevronRight } from 'lucide-react'
-import Image from 'next/image'
+import Image from './Image'
+import { useNavigate } from 'react-router-dom'
 
 interface FeatureProps {
   index?: number
@@ -18,41 +19,47 @@ export function Feature({
   image,
   urlString,
 }: FeatureProps) {
+  const navigate = useNavigate()
+
   const handleClick = () => {
-    window.location.href = urlString
+    if (urlString.startsWith('http') || urlString.startsWith('mailto:')) {
+      window.location.href = urlString
+    } else {
+      navigate(urlString)
+    }
   }
 
   return (
-    <div className="m-10 flex flex-col md:flex-row gap-6 w-[90%] md:w-[80%] rounded-2xl mx-auto bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm shadow-black relative">
+    <div className="my-10 flex flex-col md:flex-row gap-6 w-full rounded-2xl mx-auto bg-[#121212]/80 backdrop-blur-sm shadow-black relative border border-[#282828]">
       {/* Content Section */}
-      <div className="flex-1 space-y-4 p-9">
-        <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tighter leading-tight">
+      <div className="flex-1 space-y-6 p-12 lg:p-16 flex flex-col justify-center">
+        <h2 className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white">
           {heading}
           {headingEnd && <span>{headingEnd}</span>}
         </h2>
 
-        <div className="text-gray-300 leading-6 text-left text-lg font-light">
+        <div className="text-gray-300 leading-normal text-left text-xl font-light">
           {text}
         </div>
 
         <button
           onClick={handleClick}
-          className="flex h-10 font-semibold mt-10 items-center px-4 py-2 bg-[#EDC001cc] text-gray-100 rounded-lg hover-effect transition-all duration-300 hover:bg-[#EDC001aa] hover:text-shadow-sm group"
+          className="flex h-14 w-fit font-bold mt-10 items-center px-8 py-4 text-lg text-black rounded-lg transition-all duration-300 hover:brightness-110 hover:scale-105 group shadow-lg bg-[#c8a009]"
         >
           Read More
-          <ChevronRight className="h-4 w-4 ml-2 mt-[2px] group-hover:translate-x-1 transition-transform" />
+          <ChevronRight className="h-5 w-5 ml-2 mt-[2px] group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
 
       {/* Image Section */}
-      <div className="w-full md:w-1/3 h-full flex flex-col justify-center">
+      <div className="w-full md:w-[45%] lg:w-[40%] h-full flex flex-col justify-center">
         <Image
           src={image}
           alt={heading}
-          width={500}
-          height={400}
-          className="w-full h-64 object-cover rounded-lg"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          width={800}
+          height={600}
+          className="w-full h-80 md:h-full min-h-[300px] md:min-h-[400px] lg:min-h-[500px] object-cover rounded-r-2xl rounded-l-none md:rounded-l-lg"
+          sizes="(max-width: 768px) 100vw, 50vw"
           priority={index === 0}
         />
       </div>

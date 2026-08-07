@@ -1,0 +1,36 @@
+@import "./base.css";
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+#app {
+  width: screen;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  /* padding: 2rem;
+  padding-top: 85px; */
+  display: flex;
+  flex-direction: column;
+
+  font-weight: normal;
+}
+
+/* .hidden {
+  opacity: 0;
+  transform: translateX(-25%);
+  transition: all 1s;
+}
+
+.animated-show {
+  opacity: 1;
+  transform: translateX(0);
+} */
+
+/*center any element vertically and horizontally*/
+.center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

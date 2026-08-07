@@ -1,145 +1,106 @@
-'use client'
+import React, { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { TechnicalTipsCard } from '../components/TechnicalTipsCard'
 
-import { useState } from 'react'
-import { ChevronLeft } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+// Child components
+import { Yasir } from '../ChampStory/Yasir'
+import { Niru } from '../ChampStory/Niru'
 
-// Component imports
-import { TechnicalTips } from '../components/TechnicalTips'
-import { YasirStory } from '../ChampStory/Yasir'
-import { NiruthikaStory } from '../ChampStory/Niru'
-
-// Image imports
+// Images for cards
 import yasirPortrait from '../assets/images/PathOfChampion_portrait.jpg'
 import niruthikaPortrait from '../assets/images/Niru_profile_img.png'
 
-interface ChampionStory {
-  key: string
-  imageSrc: string
-  title: string
-  subtitle: string
-  body?: string
-  backgroundColorClass: string
-}
+const BackButton = ({ onClick }: { onClick: () => void }) => (
+  <button
+    onClick={onClick}
+    className="bg-[#EDC001] m-4 text-[#181818] p-3 w-16 h-16 rounded-full hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 flex items-center justify-center transition-transform hover:scale-105"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+      <path fillRule="evenodd" d="M9.293 5.293a1 1 0 011.414 1.414L7.414 10l3.293 3.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 010 1.414z" clipRule="evenodd" />
+    </svg>
+  </button>
+)
 
-interface PageChampionsStoryProps {}
+export function ChampionsStory() {
+  const location = useLocation()
+  const navigate = useNavigate()
 
-export function ChampionsStory({}: PageChampionsStoryProps) {
   const [activeKey, setActiveKey] = useState('0')
 
-  const championStories: ChampionStory[] = [
+  useEffect(() => {
+    if (location.state?.activeKey) {
+      setActiveKey(location.state.activeKey)
+    }
+  }, [location.state?.activeKey])
+
+  const handleCardClick = (key: string) => {
+    if (location.pathname === '/') {
+      navigate('/champions-story', { state: { activeKey: key } })
+    } else {
+      setActiveKey(key)
+    }
+  }
+
+  const closePost = () => {
+    setActiveKey('0')
+    navigate(location.pathname, { replace: true, state: {} })
+  }
+
+  const stories = [
     {
       key: '1',
       imageSrc: yasirPortrait,
-      title: 'Walk the Path of a Champion',
-      subtitle: 'The story of Mohamed Yasir, champion of Speech Olympiad VIII',
-      backgroundColorClass: 'bg-yellow-300',
+      title: "Walk the Path of a <br/> Champion",
+      subtitle: "The story of Mohamed Yasir, champion of Speech Olympiad VIII",
+      backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
     },
     {
       key: '2',
       imageSrc: niruthikaPortrait,
-      title: 'The Transformative Journey of a Champion',
-      subtitle: 'The story of Niruththika Sritharan, Champion of Speech Olympiad XIV',
-      body: 'My Speech Olympiad experience has enabled me to become the storyteller I am today. I work in advertising where I get to present new ideas and unique concepts to both my team and clients on a daily basis. I developed my presenting skills thanks to the support and knowledge I got from Speech Olympiad and the Gavel Club of University of Moratuwa.',
-      backgroundColorClass: 'bg-orange-400',
-    },
+      title: 'The Transformative Journey<br/> of a Champion',
+      subtitle: "The story of Niruththika Sritharan, Champion of Speech Olympiad XIV",
+      backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
+    }
   ]
 
-  const handleClose = () => setActiveKey('0')
-  const handleCardClick = (key: string) => setActiveKey(key)
-
   return (
-    <>
-      {/* Cards Grid View */}
-      {activeKey === '0' && (
-        <div
-          className={`p-8 m-8 rounded-lg transition-all duration-300 bg-gradient-to-br from-[#282828] to-[#EDC00111] backdrop-blur-sm w-[90%] ml-[5%] mr-auto`}
-        >
-          {/* Title */}
-          <div className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-4">
+    <div className="w-full flex justify-center items-center py-10">
+      {activeKey === '0' ? (
+        <div className="w-full bg-[#121212]/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+          <div className="text-3xl mb-9 lg:text-4xl font-semibold tracking-tight text-white">
             Champion's Story
           </div>
-
-          {/* Champion Cards Grid */}
-          <div className="w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {championStories.map((story) => (
-                <div
-                  key={story.key}
-                  onClick={() => handleCardClick(story.key)}
-                  className="cursor-pointer transform transition-transform duration-300 hover:scale-105"
-                >
-                  <TechnicalTips
-                    title={story.title}
-                    imageSrc={story.imageSrc}
-                    body={story.body}
-                    subtitle={story.subtitle}
-                    backgroundColorClass={story.backgroundColorClass}
-                  />
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {stories.map((story) => (
+              <TechnicalTipsCard
+                key={story.key}
+                title={story.title}
+                imageSrc={story.imageSrc}
+                subtitle={story.subtitle}
+                backgroundColorClass={story.backgroundColorClass}
+                onClick={() => handleCardClick(story.key)}
+              />
+            ))}
           </div>
         </div>
-      )}
-
-      {/* Yasir Story Detail View */}
-      {activeKey === '1' && (
+      ) : (
         <div className="w-full">
-          <div className="sticky top-4 z-10 mb-4">
-            <Button
-              onClick={handleClose}
-              variant="ghost"
-              size="lg"
-              className="bg-amber-800 hover:bg-amber-700 text-white rounded-full p-4 h-16 w-36 flex items-center justify-center transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-              aria-label="Go back to stories"
-            >
-              <ChevronLeft className="h-8 w-8" />
-            </Button>
-          </div>
-          <YasirStory />
-          <div className="flex justify-center mt-8">
-            <Button
-              onClick={handleClose}
-              variant="ghost"
-              size="lg"
-              className="bg-amber-800 hover:bg-amber-700 text-white rounded-full p-4 h-16 w-36 flex items-center justify-center transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-              aria-label="Go back to stories"
-            >
-              <ChevronLeft className="h-8 w-8" />
-            </Button>
-          </div>
+          {activeKey === '1' && (
+            <>
+              <BackButton onClick={closePost} />
+              <Yasir />
+              <BackButton onClick={closePost} />
+            </>
+          )}
+          {activeKey === '2' && (
+            <>
+              <BackButton onClick={closePost} />
+              <Niru />
+              <BackButton onClick={closePost} />
+            </>
+          )}
         </div>
       )}
-
-      {/* Niruthika Story Detail View */}
-      {activeKey === '2' && (
-        <div className="w-full">
-          <div className="sticky top-4 z-10 mb-4">
-            <Button
-              onClick={handleClose}
-              variant="ghost"
-              size="lg"
-              className="bg-amber-800 hover:bg-amber-700 text-white rounded-full p-4 h-16 w-36 flex items-center justify-center transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-              aria-label="Go back to stories"
-            >
-              <ChevronLeft className="h-8 w-8" />
-            </Button>
-          </div>
-          <NiruthikaStory />
-          <div className="flex justify-center mt-8">
-            <Button
-              onClick={handleClose}
-              variant="ghost"
-              size="lg"
-              className="bg-amber-800 hover:bg-amber-700 text-white rounded-full p-4 h-16 w-36 flex items-center justify-center transition-all duration-200 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-              aria-label="Go back to stories"
-            >
-              <ChevronLeft className="h-8 w-8" />
-            </Button>
-          </div>
-        </div>
-      )}
-    </>
+    </div>
   )
 }

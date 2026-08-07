@@ -115,6 +115,44 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: linear-gradient(to bottom, 
+      #8a5a19 0%, 
+      #d4af37 10%, 
+      #fff2a8 20%, 
+      #996515 35%, 
+      #ffd700 50%, 
+      #593e10 65%, 
+      #e0b836 80%, 
+      #fff2a8 90%,
+      #8a5a19 100%
+    );
+    min-height: 100vh;
   }
+}
+
+.register-btn {
+  background: #c8a009;
+  color: #121212;
+  transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+  background: #aa8808;
+  box-shadow: 0 0 20px rgba(200, 160, 9, 0.6), 0 0 40px rgba(170, 136, 8, 0.4);
+  transform: scale(1.05) translateY(-2px);
+  filter: brightness(1.1);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
