@@ -1,6 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Self-hosted so there is no render-blocking request to a third-party font
+   CDN. Before this, nothing was loaded at all and the whole site fell back to
+   system-ui (Segoe UI on Windows). */
+@import "@fontsource-variable/inter";      /* body / UI  — variable 100-900 */
+@import "@fontsource/cinzel/400.css";      /* display    — Roman caps      */
+@import "@fontsource/cinzel/600.css";
+@import "@fontsource/cinzel/700.css";
+@import "@fontsource/cinzel/900.css";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -39,6 +48,27 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Type. `font-sans` is the default for all body copy and UI; `font-display`
+     is opt-in for headings that should read as ceremonial. */
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Cinzel', 'Inter Variable', ui-serif, Georgia, serif;
+
+  /* Brand palette.
+     GOLD  = award semantics — buttons, champion cards, avatar rings, links,
+             focus rings. This is a competition site; gold means "you won".
+     EMBER = energy — the hero headline, border beams, hover and active states.
+             Ties to the phoenix and the drifting fire particles.
+     Previously there were five near-identical golds used interchangeably
+     (c8a009, d4b34c, d4af37, ffd700 and edc001). All consolidated here. */
+  --color-gold-light: #fff3b0;
+  --color-gold: #edc001;
+  --color-gold-deep: #a87f0a;
+
+  --color-ember-light: #ffd9a0;
+  --color-ember-mid: #ffa53d;
+  --color-ember: #ff7a18;
+  --color-ember-deep: #b02a0e;
 }
 
 :root {
@@ -49,7 +79,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #c8a009;
+  --primary: #EDC001;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -83,7 +113,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: #c8a009;
+  --primary: #EDC001;
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -115,31 +145,27 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply text-foreground;
-    background: linear-gradient(to bottom, 
-      #8a5a19 0%, 
-      #d4af37 10%, 
-      #fff2a8 20%, 
-      #996515 35%, 
-      #ffd700 50%, 
-      #593e10 65%, 
-      #e0b836 80%, 
-      #fff2a8 90%,
-      #8a5a19 100%
-    );
+    @apply text-foreground font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* App.tsx paints bg-[#181818] over the full viewport, so this is only ever
+       seen during overscroll. It used to be a nine-stop gold gradient that no
+       user could see and that held four of the five stray gold values. */
+    background: #181818;
     min-height: 100vh;
   }
 }
 
 .register-btn {
-  background: #c8a009;
+  background: #EDC001;
   color: #121212;
   transition: all 0.3s ease;
 }
 
 .register-btn:hover {
-  background: #aa8808;
-  box-shadow: 0 0 20px rgba(200, 160, 9, 0.6), 0 0 40px rgba(170, 136, 8, 0.4);
+  background: #A87F0A;
+  box-shadow: 0 0 20px rgba(237, 192, 1, 0.6), 0 0 40px rgba(168, 127, 10, 0.4);
   transform: scale(1.05) translateY(-2px);
   filter: brightness(1.1);
 }
@@ -153,6 +179,50 @@
   animation: marquee 20s linear infinite;
 }
 
-.animate-marquee:hover {
+/* Pause on hover (mouse) and on focus within (keyboard) — WCAG 2.2.2 */
+.animate-marquee:hover,
+.animate-marquee:focus-within {
   animation-play-state: paused;
+}
+
+/* Phoenix line-art strokes. Applied via a class on the <svg> so the ~790
+   paths are styled by one CSS rule instead of ~2,400 inline style writes
+   from JS. */
+.phoenix-svg path {
+  stroke: #c0c0c0;
+  stroke-width: 1.5;
+  fill: transparent;
+}
+
+/* Testimonial card — hoisted out of Testimonial.tsx so it is defined once
+   instead of being re-injected as a <style> block per rendered card. */
+.testimonial-card {
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+}
+
+.testimonial-card-img {
+  border: 2px solid #edc001;
+}
+
+/* Respect the OS "reduce motion" setting. The hero runs ~80 infinite particle
+   animations plus the marquee; for users with vestibular sensitivity these
+   must not loop. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
 }

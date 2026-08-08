@@ -1,7 +1,10 @@
-'use client'
-
 import { useEffect, useRef, memo } from 'react'
 import phoenixSvgRaw from '../assets/svg/Layer 2.svg?raw'
+// [pathIndex, strokeLength][] — precomputed, ordered centre-outward.
+// Regenerate if 'Layer 2.svg' changes (see scripts/README or the audit notes).
+import phoenixPathMetrics from '../assets/phoenixPathMetrics.json'
+
+const pathMetrics = phoenixPathMetrics as [number, number][]
 
 const cleanedSvgRaw = phoenixSvgRaw
   .replace(/<\?xml[\s\S]*?\?>/g, '')
@@ -14,6 +17,9 @@ export const PhoenixLogo = memo(function PhoenixLogo() {
 
   useEffect(() => {
     let updateScale: (() => void) | null = null;
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
 
     // Delay slightly to ensure layout is calculated
     const timer = setTimeout(() => {
@@ -29,83 +35,88 @@ export const PhoenixLogo = memo(function PhoenixLogo() {
       // Scale up and focus on upper section
       updateScale = () => {
         const isMobile = window.innerWidth < 768;
-        // Adjust scaling, translate, and rotation to visually center the phoenix
-        // Desktop is stretched horizontally by 1.5x, mobile uses uniform scale
-        svgElement.style.transform = isMobile
-          ? 'scale(1.15) translate(2%, 2%) rotate(3deg)'
-          : 'scale(1.8, 1.2) translate(0.5%, -5%) rotate(3deg)';
 
-        // Adjust gradient center over the head
+        // The artwork is portrait (viewBox 364 x 540) and the <svg> already
+        // fits itself to the container with preserveAspectRatio="meet".
+        // The old transform was scale(1.8, 1.2) — a non-uniform stretch that
+        // distorted the bird AND pushed it past the hero's overflow-hidden,
+        // cropping the wing tips and tail. A uniform scale just under 1 keeps
+        // the whole phoenix inside the frame.
+        svgElement.style.transform = 'scale(0.86)';
+
+        // Soft vignette: opaque through the middle, fading only at the far
+        // edges. The previous masks were inverted — transparent at the centre —
+        // which is what erased the phoenix's head and chest.
+        const mask = isMobile
+          ? 'radial-gradient(ellipse 78% 62% at 50% 46%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.35) 82%, rgba(0,0,0,0) 100%)'
+          : 'radial-gradient(ellipse 62% 70% at 50% 48%, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0.35) 84%, rgba(0,0,0,0) 100%)';
         if (svgRef.current) {
-          const mask = isMobile
-            ? 'radial-gradient(circle at 50% 35%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 15%, rgba(0,0,0,1) 45%)'
-            : 'radial-gradient(circle at 50% 20%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 15%, rgba(0,0,0,1) 45%)';
           svgRef.current.style.maskImage = mask;
           svgRef.current.style.webkitMaskImage = mask;
         }
-
-        // Adjust chest gradient
         if (chestRef.current) {
-          const chestMask = isMobile
-            ? 'radial-gradient(circle at 50% 60%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 20%, rgba(0,0,0,1) 50%)'
-            : 'radial-gradient(circle at 50% 45%, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 15%, rgba(0,0,0,1) 40%)';
-          chestRef.current.style.maskImage = chestMask;
-          chestRef.current.style.webkitMaskImage = chestMask;
+          chestRef.current.style.maskImage = 'none';
+          chestRef.current.style.webkitMaskImage = 'none';
         }
       };
       updateScale();
       window.addEventListener('resize', updateScale);
 
-      svgElement.style.transformOrigin = 'center 30%'
+      svgElement.style.transformOrigin = 'center center'
 
       const paths = Array.from(svgElement.querySelectorAll('path'))
       if (paths.length === 0) return
 
-      // Get SVG center
-      const svgRect = svgElement.getBoundingClientRect()
-      const centerX = svgRect.width / 2
-      const centerY = svgRect.height / 2
+      // The static stroke styling lives in CSS (.phoenix-svg path) rather than
+      // being written per-element, so JS only touches dash properties.
+      svgElement.classList.add('phoenix-svg')
 
-      // Calculate distances to center
-      const pathsWithDistance = paths.map(path => {
-        const rect = path.getBoundingClientRect()
-        const pathCenterX = (rect.left + rect.width / 2) - svgRect.left
-        const pathCenterY = (rect.top + rect.height / 2) - svgRect.top
+      // No layout reads at runtime.
+      //
+      // This used to call getBoundingClientRect() and getTotalLength() on each
+      // of the ~790 paths, interleaved with style writes — which forced a
+      // synchronous reflow per iteration (~525ms on the main thread). Both the
+      // path lengths and the centre-outward ordering are fixed properties of
+      // the artwork, so they are precomputed into phoenixPathMetrics.json
+      // (generated in SVG user space, hence viewport-independent) and simply
+      // read back here. The animation is now write-only.
+      const measured: { path: SVGPathElement; length: number }[] = []
+      for (const [index, length] of pathMetrics) {
+        const path = paths[index]
+        if (path) measured.push({ path, length })
+      }
+      if (measured.length === 0) return
 
-        const distance = Math.sqrt(
-          Math.pow(pathCenterX - centerX, 2) +
-          Math.pow(pathCenterY - centerY, 2)
-        )
-        return { path, distance }
-      })
-
-      // Sort by distance (outward means center first, then outer)
-      pathsWithDistance.sort((a, b) => a.distance - b.distance)
-
-      // Apply initial state
-      pathsWithDistance.forEach(({ path }) => {
-        const length = path.getTotalLength() || 1000
-        path.style.strokeDasharray = length.toString()
-        path.style.strokeDashoffset = length.toString()
-        path.style.transition = 'none'
-
-        // Silver metallic stroke
-        path.style.stroke = '#C0C0C0'
-        path.style.strokeWidth = '1.5'
-        path.style.fill = 'transparent'
-      })
-
-      // Force reflow
-      svgElement.getBoundingClientRect()
-
-      // Apply animations
-      requestAnimationFrame(() => {
-        const totalPaths = pathsWithDistance.length
-        pathsWithDistance.forEach(({ path }, index) => {
-          // Max delay of 2.5 seconds for the outermost paths
-          const delay = (index / totalPaths) * 2.5
-          path.style.transition = `stroke-dashoffset 3s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s`
+      // If the user asked for reduced motion, paint the final state and stop.
+      if (prefersReducedMotion) {
+        for (const { path, length } of measured) {
+          path.style.strokeDasharray = String(length)
           path.style.strokeDashoffset = '0'
+        }
+        return
+      }
+
+      // ---- Write pass ------------------------------------------------
+      for (const { path, length } of measured) {
+        path.style.strokeDasharray = String(length)
+        path.style.strokeDashoffset = String(length)
+        path.style.transition = 'none'
+      }
+
+      // Let the browser paint the initial dashed state on its own schedule,
+      // then start the transitions on the next frame. A getBoundingClientRect()
+      // here would work too, but forcing a synchronous layout over a 788-path
+      // SVG costs ~0.5s on the main thread — double-rAF gets the same ordering
+      // guarantee for free.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const total = measured.length
+          measured.forEach(({ path }, index) => {
+            // Max delay of 2.5 seconds for the outermost paths
+            const delay = (index / total) * 2.5
+            path.style.transition = `stroke-dashoffset 3s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s`
+            path.style.strokeDashoffset = '0'
+          })
         })
       })
     }, 100)
@@ -118,7 +129,7 @@ export const PhoenixLogo = memo(function PhoenixLogo() {
 
   return (
     <div
-      className="absolute inset-0 z-0 flex justify-center items-center opacity-20 pointer-events-none"
+      className="absolute inset-0 z-0 flex justify-center items-center opacity-30 pointer-events-none"
       ref={chestRef}
     >
       <div

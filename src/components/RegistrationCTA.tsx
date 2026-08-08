@@ -1,24 +1,53 @@
-import { Link } from 'react-router-dom'
+import { BorderBeam } from '@/components/ui/border-beam'
 
 export function RegistrationCTA() {
   return (
-    <div 
-      className="mb-16 relative rounded-2xl overflow-hidden shadow-2xl bg-[#D4B34C]"
+    <section
+      aria-labelledby="registration-cta-heading"
+      className="relative mb-16 overflow-hidden rounded-2xl border border-white/[0.07] bg-[#111111] shadow-2xl"
     >
-      <div className="absolute inset-0 bg-black/10 opacity-20"></div>
-      <div className="relative px-6 py-16 sm:px-12 sm:py-20 flex flex-col items-center text-center">
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-[#181818] tracking-tight mb-4">
-          Ready to Take the Stage?
+      {/* A single tight pool of warm light behind the button — not a wash.
+          An earlier version layered a broad radial, a 40%-height linear
+          gradient and a bright bottom rule; together they read as a muddy
+          brown smear across the lower half of the card. One small, low-opacity
+          source is enough to suggest embers. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-[14%] h-40 w-[min(30rem,80%)] rounded-full blur-3xl"
+        style={{ background: 'rgba(255,122,24,0.14)' }}
+      />
+
+      {/* One beam, ember, travelling the border. Enough to tie back to the
+          hero without lighting up the whole panel. */}
+      <BorderBeam size={200} duration={11} borderWidth={1} colorFrom="#FF7A18" colorTo="#FFD9A0" />
+
+      <div className="relative flex flex-col items-center px-6 py-14 text-center sm:px-12 sm:py-16">
+        <h2
+          id="registration-cta-heading"
+          className="mb-4 font-display text-2xl font-bold tracking-wide leading-snug text-white sm:text-4xl"
+        >
+          Ready to Take the{' '}
+          <span className="bg-gradient-to-b from-[#FFD9A0] via-[#FF9A3D] to-[#C2450F] bg-clip-text text-transparent">
+            Stage?
+          </span>
         </h2>
-        <p className="max-w-2xl text-lg sm:text-xl text-[#181818]/80 font-medium mb-8">
-          Join Speech Olympiad XIX today. Register now and let your voice be heard by the world.
+
+        <p className="mb-8 max-w-xl text-base leading-relaxed text-neutral-400 sm:text-[1.0625rem]">
+          Join Speech Olympiad XIX and let your voice be heard. Preliminaries
+          begin 6th September 2026.
         </p>
-        {/* <Link to="/register" className="inline-block"> */}
-          <button className="bg-[#181818] text-white opacity-80 cursor-not-allowed px-8 py-4 rounded-full text-lg font-bold transition-all duration-300">
-            Registration Opening Soon
-          </button>
-        {/* </Link> */}
+
+        {/* Registration is disabled for now — this is the placeholder state.
+            When it reopens, swap for a <Link to="/register"> with the same
+            classes minus the disabled styling. */}
+        <button
+          type="button"
+          disabled
+          className="relative inline-flex cursor-not-allowed items-center justify-center whitespace-nowrap rounded-full border border-[#FF7A18]/25 bg-[#FF7A18]/[0.06] px-6 py-3 text-sm font-semibold text-[#FFA53D] sm:px-7 sm:py-3.5 sm:text-base"
+        >
+          Registration Opening Soon
+        </button>
       </div>
-    </div>
+    </section>
   )
 }
