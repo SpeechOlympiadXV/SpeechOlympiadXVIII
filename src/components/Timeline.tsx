@@ -46,7 +46,7 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
     <div className="p-9 my-9 bg-[#121212]/80 backdrop-blur-sm rounded-xl w-full border border-[#282828]">
       {/* Header */}
       <div className="mb-8">
-        <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tighter leading-tight w-[80%]">
+        <h2 className="font-display text-2xl lg:text-3xl font-bold text-white tracking-wide leading-tight w-[80%]">
           Timeline
         </h2>
         <p className="mt-4 text-gray-300 leading-6 text-left text-lg font-light">
@@ -88,7 +88,7 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
                     <div
                       className={`ml-0 w-full sm:w-[45%] p-6 flex flex-col mb-5 rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${stage.id % 2 === 0 ? 'sm:text-end' : ''
                         } ${stage.highlightStyle === 'gold'
-                          ? 'bg-gradient-to-br from-[#282828] to-[#d4af3744] backdrop-blur-md border-[#d4af37]/50 shadow-[0_0_20px_rgba(212,175,55,0.15)]'
+                          ? 'bg-gradient-to-br from-[#282828] to-[#EDC00144] backdrop-blur-md border-[#EDC001]/50 shadow-[0_0_20px_rgba(237,192,1,0.15)]'
                           : stage.highlightStyle === 'silver'
                           ? 'bg-gradient-to-br from-[#2a2a2a] to-[#c0c0c044] backdrop-blur-md border-[#c0c0c0]/60 shadow-[0_0_20px_rgba(192,192,192,0.2)]'
                           : 'bg-[#1e1e1e] backdrop-blur-sm border border-[#4a4a4a] shadow-lg'
@@ -100,7 +100,7 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
                             : 'text-gray-200'
                           }`}
                         style={
-                          stage.highlightStyle === 'gold' ? { backgroundImage: 'linear-gradient(to bottom right, #ffe55c 0%, #d4af37 50%, #996515 100%)' } :
+                          stage.highlightStyle === 'gold' ? { backgroundImage: 'linear-gradient(to bottom right, #FFF3B0 0%, #EDC001 50%, #A87F0A 100%)' } :
                           stage.highlightStyle === 'silver' ? { backgroundImage: 'linear-gradient(to bottom right, #ffffff 0%, #c0c0c0 50%, #808080 100%)' } :
                           {}
                         }

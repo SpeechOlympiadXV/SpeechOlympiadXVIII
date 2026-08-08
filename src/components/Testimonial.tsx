@@ -1,5 +1,3 @@
-'use client'
-
 import Image from './Image'
 
 interface AppTestimonialCardProps {
@@ -32,30 +30,17 @@ export function AppTestimonialCard({
 
       {/* Content Section */}
       <div className="p-6">
-        <h5 className="text-left text-lg font-semibold text-white mb-2 testimonial-card-heading">
+        <h3 className="text-left text-lg font-semibold text-white mb-2 testimonial-card-heading">
           {title}
-        </h5>
-        <h6 className="text-sm text-gray-400 mb-4 testimonial-card-subtitle">
+        </h3>
+        {/* Role/placing is metadata about the person, not a section heading */}
+        <p className="text-sm text-gray-400 mb-4 testimonial-card-subtitle">
           {subtitle}
-        </h6>
+        </p>
         <p className="text-left text-gray-300 text-base leading-relaxed testimonial-card-body">
           "{body}"
         </p>
       </div>
-
-      <style>{`
-        .testimonial-card {
-          transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-          transform: translateY(-4px);
-        }
-
-        .testimonial-card-img {
-          border: 2px solid #EDC001;
-        }
-      `}</style>
     </div>
   )
 }

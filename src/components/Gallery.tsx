@@ -53,9 +53,10 @@ export function AppGallery({
             <div
               className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20 flex items-center justify-center rounded"
             >
-              <h5 className="text-white text-center font-semibold">
+              {/* Decorative hover affordance, not a section heading */}
+              <span className="text-white text-center font-semibold">
                 See full image
-              </h5>
+              </span>
             </div>
 
             {/* Image */}

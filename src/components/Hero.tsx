@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { PhoenixLogo } from './PhoenixLogo'
 
 
@@ -11,11 +11,19 @@ interface FireParticle {
 export function Hero() {
   const [textAnimationDone, setTextAnimationDone] = useState(false)
   const [particles, setParticles] = useState<FireParticle[]>([])
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     const textTimer = setTimeout(() => {
       setTextAnimationDone(true)
     }, 3000)
+
+    // Don't create ~80 perpetually-animating elements for users who have asked
+    // the OS to reduce motion — CSS alone would still leave them in the DOM.
+    if (reduceMotion) {
+      setParticles([])
+      return () => clearTimeout(textTimer)
+    }
 
     const particleCount = 80
     const generatedParticles: FireParticle[] = []
@@ -72,7 +80,7 @@ export function Hero() {
 
     setParticles(generatedParticles)
     return () => clearTimeout(textTimer)
-  }, [])
+  }, [reduceMotion])
 
   return (
     <>
@@ -100,16 +108,57 @@ export function Hero() {
         }
 
         .glowing-white-text {
-          color: #d3d3d3ff;
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.4);
+          color: #f2f2f2;
+          text-shadow: 0 0 34px rgba(255, 255, 255, 0.28), 0 0 12px rgba(255, 255, 255, 0.18);
         }
 
+        /* Ember gradient — pale flame at the top falling to deep ember, so the
+           headline reads as fire rather than metal and ties to the phoenix and
+           the drifting fire particles. Vertical (not diagonal) and with no
+           text-stroke, which would muddy the letter edges. */
         .golden-metallic-text {
-          background: linear-gradient(to bottom right, #bf953f 0%, #fcf6ba 30%, #b38728 70%, #fbf5b7 100%);
+          background: linear-gradient(
+            180deg,
+            #ffd9a0 0%,
+            #ffa53d 30%,
+            #ff7a18 58%,
+            #b02a0e 100%
+          );
           -webkit-background-clip: text;
+          background-clip: text;
           -webkit-text-fill-color: transparent;
-          -webkit-text-stroke: 1.5px #bf953f;
-          filter: drop-shadow(0 0 20px rgba(237, 192, 1, 0.5)) drop-shadow(0 0 40px rgba(237, 192, 1, 0.3));
+          color: transparent;
+          filter: drop-shadow(0 0 26px rgba(255, 110, 30, 0.45))
+                  drop-shadow(0 0 60px rgba(255, 60, 0, 0.22));
+        }
+
+        /* Sheen that sweeps across the gold once on load */
+        .golden-metallic-text::after {
+          content: attr(data-text);
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            100deg,
+            transparent 35%,
+            rgba(255, 255, 255, 0.75) 50%,
+            transparent 65%
+          );
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+          background-size: 250% 100%;
+          animation: goldSheen 2.6s ease-out 0.9s 1 both;
+          pointer-events: none;
+        }
+
+        @keyframes goldSheen {
+          from { background-position: 180% 0; }
+          to   { background-position: -80% 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .golden-metallic-text::after { animation: none; opacity: 0; }
         }
       `}</style>
 
@@ -123,9 +172,9 @@ export function Hero() {
       >
         {/* Phoenix Fire Background */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2, ease: 'easeOut', delay: 0.5 }}
+          transition={{ duration: 1.2, ease: 'easeOut', delay: 0.2 }}
           className="absolute inset-0 overflow-hidden pointer-events-none z-0"
         >
           {particles.map((particle) => (
@@ -143,40 +192,70 @@ export function Hero() {
         {/* Main Text Container */}
         <div className="w-full max-w-6xl h-full flex flex-col items-center justify-center p-4 z-10 relative">
 
-          {/* First Line: "Rise Within, Shine In" */}
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.2, ease: 'easeOut', delay: 0.5 }}
-            className="flex flex-col items-center mb-8"
+          {/* Kicker */}
+          <motion.p
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="mb-6 sm:mb-8 font-display text-[0.6rem] sm:text-xs md:text-sm font-normal uppercase text-neutral-300/90 tracking-[0.34em] sm:tracking-[0.4em] text-center"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-thin text-center leading-tight tracking-tight glowing-white-text uppercase">
-              RISE WITHIN
+            Speech Olympiad XIX
+          </motion.p>
+
+          {/* First Line */}
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+            className="flex flex-col items-center"
+          >
+            <h1 className="font-display text-[1.85rem] sm:text-[2.75rem] md:text-5xl lg:text-6xl xl:text-[4.5rem] font-normal text-center leading-[1.12] tracking-[0.1em] glowing-white-text uppercase">
+              Rise Within
             </h1>
           </motion.div>
 
           {/* Golden Separator Line */}
           <motion.div
-            initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: '12rem' }}
-            transition={{ duration: 1.2, ease: 'easeOut', delay: 1 }}
-            className="my-6"
+            initial={reduceMotion ? false : { opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: '26rem' }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 }}
+            className="my-7 sm:my-9 max-w-[70vw]"
           >
-            <div className="h-1 bg-gradient-to-r from-transparent via-[#D4B34C] to-transparent shadow-[0_0_20px_rgba(212,179,76,0.6)] w-full" />
+            <div className="h-[2px] rounded-full bg-gradient-to-r from-transparent via-[#FF9A3D] to-transparent shadow-[0_0_22px_rgba(255,122,24,0.7)] w-full" />
           </motion.div>
 
-          {/* Second Line: "Reign Beyond" */}
+          {/* Second Line: "Reign Beyond".
+              This <h2> is the LCP element. Its entrance previously started at
+              1.5s and ran for 1.2s, so the largest paint could not happen
+              before ~2.7s after mount — the animation, not the network, was
+              the LCP. Timings are tightened so the reveal still reads as
+              staggered but completes early. */}
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.2, ease: 'easeOut', delay: 1.5 }}
-            className="flex flex-col items-center mt-8"
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.5 }}
+            className="flex flex-col items-center"
           >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium text-center leading-tight tracking-tight golden-metallic-text uppercase">
-              REIGN BEYOND
-            </h2>
+            <h1
+              data-text="Reign Beyond"
+              className="relative font-display text-[2.05rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.25rem] font-normal text-center leading-[1.08] tracking-[0.055em] golden-metallic-text uppercase"
+            >
+              Reign Beyond
+            </h1>
           </motion.div>
+
         </div>
+
+        {/* Attribution, pinned near the hero's lower edge so it sits in the
+            quiet band below the phoenix rather than across its body. */}
+        {/* <motion.p
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.9 }}
+          className="absolute bottom-7 sm:bottom-9 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap font-display text-[0.55rem] sm:text-[0.68rem] font-normal uppercase text-neutral-400/70 tracking-[0.2em] text-center [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
+        >
+          Gavel Club <span className="mx-1.5 text-[#EDC001]/60">&middot;</span> University of Moratuwa
+        </motion.p> */}
       </div>
     </>
   )

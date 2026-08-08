@@ -103,7 +103,8 @@ export function HomePage({ }: HomePageProps) {
   // Removed manual rotation useEffect since we use CSS marquee
 
   return (
-    <main>
+    // App.tsx already provides the page's single <main> landmark.
+    <>
       {/* Hero Section */}
       <Hero />
 
@@ -164,41 +165,63 @@ export function HomePage({ }: HomePageProps) {
         </div>
 
         {/* Testimonials Section */}
-        <div className="my-12 p-9 w-full bg-[#121212]/80 backdrop-blur-sm rounded-xl border border-[#282828]">
-          <div className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-8">
+        <section
+          aria-labelledby="testimonials-heading"
+          className="my-12 p-9 w-full bg-[#121212]/80 backdrop-blur-sm rounded-xl border border-[#282828]"
+        >
+          <h2
+            id="testimonials-heading"
+            className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight text-white mb-8"
+          >
             Testimonials
-          </div>
+          </h2>
 
-          {/* Testimonial Cards Marquee */}
+          {/* Testimonial Cards Marquee. The list is rendered twice so the CSS
+              marquee can loop seamlessly; the duplicate is hidden from
+              assistive tech so each testimonial is announced only once. */}
           <div className="overflow-hidden relative w-full p-3">
-            <div className="flex w-max animate-marquee gap-6 hover:pause">
-              {[...testimonials, ...testimonials].map((testimonial, index) => (
+            <div className="flex w-max animate-marquee gap-6">
+              {[false, true].map((isDuplicate) => (
                 <div
-                  key={`testimonial-${testimonial.key}-${index}`}
-                  className="w-[300px] md:w-[400px] flex-shrink-0 flex items-stretch"
+                  key={isDuplicate ? 'marquee-duplicate' : 'marquee-primary'}
+                  className="flex gap-6"
+                  aria-hidden={isDuplicate || undefined}
                 >
-                  <AppTestimonialCard
-                    title={testimonial.title}
-                    imageSrc={testimonial.imageSrc}
-                    body={testimonial.body}
-                    subtitle={testimonial.subtitle}
-                  />
+                  {testimonials.map((testimonial) => (
+                    <div
+                      key={`testimonial-${testimonial.key}`}
+                      className="w-[300px] md:w-[400px] flex-shrink-0 flex items-stretch"
+                    >
+                      <AppTestimonialCard
+                        title={testimonial.title}
+                        imageSrc={testimonial.imageSrc}
+                        body={testimonial.body}
+                        subtitle={testimonial.subtitle}
+                      />
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Gallery Section */}
-        <div className="my-12 p-9 w-full bg-[#121212]/80 backdrop-blur-sm rounded-xl border border-[#282828]">
-          <div className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white mb-8">
+        <section
+          aria-labelledby="gallery-heading"
+          className="my-12 p-9 w-full bg-[#121212]/80 backdrop-blur-sm rounded-xl border border-[#282828]"
+        >
+          <h2
+            id="gallery-heading"
+            className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight text-white mb-8"
+          >
             Gallery
-          </div>
+          </h2>
           <div className="p-2">
             <AppGallery images={galleryImages} showLink={true} />
           </div>
-        </div>
+        </section>
       </div>
-    </main>
+    </>
   )
 }

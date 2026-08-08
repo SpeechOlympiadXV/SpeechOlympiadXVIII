@@ -5,7 +5,7 @@ export function BookletSection() {
     <div className="w-full flex justify-center items-center mb-9">
       <div className="w-[90%] md:w-[80%] bg-[#121212]/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
         <div>
-          <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-[-2px] leading-2 w-[80%]">
+          <h2 className="font-display text-2xl lg:text-3xl font-bold text-white tracking-wide leading-2 w-[80%]">
             Path to the Crown
           </h2>
           <p className="mt-4 text-gray-300 leading-6 text-left text-lg font-thin">
