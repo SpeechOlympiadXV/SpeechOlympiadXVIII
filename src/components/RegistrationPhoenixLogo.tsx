@@ -16,11 +16,11 @@ interface Props {
 const StaticPhoenix = memo(({ cleanedSvgRaw }: { cleanedSvgRaw: string }) => (
   <>
     <div
-      className="registration-phoenix-svg-container absolute top-0 bottom-0 left-0 w-[200vw] sm:w-[150vw] md:w-[100vw] lg:w-[80vw] flex justify-center items-center -translate-x-[75%] md:-translate-x-[60%] scale-x-[-1]"
+      className="registration-phoenix-svg-container absolute top-0 bottom-0 left-0 w-[100vw] lg:w-[80vw] flex justify-center items-center -translate-x-[65%] md:-translate-x-[60%] scale-x-[-1]"
       dangerouslySetInnerHTML={{ __html: cleanedSvgRaw }}
     />
     <div
-      className="registration-phoenix-svg-container absolute top-0 bottom-0 right-0 w-[200vw] sm:w-[150vw] md:w-[100vw] lg:w-[80vw] flex justify-center items-center translate-x-[75%] md:translate-x-[60%]"
+      className="registration-phoenix-svg-container absolute top-0 bottom-0 right-0 w-[100vw] lg:w-[80vw] flex justify-center items-center translate-x-[65%] md:translate-x-[60%]"
       dangerouslySetInnerHTML={{ __html: cleanedSvgRaw }}
     />
   </>
@@ -50,7 +50,7 @@ export const RegistrationPhoenixLogo = memo(function RegistrationPhoenixLogo({ p
       svgElement.style.objectFit = 'contain'
 
       const updateScale = () => {
-        const scale = window.innerWidth < 768 ? 0.8 : 2;
+        const scale = window.innerWidth < 768 ? 1.0 : 2;
         svgElement.style.transform = `scale(${scale})`;
       };
       updateScale();

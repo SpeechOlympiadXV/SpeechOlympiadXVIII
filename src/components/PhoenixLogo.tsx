@@ -32,8 +32,8 @@ export const PhoenixLogo = memo(function PhoenixLogo() {
         // Adjust scaling, translate, and rotation to visually center the phoenix
         // Desktop is stretched horizontally by 1.5x, mobile uses uniform scale
         svgElement.style.transform = isMobile
-          ? 'scale(1.4) translateY(2%) rotate(3deg)'
-          : 'scale(1.8, 1.2) translateY(-5%) rotate(3deg)';
+          ? 'scale(1.15) translate(2%, 2%) rotate(3deg)'
+          : 'scale(1.8, 1.2) translate(0.5%, -5%) rotate(3deg)';
 
         // Adjust gradient center over the head
         if (svgRef.current) {

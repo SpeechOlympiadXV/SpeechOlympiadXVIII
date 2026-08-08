@@ -352,7 +352,7 @@ export function Register() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-14 bg-[#a78e1d] text-gray-100 rounded-lg hover:bg-[#7d6c22] transition-colors hover:text-white font-bold text-xl disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+            className="w-full h-14 bg-[#c8a009] text-gray-100 rounded-lg hover:bg-[#aa8808] transition-colors hover:text-white font-bold text-xl disabled:opacity-50 disabled:cursor-not-allowed mt-4"
           >
             {isSubmitting ? 'Submitting...' : 'Submit Registration'}
           </button>
