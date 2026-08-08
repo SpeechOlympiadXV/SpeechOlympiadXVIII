@@ -22,7 +22,7 @@ const navigation: NavItem[] = [
   { name: 'Gallery', href: '/gallery', current: false, className: 'text-white' },
   { name: 'Rules & Regulations', href: '/rules', current: false, className: 'text-white' },
   { name: 'Blogs', href: '/blogs', current: false, className: 'text-white' },
-  { name: 'Register', href: '/register', current: false, isButton: true },
+  //{ name: 'Register', href: '/register', current: false, isButton: true },
 ]
 
 interface NavigationProps { }
@@ -34,7 +34,7 @@ export function Navigation({ }: NavigationProps) {
 
   const NavLink = ({ item }: { item: NavItem }) => {
     const isActive = item.href === '/' ? activeURL === '/' : activeURL.startsWith(item.href)
-    
+
     if (item.isButton) {
       return (
         <Link
@@ -66,7 +66,7 @@ export function Navigation({ }: NavigationProps) {
 
   const MobileNavLink = ({ item }: { item: NavItem }) => {
     const isActive = item.href === '/' ? activeURL === '/' : activeURL.startsWith(item.href)
-    
+
     if (item.isButton) {
       return (
         <Link
