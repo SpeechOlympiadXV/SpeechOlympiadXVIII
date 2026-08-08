@@ -36,8 +36,12 @@ jobs:
       - name: Build project
         run: npm run build
         env:
+          # Must match the names read in src/lib/supabase.ts. This previously
+          # passed VITE_SUPABASE_ANON_KEY, which the app never reads — the
+          # build only worked because .env is committed. Untracking .env
+          # without fixing this would have silently broken Supabase.
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
