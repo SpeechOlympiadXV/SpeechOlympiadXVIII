@@ -92,7 +92,7 @@ export function Vote() {
           href={currentData.igLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full h-12 flex items-center justify-center hover:shadow-md hover:shadow-[#d4b34c55] hover:text-gray-100 bg-gray-700 bg-[#d4b34c] transition-all duration-500 rounded-lg"
+          className="w-full h-12 flex items-center justify-center hover:shadow-md hover:shadow-[#EDC00155] hover:text-gray-100 bg-gray-700 bg-[#EDC001] transition-all duration-500 rounded-lg"
         >
           <Instagram className="mr-2 text-black w-5 h-5" />
           <p className="text-center font-bold text-black text-sm md:text-md">
@@ -103,7 +103,7 @@ export function Vote() {
           href={currentData.fbLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full h-12 flex items-center justify-center hover:shadow-md hover:shadow-[#d4b34c55] hover:text-gray-100 bg-gray-700 bg-[#d4b34c] transition-all duration-500 rounded-lg"
+          className="w-full h-12 flex items-center justify-center hover:shadow-md hover:shadow-[#EDC00155] hover:text-gray-100 bg-gray-700 bg-[#EDC001] transition-all duration-500 rounded-lg"
         >
           <Facebook className="mr-2 text-black w-5 h-5" />
           <p className="text-center font-bold text-black text-sm md:text-md">

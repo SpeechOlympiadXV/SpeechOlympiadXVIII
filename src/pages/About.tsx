@@ -21,7 +21,8 @@ export function AboutPage({}: AboutPageProps) {
   }, [])
 
   return (
-    <main>
+    // App.tsx provides the single <main> landmark.
+    <div>
       {/* Hero Section */}
       <div className="relative w-full text-center">
         <img
@@ -87,7 +88,7 @@ export function AboutPage({}: AboutPageProps) {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   )
 }
 

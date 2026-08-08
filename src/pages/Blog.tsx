@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Image from '../components/Image'
@@ -223,6 +221,14 @@ export function Blogs({
     fetchData()
   }, [fetchData])
 
+  // This component is used two ways: embedded on the home page (limit={2}) and
+  // as the whole /blogs route. When embedded and the fetch returns nothing,
+  // hide the section rather than render an orphan heading — but never hide the
+  // standalone page, or the route goes blank.
+  const isEmbedded = limit === 2
+  const isEmpty = !loading && !slug && posts.length === 0
+  if (isEmbedded && isEmpty) return null
+
   return (
     <div
       ref={componentRef}
@@ -231,9 +237,9 @@ export function Blogs({
       <div className="w-full">
         {/* Header */}
         <div className="w-full flex flex-col items-start mb-8">
-          <div className="text-3xl lg:text-4xl font-semibold tracking-tighter leading-tight text-white">
+          <h2 className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight text-white">
             Past Experiences
-          </div>
+          </h2>
         </div>
 
         {/* Single Post View */}
@@ -284,9 +290,9 @@ export function Blogs({
                     
                     {/* Title */}
                     <div className="text-center mb-12">
-                      <h1 className="text-4xl md:text-5xl font-bold text-white border-b border-[#edc001] pb-2 inline-block">
+                      <h2 className="text-4xl md:text-5xl font-bold text-white border-b border-[#edc001] pb-2 inline-block">
                         {post.title}
-                      </h1>
+                      </h2>
                     </div>
 
                     {/* Blog Content */}
@@ -408,7 +414,7 @@ export function Blogs({
                   </p>
                   <button
                     onClick={() => handleReadmore(post.slug.current)}
-                    className="mt-auto self-start text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md bg-[#c8a009]"
+                    className="mt-auto self-start text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md bg-[#EDC001]"
                   >
                     Read more
                   </button>

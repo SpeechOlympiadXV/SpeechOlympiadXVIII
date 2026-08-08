@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useEffect } from 'react'
 import { SOLogo } from '../SOLogo'
 import { Menu, X } from 'lucide-react'

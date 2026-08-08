@@ -1,10 +1,8 @@
-'use client'
-
 interface NotFoundPageProps {}
 
 export function NotFoundPage({}: NotFoundPageProps) {
   return (
-    <main className="flex items-center justify-center w-full min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
+    <div className="flex items-center justify-center w-full min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
       <div className="text-center px-4">
         <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
           Sorry, This Page Is Unavailable 🙃
@@ -19,6 +17,6 @@ export function NotFoundPage({}: NotFoundPageProps) {
           Go Back Home
         </a>
       </div>
-    </main>
+    </div>
   )
 }
