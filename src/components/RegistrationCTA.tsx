@@ -13,11 +13,11 @@ export function RegistrationCTA() {
         <p className="max-w-2xl text-lg sm:text-xl text-[#181818]/80 font-medium mb-8">
           Join Speech Olympiad XIX today. Register now and let your voice be heard by the world.
         </p>
-        <Link to="/register" className="inline-block">
-          <button className="bg-[#181818] text-white hover:bg-black px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-            Register Now
+        {/* <Link to="/register" className="inline-block"> */}
+          <button className="bg-[#181818] text-white opacity-80 cursor-not-allowed px-8 py-4 rounded-full text-lg font-bold transition-all duration-300">
+            Registration Opening Soon
           </button>
-        </Link>
+        {/* </Link> */}
       </div>
     </div>
   )

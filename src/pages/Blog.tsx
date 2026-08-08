@@ -226,7 +226,7 @@ export function Blogs({
   return (
     <div
       ref={componentRef}
-      className={`transition-all p-9 bg-[#121212]/80 backdrop-blur-sm text-gray-100 my-12 rounded-xl w-full border border-[#282828]`}
+      className={`transition-all p-4 md:p-9 bg-[#121212]/80 backdrop-blur-sm text-gray-100 my-12 rounded-xl w-full border border-[#282828]`}
     >
       <div className="w-full">
         {/* Header */}
@@ -280,7 +280,7 @@ export function Blogs({
 
                 {/* Main Content Card */}
                 <div className="flex justify-center w-full">
-                  <div className="w-[90%] md:w-[80%] bg-[#121212]/80 border border-gray-600 rounded-2xl p-9 md:p-14 my-9 text-lg font-light leading-normal">
+                  <div className="w-[95%] sm:w-[90%] md:w-[80%] bg-[#121212]/80 border border-gray-600 rounded-2xl p-5 md:p-14 my-9 text-lg font-light leading-normal">
                     
                     {/* Title */}
                     <div className="text-center mb-12">
@@ -383,7 +383,7 @@ export function Blogs({
 
         {/* Blog Posts Grid */}
         {loadBlog && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pl-4 pr-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => (
               <div
                 key={post._id}
@@ -399,7 +399,7 @@ export function Blogs({
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="p-4 sm:p-6 flex flex-col flex-grow">
                   <h2 className="text-xl font-semibold mb-2 text-white">
                     {post.title}
                   </h2>

@@ -46,7 +46,7 @@ export function Hero() {
 
       const driftX = `${(Math.random() - 0.5) * 50}vw`;
       const driftY = `-${Math.random() * 80 + 50}vh`;
-      
+
       const rotStart = Math.random() * 360;
       const rotEnd = rotStart + (Math.random() * 720 - 360);
 
@@ -99,12 +99,9 @@ export function Hero() {
           will-change: transform, opacity;
         }
 
-        .silver-metallic-text {
-          background: linear-gradient(to bottom right, #a1a1aa 0%, #f4f4f5 30%, #71717a 70%, #e4e4e7 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          -webkit-text-stroke: 1.5px #bf953f;
-          filter: drop-shadow(0 0 20px rgba(161, 161, 170, 0.5)) drop-shadow(0 0 40px rgba(161, 161, 170, 0.3));
+        .glowing-white-text {
+          color: #d3d3d3ff;
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.4);
         }
 
         .golden-metallic-text {
@@ -119,13 +116,13 @@ export function Hero() {
       <div
         className="w-full h-[78vh] sm:h-[82vh] md:h-[86vh] lg:h-[90vh] flex flex-col items-center justify-center relative overflow-hidden z-10"
         style={{
-          backgroundImage: 'radial-gradient(75% 75% at 50% 50%, #000000 59%, #181818 100%)',
+          backgroundImage: 'radial-gradient(75% 75% at 50% 50%, rgba(0,0,0,0.9) 49%, #181818 100%)',
           backgroundSize: '100% 100%',
           backgroundPosition: '0px 0px',
         }}
       >
         {/* Phoenix Fire Background */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, ease: 'easeOut', delay: 0.5 }}
@@ -153,7 +150,7 @@ export function Hero() {
             transition={{ duration: 1.2, ease: 'easeOut', delay: 0.5 }}
             className="flex flex-col items-center mb-8"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-thin text-center leading-tight tracking-tight silver-metallic-text uppercase">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-thin text-center leading-tight tracking-tight glowing-white-text uppercase">
               RISE WITHIN
             </h1>
           </motion.div>

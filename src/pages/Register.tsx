@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { supabase } from '../lib/supabase'
+import { RegistrationPhoenixLogo } from '../components/RegistrationPhoenixLogo'
 
 
 const formSchema = z.object({
@@ -52,7 +53,31 @@ export function Register() {
     }
   })
 
-  const watchHearAbout = watch('hearAbout')
+  const watchAllFields = watch()
+  const watchHearAbout = watchAllFields.hearAbout
+
+  const requiredFields = [
+    'firstName', 'lastName', 'registrationNumber', 'nameOnCertificate',
+    'batch', 'faculty', 'department', 'email', 'phone',
+    'previousParticipation', 'hearAbout'
+  ];
+
+  let filledCount = 0;
+  requiredFields.forEach(field => {
+    if (watchAllFields[field as keyof FormValues]) {
+      filledCount++;
+    }
+  });
+
+  if (watchAllFields.agreeToTerms) filledCount++;
+
+  let totalFields = requiredFields.length + 1; // 11 + 1 = 12
+  if (watchAllFields.hearAbout === 'Other') {
+    totalFields++;
+    if (watchAllFields.hearAboutOther) filledCount++;
+  }
+
+  const progress = filledCount / totalFields;
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true)
@@ -97,8 +122,9 @@ export function Register() {
   }
 
   return (
-    <div className="w-full flex justify-center items-center mt-20 mb-10">
-      <div className="w-[90%] md:w-[80%] bg-[#121212]/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+    <div className="w-full flex justify-center items-center mt-20 mb-10 relative">
+      <RegistrationPhoenixLogo progress={progress} isSuccess={!!successMessage} />
+      <div className="w-[90%] md:w-[80%] bg-[#121212]/10 md:bg-[#121212]/50 backdrop-blur-[3px] md:backdrop-blur-sm rounded-2xl p-8 shadow-2xl relative z-10">
         <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tight leading-tight w-[80%]">
           Register Now
         </h2>
@@ -112,7 +138,7 @@ export function Register() {
             href="https://drive.google.com/file/d/1q593UEqVGyOmJeEzJoMwOyjGEroa8Ksz/view?usp=sharing"
             target="_blank"
             rel="noreferrer"
-            className="text-blue-500 hover:text-blue-300 hover:cursor-pointer transition-colors duration-200 font-bold underline"
+            className="text-[#EDC001] hover:text-yellow-300 hover:cursor-pointer transition-colors duration-200 font-bold underline"
           >
             Competition Guidelines
           </a>{' '}
@@ -326,15 +352,14 @@ export function Register() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-14 bg-[#a78e1d] text-gray-100 rounded-lg hover:bg-[#7d6c22] transition-colors hover:text-white font-bold text-xl disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+            className="w-full h-14 bg-[#c8a009] text-gray-100 rounded-lg hover:bg-[#aa8808] transition-colors hover:text-white font-bold text-xl disabled:opacity-50 disabled:cursor-not-allowed mt-4"
           >
             {isSubmitting ? 'Submitting...' : 'Submit Registration'}
           </button>
         </form>
 
-        {/* Status Messages */}
         {successMessage && (
-          <div className="mt-6 p-4 bg-green-600/20 border border-green-500 text-green-400 rounded-lg text-center font-semibold">
+          <div className="mt-6 p-4 bg-[#EDC001]/20 border border-[#EDC001] text-[#EDC001] rounded-lg text-center font-semibold">
             {successMessage}
           </div>
         )}
@@ -347,3 +372,4 @@ export function Register() {
     </div>
   )
 }
+import { useEffect } from 'react'
