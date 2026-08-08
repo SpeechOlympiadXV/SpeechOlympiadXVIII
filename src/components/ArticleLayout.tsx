@@ -21,7 +21,7 @@ export function ArticleLayout({
   compiledBy = true,
 }: ArticleLayoutProps) {
   return (
-    <main className="text-gray-100 pb-16">
+    <div className="text-gray-100 pb-16">
       {/* Hero Section */}
       {(heroImageDesktop || heroImageMobile) && (
         <div className="relative text-center w-full">
@@ -112,6 +112,6 @@ export function ArticleLayout({
           }
         }
       `}</style>
-    </main>
+    </div>
   )
 }

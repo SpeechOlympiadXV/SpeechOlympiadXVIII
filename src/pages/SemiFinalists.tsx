@@ -20,7 +20,7 @@ export function SemiFinalists() {
   return (
     <div className="w-[90%] sm:w-[80%] rounded-xl mx-auto my-9 bg-[#121212]/80 backdrop-blur-sm mt-20 text-white">
       <div className="px-9 py-9 mx-auto">
-        <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">
+        <h2 className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight">
           Semi Finalists
         </h2>
 
@@ -88,7 +88,7 @@ export function SemiFinalists() {
       </div>
 
       <div className="px-9 py-9 mx-auto border-t border-gray-700">
-        <h2 className="text-3xl lg:text-4xl font-semibold tracking-tight leading-tight mb-8">
+        <h2 className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight mb-8">
           Reserved Semi Finalists
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4">

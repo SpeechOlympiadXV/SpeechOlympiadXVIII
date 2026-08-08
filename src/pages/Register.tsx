@@ -106,12 +106,17 @@ export function Register() {
 
       if (error) throw error
 
-      console.log('Registration submitted with data: ', data)
       setSuccessMessage('Registration submitted successfully! Welcome to Speech Olympiad!')
       reset()
     } catch (error: any) {
+      // Log the detail for debugging, but never render a raw database message
+      // to the user — those leak table, column and constraint names.
       console.error('Error submitting registration: ', error)
-      setErrorMessage('Error submitting registration: ' + error.message)
+      setErrorMessage(
+        error?.code === '23505'
+          ? 'It looks like you have already registered with this email or university ID.'
+          : 'Something went wrong submitting your registration. Please try again, or contact us if the problem continues.'
+      )
     } finally {
       setIsSubmitting(false)
       setTimeout(() => {
@@ -125,7 +130,7 @@ export function Register() {
     <div className="w-full flex justify-center items-center mt-20 mb-10 relative">
       <RegistrationPhoenixLogo progress={progress} isSuccess={!!successMessage} />
       <div className="w-[90%] md:w-[80%] bg-[#121212]/10 md:bg-[#121212]/50 backdrop-blur-[3px] md:backdrop-blur-sm rounded-2xl p-8 shadow-2xl relative z-10">
-        <h2 className="text-3xl lg:text-4xl font-semibold text-white tracking-tight leading-tight w-[80%]">
+        <h2 className="font-display text-2xl lg:text-3xl font-bold text-white tracking-wide leading-tight w-[80%]">
           Register Now
         </h2>
         <p className="mt-4 text-gray-300 leading-6 text-left text-lg font-thin">
@@ -138,7 +143,7 @@ export function Register() {
             href="https://drive.google.com/file/d/1q593UEqVGyOmJeEzJoMwOyjGEroa8Ksz/view?usp=sharing"
             target="_blank"
             rel="noreferrer"
-            className="text-[#EDC001] hover:text-yellow-300 hover:cursor-pointer transition-colors duration-200 font-bold underline"
+            className="text-[#EDC001] hover:text-[#FFA53D] hover:cursor-pointer transition-colors duration-200 font-bold underline"
           >
             Competition Guidelines
           </a>{' '}
@@ -149,62 +154,81 @@ export function Register() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* First Name */}
             <div>
-              <label className="block text-white mb-2">First Name</label>
+              <label htmlFor="firstName" className="block text-white mb-2">First Name</label>
               <input
+                id="firstName"
+                autoComplete="given-name"
+                aria-invalid={!!errors.firstName}
+                aria-describedby={errors.firstName ? 'firstName-error' : undefined}
                 {...register('firstName')}
                 type="text"
                 placeholder="First Name"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
               />
-              {errors.firstName && <p className="text-red-400 text-sm mt-1">{errors.firstName.message}</p>}
+              {errors.firstName && <p id="firstName-error" role="alert" className="text-red-400 text-sm mt-1">{errors.firstName.message}</p>}
             </div>
 
             {/* Last Name */}
             <div>
-              <label className="block text-white mb-2">Last Name</label>
+              <label htmlFor="lastName" className="block text-white mb-2">Last Name</label>
               <input
+                id="lastName"
+                autoComplete="family-name"
+                aria-invalid={!!errors.lastName}
+                aria-describedby={errors.lastName ? 'lastName-error' : undefined}
                 {...register('lastName')}
                 type="text"
                 placeholder="Last Name"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
               />
-              {errors.lastName && <p className="text-red-400 text-sm mt-1">{errors.lastName.message}</p>}
+              {errors.lastName && <p id="lastName-error" role="alert" className="text-red-400 text-sm mt-1">{errors.lastName.message}</p>}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* University ID */}
             <div>
-              <label className="block text-white mb-2">University ID</label>
+              <label htmlFor="registrationNumber" className="block text-white mb-2">University ID</label>
               <input
+                id="registrationNumber"
+                autoComplete="off"
+                aria-invalid={!!errors.registrationNumber}
+                aria-describedby={errors.registrationNumber ? 'registrationNumber-error' : undefined}
                 {...register('registrationNumber')}
                 type="text"
                 placeholder="University ID"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
               />
-              {errors.registrationNumber && <p className="text-red-400 text-sm mt-1">{errors.registrationNumber.message}</p>}
+              {errors.registrationNumber && <p id="registrationNumber-error" role="alert" className="text-red-400 text-sm mt-1">{errors.registrationNumber.message}</p>}
             </div>
 
             {/* Name on Certificate */}
             <div>
-              <label className="block text-white mb-2">Name as it should appear on certificate</label>
+              <label htmlFor="nameOnCertificate" className="block text-white mb-2">Name as it should appear on certificate</label>
               <input
+                id="nameOnCertificate"
+                autoComplete="name"
+                aria-invalid={!!errors.nameOnCertificate}
+                aria-describedby={errors.nameOnCertificate ? 'nameOnCertificate-error' : undefined}
                 {...register('nameOnCertificate')}
                 type="text"
                 placeholder="Full Name for Certificate"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
               />
-              {errors.nameOnCertificate && <p className="text-red-400 text-sm mt-1">{errors.nameOnCertificate.message}</p>}
+              {errors.nameOnCertificate && <p id="nameOnCertificate-error" role="alert" className="text-red-400 text-sm mt-1">{errors.nameOnCertificate.message}</p>}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Batch */}
             <div>
-              <label className="block text-white mb-2">Batch</label>
+              <label htmlFor="batch" className="block text-white mb-2">Batch</label>
               <select
+                id="batch"
+                aria-invalid={!!errors.batch}
+                aria-describedby={errors.batch ? 'batch-error' : undefined}
                 {...register('batch')}
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001] appearance-none"
               >
                 <option value="">Select Batch (22-25)</option>
                 <option value="22">22</option>
@@ -212,15 +236,18 @@ export function Register() {
                 <option value="24">24</option>
                 <option value="25">25</option>
               </select>
-              {errors.batch && <p className="text-red-400 text-sm mt-1">{errors.batch.message}</p>}
+              {errors.batch && <p id="batch-error" role="alert" className="text-red-400 text-sm mt-1">{errors.batch.message}</p>}
             </div>
 
             {/* Faculty */}
             <div>
-              <label className="block text-white mb-2">Faculty</label>
+              <label htmlFor="faculty" className="block text-white mb-2">Faculty</label>
               <select
+                id="faculty"
+                aria-invalid={!!errors.faculty}
+                aria-describedby={errors.faculty ? 'faculty-error' : undefined}
                 {...register('faculty')}
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001] appearance-none"
               >
                 <option value="">Select Faculty</option>
                 <option value="Engineering">Faculty of Engineering</option>
@@ -230,58 +257,74 @@ export function Register() {
                 <option value="Medicine">Faculty of Medicine</option>
                 <option value="Graduate Studies">Faculty of Graduate Studies</option>
               </select>
-              {errors.faculty && <p className="text-red-400 text-sm mt-1">{errors.faculty.message}</p>}
+              {errors.faculty && <p id="faculty-error" role="alert" className="text-red-400 text-sm mt-1">{errors.faculty.message}</p>}
             </div>
 
             {/* Department */}
             <div>
-              <label className="block text-white mb-2">Department</label>
+              <label htmlFor="department" className="block text-white mb-2">Department</label>
               <input
+                id="department"
+                autoComplete="organization-title"
+                aria-invalid={!!errors.department}
+                aria-describedby={errors.department ? 'department-error' : undefined}
                 {...register('department')}
                 type="text"
                 placeholder="Department"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
               />
-              {errors.department && <p className="text-red-400 text-sm mt-1">{errors.department.message}</p>}
+              {errors.department && <p id="department-error" role="alert" className="text-red-400 text-sm mt-1">{errors.department.message}</p>}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Email */}
             <div>
-              <label className="block text-white mb-2">Email</label>
+              <label htmlFor="email" className="block text-white mb-2">Email</label>
               <input
+                id="email"
+                autoComplete="email"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'email-error' : undefined}
                 {...register('email')}
                 type="email"
                 placeholder="Your Email"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
               />
-              {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>}
+              {errors.email && <p id="email-error" role="alert" className="text-red-400 text-sm mt-1">{errors.email.message}</p>}
             </div>
 
             {/* Phone */}
             <div>
-              <label className="block text-white mb-2">Phone Number (WhatsApp)</label>
+              <label htmlFor="phone" className="block text-white mb-2">Phone Number (WhatsApp)</label>
               <input
+                id="phone"
+                autoComplete="tel"
+                aria-invalid={!!errors.phone}
+                aria-describedby={errors.phone ? 'phone-error' : undefined}
                 {...register('phone')}
                 type="tel"
                 placeholder="Your WhatsApp Number"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
               />
-              {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone.message}</p>}
+              {errors.phone && <p id="phone-error" role="alert" className="text-red-400 text-sm mt-1">{errors.phone.message}</p>}
             </div>
           </div>
 
-          {/* Previous Participation */}
-          <div>
-            <label className="block text-white mb-3">Have you already participated in Speech Olympiad?</label>
+          {/* Previous Participation. fieldset/legend so the question is
+              announced together with the radio options. */}
+          <fieldset
+            aria-invalid={!!errors.previousParticipation}
+            aria-describedby={errors.previousParticipation ? 'previousParticipation-error' : undefined}
+          >
+            <legend className="block text-white mb-3">Have you already participated in Speech Olympiad?</legend>
             <div className="flex space-x-6">
               <label className="flex items-center space-x-3 cursor-pointer text-white">
                 <input
                   type="radio"
                   value="yes"
                   {...register('previousParticipation')}
-                  className="w-5 h-5 text-yellow-500 focus:ring-yellow-500 bg-gray-800 border-gray-600"
+                  className="w-5 h-5 text-[#EDC001] focus:ring-[#EDC001] bg-gray-800 border-gray-600"
                 />
                 <span>Yes</span>
               </label>
@@ -290,21 +333,24 @@ export function Register() {
                   type="radio"
                   value="no"
                   {...register('previousParticipation')}
-                  className="w-5 h-5 text-yellow-500 focus:ring-yellow-500 bg-gray-800 border-gray-600"
+                  className="w-5 h-5 text-[#EDC001] focus:ring-[#EDC001] bg-gray-800 border-gray-600"
                 />
                 <span>No</span>
               </label>
             </div>
-            {errors.previousParticipation && <p className="text-red-400 text-sm mt-1">{errors.previousParticipation.message}</p>}
-          </div>
+            {errors.previousParticipation && <p id="previousParticipation-error" role="alert" className="text-red-400 text-sm mt-1">{errors.previousParticipation.message}</p>}
+          </fieldset>
 
           {/* Hear About */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-white mb-2">How did you hear about this competition?</label>
+              <label htmlFor="hearAbout" className="block text-white mb-2">How did you hear about this competition?</label>
               <select
+                id="hearAbout"
+                aria-invalid={!!errors.hearAbout}
+                aria-describedby={errors.hearAbout ? 'hearAbout-error' : undefined}
                 {...register('hearAbout')}
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 appearance-none"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001] appearance-none"
               >
                 <option value="">Select an option</option>
                 <option value="Gavel Club of UOM">Gavel Club of UOM</option>
@@ -312,20 +358,24 @@ export function Register() {
                 <option value="Friend">Friend</option>
                 <option value="Other">Other</option>
               </select>
-              {errors.hearAbout && <p className="text-red-400 text-sm mt-1">{errors.hearAbout.message}</p>}
+              {errors.hearAbout && <p id="hearAbout-error" role="alert" className="text-red-400 text-sm mt-1">{errors.hearAbout.message}</p>}
             </div>
 
             {/* Other option input */}
             {watchHearAbout === 'Other' && (
               <div>
-                <label className="block text-white mb-2">Please specify</label>
+                <label htmlFor="hearAboutOther" className="block text-white mb-2">Please specify</label>
                 <input
+                  id="hearAboutOther"
+                  autoComplete="off"
+                  aria-invalid={!!errors.hearAboutOther}
+                  aria-describedby={errors.hearAboutOther ? 'hearAboutOther-error' : undefined}
                   {...register('hearAboutOther')}
                   type="text"
                   placeholder="Please specify"
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
                 />
-                {errors.hearAboutOther && <p className="text-red-400 text-sm mt-1">{errors.hearAboutOther.message}</p>}
+                {errors.hearAboutOther && <p id="hearAboutOther-error" role="alert" className="text-red-400 text-sm mt-1">{errors.hearAboutOther.message}</p>}
               </div>
             )}
           </div>
@@ -336,23 +386,23 @@ export function Register() {
               {...register('agreeToTerms')}
               type="checkbox"
               id="terms"
-              className="mt-1 h-5 w-5 text-yellow-500 focus:ring-yellow-500 bg-gray-800 border-gray-600 rounded"
+              className="mt-1 h-5 w-5 text-[#EDC001] focus:ring-[#EDC001] bg-gray-800 border-gray-600 rounded"
             />
             <label htmlFor="terms" className="text-gray-300 text-sm cursor-pointer">
               I confirm that I have read and agree to the{' '}
-              <a href="/rules" className="text-[#EDC001] underline hover:text-yellow-300">
+              <a href="/rules" className="text-[#EDC001] underline hover:text-[#FFA53D]">
                 rules and regulations
               </a>
               , and I consent to share my information with authorized third parties for relevant purposes.
             </label>
           </div>
-          {errors.agreeToTerms && <p className="text-red-400 text-sm mt-1">{errors.agreeToTerms.message}</p>}
+          {errors.agreeToTerms && <p id="agreeToTerms-error" role="alert" className="text-red-400 text-sm mt-1">{errors.agreeToTerms.message}</p>}
 
           {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-14 bg-[#c8a009] text-gray-100 rounded-lg hover:bg-[#aa8808] transition-colors hover:text-white font-bold text-xl disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+            className="w-full h-14 bg-[#EDC001] text-gray-100 rounded-lg hover:bg-[#A87F0A] transition-colors hover:text-white font-bold text-xl disabled:opacity-50 disabled:cursor-not-allowed mt-4"
           >
             {isSubmitting ? 'Submitting...' : 'Submit Registration'}
           </button>

@@ -13,7 +13,7 @@ import niruthikaPortrait from '../assets/images/Niru_profile_img.png'
 const BackButton = ({ onClick }: { onClick: () => void }) => (
   <button
     onClick={onClick}
-    className="bg-[#EDC001] m-4 text-[#181818] p-3 w-16 h-16 rounded-full hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 flex items-center justify-center transition-transform hover:scale-105"
+    className="bg-[#EDC001] m-4 text-[#181818] p-3 w-16 h-16 rounded-full hover:bg-[#FF7A18] focus:outline-none focus:ring-2 focus:ring-[#FF7A18] focus:ring-opacity-50 flex items-center justify-center transition-transform hover:scale-105"
   >
     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
       <path fillRule="evenodd" d="M9.293 5.293a1 1 0 011.414 1.414L7.414 10l3.293 3.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 010 1.414z" clipRule="evenodd" />
@@ -66,10 +66,16 @@ export function ChampionsStory() {
   return (
     <div className="w-full flex justify-center items-center py-10">
       {activeKey === '0' ? (
-        <div className="w-full bg-[#121212]/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
-          <div className="text-3xl mb-9 lg:text-4xl font-semibold tracking-tight text-white">
+        <section
+          aria-labelledby="champions-story-heading"
+          className="w-full bg-[#121212]/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl"
+        >
+          <h2
+            id="champions-story-heading"
+            className="font-display text-2xl mb-9 lg:text-3xl font-bold tracking-wide text-white"
+          >
             Champion's Story
-          </div>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {stories.map((story) => (
               <TechnicalTipsCard
@@ -82,7 +88,7 @@ export function ChampionsStory() {
               />
             ))}
           </div>
-        </div>
+        </section>
       ) : (
         <div className="w-full">
           {activeKey === '1' && (

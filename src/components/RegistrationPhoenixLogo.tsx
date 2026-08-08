@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useRef, memo, useState } from 'react'
 import phoenixSvgRaw from '../assets/svg/Layer 2.svg?raw'
 
