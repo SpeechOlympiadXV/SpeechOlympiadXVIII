@@ -22,7 +22,7 @@ const navigation: NavItem[] = [
   { name: 'Gallery', href: '/gallery', current: false, className: 'text-white' },
   { name: 'Rules & Regulations', href: '/rules', current: false, className: 'text-white' },
   { name: 'Blogs', href: '/blogs', current: false, className: 'text-white' },
-  //{ name: 'Register', href: '/register', current: false, isButton: true },
+  { name: 'Register', href: '/register', current: false, isButton: true },
 ]
 
 interface NavigationProps { }
@@ -39,7 +39,7 @@ export function Navigation({ }: NavigationProps) {
       return (
         <Link
           to={item.href}
-          className="ml-2 px-6 py-2 rounded-md text-sm font-bold text-black inline-block register-btn"
+          className="ml-2 px-6 py-2 rounded-md text-sm font-bold inline-block register-btn"
         >
           {item.name}
         </Link>
@@ -73,7 +73,7 @@ export function Navigation({ }: NavigationProps) {
           key={item.name}
           to={item.href}
           onClick={() => setMobileMenuOpen(false)}
-          className="block w-fit mt-4 px-6 py-2 rounded-md text-base font-bold text-black register-btn"
+          className="block w-fit mt-4 px-6 py-2 rounded-md text-base font-bold register-btn"
         >
           {item.name}
         </Link>

@@ -33,7 +33,7 @@ export function Feature({
     <div className="my-10 flex flex-col md:flex-row gap-6 w-full rounded-2xl mx-auto bg-[#121212]/80 backdrop-blur-sm shadow-black relative border border-[#282828]">
       {/* Content Section */}
       <div className="flex-1 space-y-6 p-12 lg:p-16 flex flex-col justify-center">
-        <h2 className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight text-white">
+        <h2 className="heading-section text-white">
           {heading}
           {headingEnd && <span>{headingEnd}</span>}
         </h2>
@@ -44,7 +44,7 @@ export function Feature({
 
         <button
           onClick={handleClick}
-          className="flex h-14 w-fit font-bold mt-10 items-center px-8 py-4 text-lg text-black rounded-lg transition-all duration-300 hover:brightness-110 hover:scale-105 group shadow-lg bg-[#EDC001]"
+          className="btn-ember group mt-10 h-14 w-fit rounded-lg px-8 py-4 text-lg"
         >
           Read More
           <ChevronRight className="h-5 w-5 ml-2 mt-[2px] group-hover:translate-x-1 transition-transform" />
@@ -71,7 +71,7 @@ export function Feature({
         }
 
         .hover-effect:hover {
-          background-color: #EDC001aa;
+          background-color: color-mix(in srgb, var(--color-ember) 67%, transparent);
           text-shadow: 0 0 1px #ffffff;
         }
       `}</style>

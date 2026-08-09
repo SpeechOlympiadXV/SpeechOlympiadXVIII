@@ -38,10 +38,10 @@ export function Hero() {
         midColor = '#FF0000';
         endColor = '#8B0000';
       } else {
-        // Golden Yellow (92%)
-        coreColor = '#FFFDE7';
-        midColor = '#FFD700';
-        endColor = '#DAA520';
+        // Ember (92%)
+        coreColor = '#FFF0D6';
+        midColor = '#FFA53D';
+        endColor = '#FF7A18';
       }
 
       const size = Math.random() * 6 + 2
@@ -197,7 +197,7 @@ export function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="mb-6 sm:mb-8 font-display text-[0.6rem] sm:text-xs md:text-sm font-normal uppercase text-neutral-300/90 tracking-[0.34em] sm:tracking-[0.4em] text-center"
+            className="eyebrow mb-6 sm:mb-8 md:text-sm text-neutral-300/90 sm:tracking-[0.4em] text-center"
           >
             Speech Olympiad XIX
           </motion.p>
@@ -221,7 +221,7 @@ export function Hero() {
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 }}
             className="my-7 sm:my-9 max-w-[70vw]"
           >
-            <div className="h-[2px] rounded-full bg-gradient-to-r from-transparent via-[#FF9A3D] to-transparent shadow-[0_0_22px_rgba(255,122,24,0.7)] w-full" />
+            <div className="h-[2px] rounded-full bg-linear-to-r from-transparent via-ember-mid to-transparent shadow-[0_0_22px_rgba(255,122,24,0.7)] w-full" />
           </motion.div>
 
           {/* Second Line: "Reign Beyond".
@@ -236,12 +236,12 @@ export function Hero() {
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.5 }}
             className="flex flex-col items-center"
           >
-            <h1
+            <h2
               data-text="Reign Beyond"
               className="relative font-display text-[2.05rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.25rem] font-normal text-center leading-[1.08] tracking-[0.055em] golden-metallic-text uppercase"
             >
               Reign Beyond
-            </h1>
+            </h2>
           </motion.div>
 
         </div>
@@ -254,7 +254,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.9 }}
           className="absolute bottom-7 sm:bottom-9 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap font-display text-[0.55rem] sm:text-[0.68rem] font-normal uppercase text-neutral-400/70 tracking-[0.2em] text-center [text-shadow:0_2px_10px_rgba(0,0,0,0.9)]"
         >
-          Gavel Club <span className="mx-1.5 text-[#EDC001]/60">&middot;</span> University of Moratuwa
+          Gavel Club <span className="mx-1.5 text-ember/60">&middot;</span> University of Moratuwa
         </motion.p> */}
       </div>
     </>

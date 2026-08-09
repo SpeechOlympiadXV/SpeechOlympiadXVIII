@@ -150,7 +150,7 @@ export function PartnersDisplay({}: PartnersDisplayProps) {
       <div className="w-full bg-[#121212]/80 backdrop-blur-sm rounded-2xl p-12 lg:p-16 shadow-2xl">
         {/* Header */}
         <div className="w-full flex flex-col items-start mb-12">
-          <h1 className="text-4xl lg:text-5xl xl:text-6xl font-semibold tracking-tighter leading-tight text-white">
+          <h1 className="heading-page text-white lg:text-5xl xl:text-6xl">
             Our Partners
           </h1>
         </div>
@@ -164,7 +164,7 @@ export function PartnersDisplay({}: PartnersDisplayProps) {
 
               return (
                 <div key={type}>
-                  <h2 className={`text-xl lg:text-2xl font-semibold mb-4 ${getPartnerTypeClass(type)}`}>
+                  <h2 className={`heading-minor text-xl lg:text-2xl mb-4 ${getPartnerTypeClass(type)}`}>
                     {type} Partners
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">

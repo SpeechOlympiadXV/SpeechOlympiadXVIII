@@ -171,7 +171,7 @@ export function HomePage({ }: HomePageProps) {
         >
           <h2
             id="testimonials-heading"
-            className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight text-white mb-8"
+            className="heading-section text-white mb-8"
           >
             Testimonials
           </h2>
@@ -213,7 +213,7 @@ export function HomePage({ }: HomePageProps) {
         >
           <h2
             id="gallery-heading"
-            className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight text-white mb-8"
+            className="heading-section text-white mb-8"
           >
             Gallery
           </h2>

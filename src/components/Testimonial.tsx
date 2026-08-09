@@ -30,7 +30,7 @@ export function AppTestimonialCard({
 
       {/* Content Section */}
       <div className="p-6">
-        <h3 className="text-left text-lg font-semibold text-white mb-2 testimonial-card-heading">
+        <h3 className="heading-minor text-left text-white mb-2 testimonial-card-heading">
           {title}
         </h3>
         {/* Role/placing is metadata about the person, not a section heading */}
