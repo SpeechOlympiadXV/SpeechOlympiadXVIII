@@ -5,10 +5,8 @@
    CDN. Before this, nothing was loaded at all and the whole site fell back to
    system-ui (Segoe UI on Windows). */
 @import "@fontsource-variable/inter";      /* body / UI  — variable 100-900 */
-@import "@fontsource/cinzel/400.css";      /* display    — Roman caps      */
-@import "@fontsource/cinzel/600.css";
-@import "@fontsource/cinzel/700.css";
-@import "@fontsource/cinzel/900.css";
+@import "@fontsource/cinzel/400.css";      /* display    — hero            */
+@import "@fontsource/cinzel/700.css";      /* display    — headings        */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -54,21 +52,20 @@
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Cinzel', 'Inter Variable', ui-serif, Georgia, serif;
 
-  /* Brand palette.
-     GOLD  = award semantics — buttons, champion cards, avatar rings, links,
-             focus rings. This is a competition site; gold means "you won".
-     EMBER = energy — the hero headline, border beams, hover and active states.
-             Ties to the phoenix and the drifting fire particles.
-     Previously there were five near-identical golds used interchangeably
-     (c8a009, d4b34c, d4af37, ffd700 and edc001). All consolidated here. */
-  --color-gold-light: #fff3b0;
-  --color-gold: #edc001;
-  --color-gold-deep: #a87f0a;
+}
 
-  --color-ember-light: #ffd9a0;
-  --color-ember-mid: #ffa53d;
-  --color-ember: #ff7a18;
-  --color-ember-deep: #b02a0e;
+/* Brand ramp — ember is the only warm family; gold is retired.
+   Deliberately `static`, not `inline`: `inline` bakes the literal into each
+   utility and emits no :root variable, and plain `@theme` tree-shakes any
+   variable Tailwind can't see used. Four components style themselves from
+   runtime <style> blocks that Tailwind never scans — ArticleLayout, Blog,
+   Timeline, Feature — so they need var(--color-ember) to genuinely exist at
+   :root. `static` guarantees that for ~8 lines of always-shipped CSS. */
+@theme static {
+  --color-ember-light: #ffd9a0; /* highlights, gradient top stop        */
+  --color-ember-mid: #ffa53d;   /* link hover, gradient mid, body accent */
+  --color-ember: #ff7a18;       /* primary accent — borders, text, rings */
+  --color-ember-deep: #b02a0e;  /* gradient base — decorative only, low contrast */
 }
 
 :root {
@@ -79,8 +76,8 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #EDC001;
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: #ff7a18;
+  --primary-foreground: #121212;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -113,7 +110,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: #EDC001;
+  --primary: #ff7a18;
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -157,17 +154,76 @@
   }
 }
 
+@layer components {
+  /* ---- Heading scale -------------------------------------------------
+     One scale, used everywhere. Carries family / size / weight / tracking
+     only — never colour, so article headings can tint themselves with
+     .text-accent while page headings stay white.
+
+     Replaces 13 hand-copied variants of the same section heading and 45
+     headings that previously bypassed the type system entirely. Spacing
+     (mb-*) stays at the call site so these remain purely typographic. */
+
+  .heading-page {
+    @apply font-display text-3xl sm:text-4xl font-bold tracking-wide leading-tight;
+  }
+
+  .heading-section {
+    @apply font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight;
+  }
+
+  .heading-sub {
+    @apply font-display text-xl lg:text-2xl font-bold tracking-wide leading-snug;
+  }
+
+  .heading-minor {
+    @apply font-display text-lg font-bold tracking-wide leading-snug;
+  }
+
+  /* Small letter-spaced label above a heading */
+  .eyebrow {
+    @apply font-display text-[0.65rem] sm:text-xs font-normal uppercase tracking-[0.32em];
+  }
+
+  /* ---- Buttons -------------------------------------------------------
+     Outlined ember on dark. Solid fills read as loud against this theme,
+     so the accent lives in the border and the label. */
+
+  .btn-ember {
+    @apply inline-flex items-center justify-center gap-2 rounded-full
+           border border-ember/40 bg-ember/6 px-6 py-3
+           font-semibold text-ember-mid transition-colors duration-200
+           hover:border-ember/70 hover:bg-ember/12 hover:text-ember-light
+           focus-visible:outline-2 focus-visible:outline-offset-2
+           focus-visible:outline-ember;
+  }
+
+  /* Solid ember. Deliberately limited to two places — if it spreads to a
+     third, the outlined default stops meaning anything:
+       1. the skip link, which overlays arbitrary page content and would be
+          unreadable outlined;
+       2. the registration submit, the site's primary conversion action. */
+  .btn-ember-solid {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-ember
+           font-bold text-[#121212] transition-all duration-300
+           hover:bg-ember-mid focus-visible:outline-2
+           focus-visible:outline-offset-2 focus-visible:outline-ember-light;
+  }
+}
+
 .register-btn {
-  background: #EDC001;
-  color: #121212;
+  border: 1px solid color-mix(in srgb, var(--color-ember) 40%, transparent);
+  background: color-mix(in srgb, var(--color-ember) 6%, transparent);
+  color: var(--color-ember-mid);
   transition: all 0.3s ease;
 }
 
 .register-btn:hover {
-  background: #A87F0A;
-  box-shadow: 0 0 20px rgba(237, 192, 1, 0.6), 0 0 40px rgba(168, 127, 10, 0.4);
-  transform: scale(1.05) translateY(-2px);
-  filter: brightness(1.1);
+  border-color: color-mix(in srgb, var(--color-ember) 70%, transparent);
+  background: color-mix(in srgb, var(--color-ember) 12%, transparent);
+  color: var(--color-ember-light);
+  box-shadow: 0 0 18px rgba(255, 122, 24, 0.35);
+  transform: translateY(-1px);
 }
 
 @keyframes marquee {
@@ -205,7 +261,7 @@
 }
 
 .testimonial-card-img {
-  border: 2px solid #edc001;
+  border: 2px solid var(--color-ember);
 }
 
 /* Respect the OS "reduce motion" setting. The hero runs ~80 infinite particle
