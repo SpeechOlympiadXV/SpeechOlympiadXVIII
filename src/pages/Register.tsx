@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { supabase } from '../lib/supabase'
+import { supabase, isSupabaseConfigured } from '../lib/supabase'
 import { RegistrationPhoenixLogo } from '../components/RegistrationPhoenixLogo'
 
 
@@ -84,6 +84,15 @@ export function Register() {
     setErrorMessage('')
     setSuccessMessage('')
 
+    // Fail loudly and early rather than sending a request that cannot succeed.
+    if (!isSupabaseConfigured) {
+      setIsSubmitting(false)
+      setErrorMessage(
+        'Registration is temporarily unavailable. Please try again shortly, or contact the Gavel Club directly.'
+      )
+      return
+    }
+
     try {
       const { error } = await supabase
         .from('registrations')
@@ -130,12 +139,14 @@ export function Register() {
     <div className="w-full flex justify-center items-center mt-20 mb-10 relative">
       <RegistrationPhoenixLogo progress={progress} isSuccess={!!successMessage} />
       <div className="w-[90%] md:w-[80%] bg-[#121212]/10 md:bg-[#121212]/50 backdrop-blur-[3px] md:backdrop-blur-sm rounded-2xl p-8 shadow-2xl relative z-10">
-        <h2 className="font-display text-2xl lg:text-3xl font-bold text-white tracking-wide leading-tight w-[80%]">
+        {/* This page's own <h1> — /register is standalone, so unlike About or
+            TechTips it is not given a route-level sr-only title in App.tsx. */}
+        <h1 className="heading-page text-white w-[80%]">
           Register Now
-        </h2>
+        </h1>
         <p className="mt-4 text-gray-300 leading-6 text-left text-lg font-thin">
           Registrations for{' '}
-          <span className="font-bold text-[#EDC001]">Speech Olympiad</span> are open now. Time to own your voice!
+          <span className="font-bold text-ember">Speech Olympiad</span> are open now. Time to own your voice!
         </p>
         <p className="mt-1 text-gray-300 leading-6 text-left text-lg font-thin">
           Master the art of public speaking with our comprehensive{' '}
@@ -143,7 +154,7 @@ export function Register() {
             href="https://drive.google.com/file/d/1q593UEqVGyOmJeEzJoMwOyjGEroa8Ksz/view?usp=sharing"
             target="_blank"
             rel="noreferrer"
-            className="text-[#EDC001] hover:text-[#FFA53D] hover:cursor-pointer transition-colors duration-200 font-bold underline"
+            className="text-ember hover:text-ember-mid hover:cursor-pointer transition-colors duration-200 font-bold underline"
           >
             Competition Guidelines
           </a>{' '}
@@ -163,7 +174,7 @@ export function Register() {
                 {...register('firstName')}
                 type="text"
                 placeholder="First Name"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember"
               />
               {errors.firstName && <p id="firstName-error" role="alert" className="text-red-400 text-sm mt-1">{errors.firstName.message}</p>}
             </div>
@@ -179,7 +190,7 @@ export function Register() {
                 {...register('lastName')}
                 type="text"
                 placeholder="Last Name"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember"
               />
               {errors.lastName && <p id="lastName-error" role="alert" className="text-red-400 text-sm mt-1">{errors.lastName.message}</p>}
             </div>
@@ -197,7 +208,7 @@ export function Register() {
                 {...register('registrationNumber')}
                 type="text"
                 placeholder="University ID"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember"
               />
               {errors.registrationNumber && <p id="registrationNumber-error" role="alert" className="text-red-400 text-sm mt-1">{errors.registrationNumber.message}</p>}
             </div>
@@ -213,7 +224,7 @@ export function Register() {
                 {...register('nameOnCertificate')}
                 type="text"
                 placeholder="Full Name for Certificate"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember"
               />
               {errors.nameOnCertificate && <p id="nameOnCertificate-error" role="alert" className="text-red-400 text-sm mt-1">{errors.nameOnCertificate.message}</p>}
             </div>
@@ -228,7 +239,7 @@ export function Register() {
                 aria-invalid={!!errors.batch}
                 aria-describedby={errors.batch ? 'batch-error' : undefined}
                 {...register('batch')}
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001] appearance-none"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember appearance-none"
               >
                 <option value="">Select Batch (22-25)</option>
                 <option value="22">22</option>
@@ -247,7 +258,7 @@ export function Register() {
                 aria-invalid={!!errors.faculty}
                 aria-describedby={errors.faculty ? 'faculty-error' : undefined}
                 {...register('faculty')}
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001] appearance-none"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember appearance-none"
               >
                 <option value="">Select Faculty</option>
                 <option value="Engineering">Faculty of Engineering</option>
@@ -271,7 +282,7 @@ export function Register() {
                 {...register('department')}
                 type="text"
                 placeholder="Department"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember"
               />
               {errors.department && <p id="department-error" role="alert" className="text-red-400 text-sm mt-1">{errors.department.message}</p>}
             </div>
@@ -289,7 +300,7 @@ export function Register() {
                 {...register('email')}
                 type="email"
                 placeholder="Your Email"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember"
               />
               {errors.email && <p id="email-error" role="alert" className="text-red-400 text-sm mt-1">{errors.email.message}</p>}
             </div>
@@ -305,7 +316,7 @@ export function Register() {
                 {...register('phone')}
                 type="tel"
                 placeholder="Your WhatsApp Number"
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember"
               />
               {errors.phone && <p id="phone-error" role="alert" className="text-red-400 text-sm mt-1">{errors.phone.message}</p>}
             </div>
@@ -324,7 +335,7 @@ export function Register() {
                   type="radio"
                   value="yes"
                   {...register('previousParticipation')}
-                  className="w-5 h-5 text-[#EDC001] focus:ring-[#EDC001] bg-gray-800 border-gray-600"
+                  className="w-5 h-5 text-ember focus:ring-ember bg-gray-800 border-gray-600"
                 />
                 <span>Yes</span>
               </label>
@@ -333,7 +344,7 @@ export function Register() {
                   type="radio"
                   value="no"
                   {...register('previousParticipation')}
-                  className="w-5 h-5 text-[#EDC001] focus:ring-[#EDC001] bg-gray-800 border-gray-600"
+                  className="w-5 h-5 text-ember focus:ring-ember bg-gray-800 border-gray-600"
                 />
                 <span>No</span>
               </label>
@@ -350,7 +361,7 @@ export function Register() {
                 aria-invalid={!!errors.hearAbout}
                 aria-describedby={errors.hearAbout ? 'hearAbout-error' : undefined}
                 {...register('hearAbout')}
-                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001] appearance-none"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember appearance-none"
               >
                 <option value="">Select an option</option>
                 <option value="Gavel Club of UOM">Gavel Club of UOM</option>
@@ -373,7 +384,7 @@ export function Register() {
                   {...register('hearAboutOther')}
                   type="text"
                   placeholder="Please specify"
-                  className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-[#EDC001]"
+                  className="w-full p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-ember"
                 />
                 {errors.hearAboutOther && <p id="hearAboutOther-error" role="alert" className="text-red-400 text-sm mt-1">{errors.hearAboutOther.message}</p>}
               </div>
@@ -386,11 +397,11 @@ export function Register() {
               {...register('agreeToTerms')}
               type="checkbox"
               id="terms"
-              className="mt-1 h-5 w-5 text-[#EDC001] focus:ring-[#EDC001] bg-gray-800 border-gray-600 rounded"
+              className="mt-1 h-5 w-5 text-ember focus:ring-ember bg-gray-800 border-gray-600 rounded"
             />
             <label htmlFor="terms" className="text-gray-300 text-sm cursor-pointer">
               I confirm that I have read and agree to the{' '}
-              <a href="/rules" className="text-[#EDC001] underline hover:text-[#FFA53D]">
+              <a href="/rules" className="text-ember underline hover:text-ember-mid">
                 rules and regulations
               </a>
               , and I consent to share my information with authorized third parties for relevant purposes.
@@ -402,14 +413,14 @@ export function Register() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-14 bg-[#EDC001] text-gray-100 rounded-lg hover:bg-[#A87F0A] transition-colors hover:text-white font-bold text-xl disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+            className="btn-ember-solid mt-4 h-14 w-full rounded-lg text-xl disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? 'Submitting...' : 'Submit Registration'}
           </button>
         </form>
 
         {successMessage && (
-          <div className="mt-6 p-4 bg-[#EDC001]/20 border border-[#EDC001] text-[#EDC001] rounded-lg text-center font-semibold">
+          <div className="mt-6 p-4 bg-ember/20 border border-ember text-ember rounded-lg text-center font-semibold">
             {successMessage}
           </div>
         )}
@@ -422,4 +433,3 @@ export function Register() {
     </div>
   )
 }
-import { useEffect } from 'react'

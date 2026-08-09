@@ -15,7 +15,7 @@ import { Rules } from '@/pages/Rules'
 //import { Finalists } from '@/pages/Finalists'
 // import { SemiFinalists } from '@/pages/SemiFinalists'
 import { Vote } from '@/pages/Vote'
-//import { Register } from '@/pages/Register'
+import { Register } from '@/pages/Register'
 import { NotFoundPage } from '@/pages/Page404'
 
 // Sanity setup moved to lib/sanity.ts
@@ -48,7 +48,7 @@ export default function App() {
       <ScrollToTop />
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-[#EDC001] focus:px-4 focus:py-2 focus:font-semibold focus:text-black"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-ember focus:px-4 focus:py-2 focus:font-semibold focus:text-[#121212]"
       >
         Skip to main content
       </a>
@@ -81,7 +81,7 @@ export default function App() {
           <Route path="/amirthavarshani" element={<Vote />} />
           <Route path="/neelayadhakshi" element={<Vote />} />
           <Route path="/afrah" element={<Vote />} />*/}
-          {/*<Route path="/register" element={<Register />} />*/}
+          <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
