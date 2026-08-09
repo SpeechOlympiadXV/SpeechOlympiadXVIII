@@ -151,7 +151,7 @@ export function Register() {
         <p className="mt-1 text-gray-300 leading-6 text-left text-lg font-thin">
           Master the art of public speaking with our comprehensive{' '}
           <a
-            href="https://drive.google.com/file/d/1q593UEqVGyOmJeEzJoMwOyjGEroa8Ksz/view?usp=sharing"
+            href="https://drive.google.com/file/d/16CUggyf5BhbXBA24k6k77J6BEx6JMYLE/view?usp=sharing"
             target="_blank"
             rel="noreferrer"
             className="text-ember hover:text-ember-mid hover:cursor-pointer transition-colors duration-200 font-bold underline"
