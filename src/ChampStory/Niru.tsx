@@ -54,7 +54,7 @@ export function Niru() {
       <p className="box text-center text-xl font-medium">
         With the support of the Gavel family, I achieved what seemed impossible.
         <br /><br />
-        <span className="text-2xl text-[#EDC001]">I became the Speech Olympiad XIV champion.</span>
+        <span className="text-2xl text-ember">I became the Speech Olympiad XIV champion.</span>
       </p>
 
       <Image className="article-img my-8" src={midImage} alt="Niruththika speaking" />

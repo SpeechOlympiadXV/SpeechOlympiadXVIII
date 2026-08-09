@@ -237,7 +237,7 @@ export function Blogs({
       <div className="w-full">
         {/* Header */}
         <div className="w-full flex flex-col items-start mb-8">
-          <h2 className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight text-white">
+          <h2 className="heading-section text-white">
             Past Experiences
           </h2>
         </div>
@@ -290,7 +290,7 @@ export function Blogs({
                     
                     {/* Title */}
                     <div className="text-center mb-12">
-                      <h2 className="text-4xl md:text-5xl font-bold text-white border-b border-[#edc001] pb-2 inline-block">
+                      <h2 className="heading-page text-white border-b border-ember pb-2 inline-block sm:text-5xl">
                         {post.title}
                       </h2>
                     </div>
@@ -318,7 +318,7 @@ export function Blogs({
                               />
                             </div>
                           )}
-                          <div className="text-xl md:text-2xl font-medium text-[#EDC001]">
+                          <div className="text-xl md:text-2xl font-medium text-ember">
                             {post.name}
                           </div>
                         </div>
@@ -328,7 +328,7 @@ export function Blogs({
                     {/* Blog Photos Gallery */}
                     {post.images && post.images.length > 0 && (
                       <div className="mt-12 border-t border-gray-600 pt-8">
-                        <h2 className="text-2xl font-semibold mb-6 text-white">
+                        <h2 className="heading-sub mb-6 text-white">
                           Blog Photos
                         </h2>
                         <div className="columns-1 sm:columns-2 md:columns-3 gap-4">
@@ -406,7 +406,7 @@ export function Blogs({
                   />
                 </div>
                 <div className="p-4 sm:p-6 flex flex-col flex-grow">
-                  <h2 className="text-xl font-semibold mb-2 text-white">
+                  <h2 className="heading-minor text-xl mb-2 text-white">
                     {post.title}
                   </h2>
                   <p className="text-gray-300 mb-4 flex-grow">
@@ -414,7 +414,7 @@ export function Blogs({
                   </p>
                   <button
                     onClick={() => handleReadmore(post.slug.current)}
-                    className="mt-auto self-start text-black font-bold py-2 px-4 rounded transition-all duration-300 ease-in-out hover:brightness-110 hover:scale-105 shadow-md bg-[#EDC001]"
+                    className="btn-ember mt-auto self-start rounded-lg px-4 py-2 text-sm"
                   >
                     Read more
                   </button>
@@ -437,7 +437,7 @@ export function Blogs({
         .article-content p:first-of-type::first-letter {
           font-size: 250%;
           line-height: 100%;
-          color: #EDC001;
+          color: var(--color-ember);
         }
 
         .article-content blockquote {
@@ -445,7 +445,7 @@ export function Blogs({
           padding: 1.5rem;
           text-align: left;
           font-style: italic;
-          border-left: 4px solid #EDC001;
+          border-left: 4px solid var(--color-ember);
           margin: 1.5rem 0;
           border-radius: 0 0.5rem 0.5rem 0;
         }
@@ -460,7 +460,7 @@ export function Blogs({
           font-weight: 700;
           color: rgb(255 255 255);
           margin: 2.5rem 0 1.5rem 0;
-          border-bottom: 2px solid rgba(237, 192, 1, 0.4);
+          border-bottom: 2px solid rgba(255, 122, 24, 0.4);
           padding-bottom: 0.5rem;
         }
 

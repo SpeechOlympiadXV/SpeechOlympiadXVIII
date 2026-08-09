@@ -4,7 +4,7 @@ export function NotFoundPage({}: NotFoundPageProps) {
   return (
     <div className="flex items-center justify-center w-full min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
       <div className="text-center px-4">
-        <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4">
+        <h1 className="heading-page text-white mb-4 lg:text-6xl">
           Sorry, This Page Is Unavailable 🙃
         </h1>
         <p className="text-lg lg:text-xl text-slate-300 mb-8">

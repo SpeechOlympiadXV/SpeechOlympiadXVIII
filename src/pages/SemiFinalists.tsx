@@ -20,7 +20,7 @@ export function SemiFinalists() {
   return (
     <div className="w-[90%] sm:w-[80%] rounded-xl mx-auto my-9 bg-[#121212]/80 backdrop-blur-sm mt-20 text-white">
       <div className="px-9 py-9 mx-auto">
-        <h2 className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight">
+        <h2 className="heading-section text-white">
           Semi Finalists
         </h2>
 
@@ -29,7 +29,7 @@ export function SemiFinalists() {
         </div>
         <div className="text-gray-300 leading-6 text-left text-md sm:text-lg font-thin mt-1">
           Now, the journey to be{' '}
-          <span className="text-xl sm:text-2xl italic font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#edc001] to-[#ff5e5e]">
+          <span className="text-xl sm:text-2xl italic font-bold bg-clip-text text-transparent bg-gradient-to-r from-ember to-[#ff5e5e]">
             Unleashed
           </span>
           , begins.
@@ -60,7 +60,7 @@ export function SemiFinalists() {
                   }}
                   onMouseEnter={() => setHoverIndex(index)}
                   onMouseLeave={() => setHoverIndex(null)}
-                  className={`relative rounded-lg overflow-hidden transition-all duration-500 ease-in-out p-[2px] bg-gradient-to-br from-[#846a00] to-[#84001e] ${
+                  className={`relative rounded-lg overflow-hidden transition-all duration-500 ease-in-out p-[2px] bg-gradient-to-br from-ember-deep to-[#84001e] ${
                     isHovered ? 'w-[37%] sm:w-[35%] md:w-[30%] lg:w-[25%]' : 'w-[20%] sm:w-[15%] md:w-[15%] lg:w-[12%]'
                   }`}
                   style={{ minWidth: '150px', height: '300px', cursor: 'pointer' }}
@@ -88,7 +88,7 @@ export function SemiFinalists() {
       </div>
 
       <div className="px-9 py-9 mx-auto border-t border-gray-700">
-        <h2 className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight mb-8">
+        <h2 className="heading-section text-white mb-8">
           Reserved Semi Finalists
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4">

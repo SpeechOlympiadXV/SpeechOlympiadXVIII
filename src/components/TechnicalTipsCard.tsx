@@ -29,7 +29,7 @@ export function TechnicalTipsCard({
         rounded-lg p-4 my-3 md:my-0 w-full h-full
         cursor-pointer text-left
         transition-all duration-300 ease-in-out transform hover:scale-105 hover:-translate-y-1 hover:shadow-xl
-        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EDC001]
+        focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember
         flex flex-col
       `}
     >
@@ -38,7 +38,7 @@ export function TechnicalTipsCard({
             elements rather than injecting HTML — keeps this safe if titles
             ever come from the CMS. */}
         <h3
-          className={`font-semibold tracking-tighter leading-tight text-gray-300 text-xl sm:text-2xl xl:text-3xl mb-2 border-b-2 border-[#333333] pb-2 drop-shadow-md`}
+          className="heading-sub text-gray-300 xl:text-3xl mb-2 border-b-2 border-[#333333] pb-2 drop-shadow-md"
         >
           {title.split(/<br\s*\/?>/i).map((line, i, lines) => (
             <span key={i}>

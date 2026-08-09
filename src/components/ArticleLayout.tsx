@@ -63,7 +63,7 @@ export function ArticleLayout({
                     />
                   </div>
                 )}
-                <div className="text-xl font-medium text-[#EDC001]">
+                <div className="text-xl font-medium text-ember">
                   {intervieweeName}
                 </div>
               </div>
@@ -84,14 +84,14 @@ export function ArticleLayout({
         .article-content .first-letter::first-letter {
           font-size: 250%;
           line-height: 100%;
-          color: #EDC001;
+          color: var(--color-ember);
         }
         .article-content .box {
           background-color: rgba(255, 255, 255, 0.05);
           padding: 1.5rem;
           text-align: left;
           font-style: italic;
-          border-left: 4px solid #EDC001;
+          border-left: 4px solid var(--color-ember);
           margin: 1.5rem 0;
           border-radius: 4px;
         }

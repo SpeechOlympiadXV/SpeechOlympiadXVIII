@@ -1,14 +1,14 @@
 export function Rules() {
   return (
     <div className="container my-12 mx-auto p-8 md:p-12 w-11/12 md:w-4/5 bg-[#121212]/80 backdrop-blur-sm rounded-xl text-white border border-[#585858]/30">
-      <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-wide mb-6 text-center">Speech Olympiad XIX</h1>
+      <h1 className="heading-page mb-6 text-center">Speech Olympiad XIX</h1>
       {/* Tagline, not a heading */}
       <p className="text-lg font-thin mb-6 text-center">Intra-University Speech Competition - University of Moratuwa</p>
       {/* Was a second <h1> — a document must have exactly one */}
-      <h2 className="font-display text-lg sm:text-xl font-bold tracking-wide mb-6 text-center">Contest Rules: Preliminaries</h2>
+      <h2 className="heading-sub mb-6 text-center">Contest Rules: Preliminaries</h2>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">1. Eligibility</h2>
+        <h2 className="heading-sub mb-4">1. Eligibility</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal border-none">
             The contestant should be an undergraduate studying in any of the following faculties<sup>1</sup> of University of Moratuwa to be eligible to participate in Speech Olympiad XIX.
@@ -25,7 +25,7 @@ export function Rules() {
       </section>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">2. Language</h2>
+        <h2 className="heading-sub mb-4">2. Language</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal border-none">
             All speeches must be delivered in English. (Dialogues or any phrases expressed in other languages i.e., Sinhala, Tamil etc. should be minimal and such phrases should be immediately translated to English.)
@@ -34,7 +34,7 @@ export function Rules() {
       </section>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">3. Speech Rounds</h2>
+        <h2 className="heading-sub mb-4">3. Speech Rounds</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal pt-1 pb-2 border-none">
             There will be 3 rounds i.e., the Preliminary round, the Semi-final round, and the Final round.
@@ -49,7 +49,7 @@ export function Rules() {
       </section>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">4. Competition Procedure</h2>
+        <h2 className="heading-sub mb-4">4. Competition Procedure</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal pt-1 pb-2 border-none">
             The preliminaries will be happening on the <span className="font-bold text-white">6th of September</span> at the University Premises. For verification purposes, all contestants must bring their <span className="font-bold text-white">University ID</span> or the <span className="font-bold text-white">Student Record Book</span>.
@@ -70,7 +70,7 @@ export function Rules() {
       </section>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">5. Speech Timings</h2>
+        <h2 className="heading-sub mb-4">5. Speech Timings</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal border-none">
             Timing will begin with the contestant's first definite verbal or nonverbal communication with the audience. This usually will be the first word uttered by the contestant, but would include any other communication such as sound effects.
@@ -91,7 +91,7 @@ export function Rules() {
       </section>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">6. Speech Topics and Content</h2>
+        <h2 className="heading-sub mb-4">6. Speech Topics and Content</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal border-none">
             Contestants are free to choose any topic of their choice subjected to the following conditions:
@@ -107,7 +107,7 @@ export function Rules() {
       </section>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">7. Use of Props and Electronic Devices</h2>
+        <h2 className="heading-sub mb-4">7. Use of Props and Electronic Devices</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal pt-1 pb-2 border-none">
             The use of electronic aids including visuals, slide projectors, and charts will not be permitted. Contestants are allowed to use other props.
@@ -130,7 +130,7 @@ export function Rules() {
       </section>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">8. Protests and Disqualifications</h2>
+        <h2 className="heading-sub mb-4">8. Protests and Disqualifications</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal p-1 border-none">
             Protests are limited to eligibility, originality, and reference to another contestant's speech and must only be lodged by voting judges and/or contestants. Any protest must be lodged with the chief judge and/or contest chair prior to the contest being adjourned.
@@ -151,7 +151,7 @@ export function Rules() {
       </section>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">9. Dress Code</h2>
+        <h2 className="heading-sub mb-4">9. Dress Code</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal pt-1 pb-2 border-none">
             Formal attire is recommended.
@@ -160,7 +160,7 @@ export function Rules() {
       </section>
 
       <section className="mb-8">
-        <h2 className="font-display text-xl font-bold tracking-wide mb-4">10. Speech Evaluation Criteria</h2>
+        <h2 className="heading-sub mb-4">10. Speech Evaluation Criteria</h2>
         <ul className="pl-6 space-y-2 list-disc border-none">
           <li className="text-gray-300 font-normal pt-1 pb-2 border-none">
             Speeches will be evaluated on the following criteria:

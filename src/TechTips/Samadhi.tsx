@@ -37,7 +37,7 @@ export function Samadhi() {
         </p>
       </div>
 
-      <h3 className="text-2xl font-bold text-[#EDC001] mt-8 mb-4">1. What are the key points to focus on when crafting a speech?</h3>
+      <h2 className="heading-sub text-ember mt-8 mb-4">1. What are the key points to focus on when crafting a speech?</h2>
       <ul className="list-disc pl-6 space-y-4">
         <li>
           <b>Take home message</b>
@@ -87,7 +87,7 @@ export function Samadhi() {
         </li>
       </ul>
 
-      <h3 className="text-2xl font-bold text-[#EDC001] mt-10 mb-4">2. How should one decide on what he/she is going to speak on?</h3>
+      <h2 className="heading-sub text-ember mt-10 mb-4">2. How should one decide on what he/she is going to speak on?</h2>
       <p>
         One of the best ways to come up with a good speech is to speak about
         your own experiences. Especially if you learnt something out of it, it
@@ -109,7 +109,7 @@ export function Samadhi() {
         quite attractive.
       </p>
 
-      <h3 className="text-2xl font-bold text-[#EDC001] mt-10 mb-4">3. How important is it to use stories in our speeches?</h3>
+      <h2 className="heading-sub text-ember mt-10 mb-4">3. How important is it to use stories in our speeches?</h2>
       <p>
         Stories can be interesting to add to a speech. We all love to hear
         stories. But it does not mean that you need to narrate lengthy tales.
@@ -117,7 +117,7 @@ export function Samadhi() {
         words can be an interesting story.
       </p>
 
-      <h3 className="text-2xl font-bold text-[#EDC001] mt-10 mb-4">4. Can you give some tips on impromptu speaking?</h3>
+      <h2 className="heading-sub text-ember mt-10 mb-4">4. Can you give some tips on impromptu speaking?</h2>
       <p>
         Impromptu speaking requires a lot of practice and experience. You need
         to have 3 qualities mastered when doing an impromptu speech.
@@ -172,7 +172,7 @@ export function Samadhi() {
         </li>
       </ul>
 
-      <h3 className="text-2xl font-bold text-[#EDC001] mt-10 mb-4">5. Do you have any tips on practising a speech?</h3>
+      <h2 className="heading-sub text-ember mt-10 mb-4">5. Do you have any tips on practising a speech?</h2>
       <p>
         Practice is key for both prepared speeches and impromptu speeches. You
         need to practise until you feel at home on a stage. Practice is what

@@ -17,7 +17,7 @@ import kasunPortrait from '../assets/images/Kasunayya.jpg'
 const BackButton = ({ onClick }: { onClick: () => void }) => (
   <button
     onClick={onClick}
-    className="bg-[#EDC001] m-4 text-[#181818] p-3 w-16 h-16 rounded-full hover:bg-[#FF7A18] focus:outline-none focus:ring-2 focus:ring-[#FF7A18] focus:ring-opacity-50 flex items-center justify-center transition-transform hover:scale-105"
+    className="btn-ember m-4 h-16 w-16 rounded-full p-3"
   >
     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
       <path fillRule="evenodd" d="M9.293 5.293a1 1 0 011.414 1.414L7.414 10l3.293 3.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 010 1.414z" clipRule="evenodd" />
@@ -54,7 +54,7 @@ export function PageTechnicalTips() {
     {
       key: '1',
       imageSrc: samadhiPortrait,
-      title: 'A guide to becoming <br/> a better speaker',
+      title: 'Becoming <br/> a better speaker',
       subtitle: 'Tips from Dr.Samadhi Poornima, champion of Speech Olympiad IX',
       backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
     },
@@ -75,7 +75,7 @@ export function PageTechnicalTips() {
     {
       key: '4',
       imageSrc: kasunPortrait,
-      title: 'The Art Of <br/> Winning',
+      title: 'The Art Of Winning',
       subtitle: 'Tips from Kasun Ranasinghe, Champion of Speech Olympiad X',
       backgroundColorClass: 'bg-gradient-to-br from-slate-300/70 via-slate-100/70 to-slate-400/70',
     },
@@ -90,7 +90,7 @@ export function PageTechnicalTips() {
         >
           <h2
             id="technical-tips-heading"
-            className="font-display text-2xl mb-9 lg:text-3xl font-bold tracking-wide text-white"
+            className="heading-section text-white mb-9"
           >
             Technical Tips
           </h2>

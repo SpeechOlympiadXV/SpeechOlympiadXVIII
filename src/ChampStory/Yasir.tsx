@@ -63,7 +63,7 @@ export function Yasir() {
         getting the exposure and being mentored by senior Gaveliers. With their
         guidance, I came up with a solid speech for the following Speech
         Olympiad, and with a huge effort put in from my end, I emerged as the
-        <b className="text-[#EDC001] ml-1">first runner-up</b>.
+        <b className="text-ember ml-1">first runner-up</b>.
       </p>
 
       <div className="my-8">
@@ -95,7 +95,7 @@ export function Yasir() {
         up with the best approach for table topics while sharpening my speaking
         skills and refining my speech with the help of practice and impactful
         mentoring sessions; which finally made me the
-        <br /><span className="text-[#EDC001] text-xl font-bold">Champion of Speech Olympiad VIII in 2014</span>.
+        <br /><span className="text-ember text-xl font-bold">Champion of Speech Olympiad VIII in 2014</span>.
       </p>
 
       <p>

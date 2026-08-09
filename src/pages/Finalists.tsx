@@ -25,7 +25,7 @@ export function Finalists() {
   return (
     <div className="w-[90%] sm:w-[80%] rounded-xl mx-auto my-9 bg-[#121212]/80 backdrop-blur-sm mt-20 text-white">
       <div className="px-9 py-9 mx-auto">
-        <h2 className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight">
+        <h2 className="heading-section text-white">
           Finalists
         </h2>
 
@@ -34,11 +34,11 @@ export function Finalists() {
         </div>
         <div className="text-gray-300 leading-6 text-left text-md sm:text-lg font-thin mt-1">
           Now, the final stage awaits—where you{' '}
-          <span className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#d5c060] to-cyan-600">
+          <span className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-ember-mid to-cyan-600">
             Own Your Voice
           </span>{' '}
           and{' '}
-          <span className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#d5c060] to-cyan-600">
+          <span className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-ember-mid to-cyan-600">
             Earn Your Crown
           </span>
           .
@@ -69,7 +69,7 @@ export function Finalists() {
                   }}
                   onMouseEnter={() => setHoverIndex(index)}
                   onMouseLeave={() => setHoverIndex(null)}
-                  className={`relative rounded-lg overflow-hidden transition-all duration-500 ease-in-out p-[2px] bg-gradient-to-br from-[#e5be06] to-[#0991b0] ${
+                  className={`relative rounded-lg overflow-hidden transition-all duration-500 ease-in-out p-[2px] bg-gradient-to-br from-ember to-[#0991b0] ${
                     isHovered ? 'w-[37%] sm:w-[35%] md:w-[30%] lg:w-[25%]' : 'w-[20%] sm:w-[15%] md:w-[15%] lg:w-[12%]'
                   }`}
                   style={{ minWidth: '150px', height: '300px', cursor: 'pointer' }}
@@ -97,7 +97,7 @@ export function Finalists() {
       </div>
 
       <div className="px-9 py-9 mx-auto border-t border-gray-700">
-        <h2 className="font-display text-2xl lg:text-3xl font-bold tracking-wide leading-tight mb-8">
+        <h2 className="heading-section text-white mb-8">
           Reserved Finalists
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-4">

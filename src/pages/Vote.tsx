@@ -92,10 +92,10 @@ export function Vote() {
           href={currentData.igLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full h-12 flex items-center justify-center hover:shadow-md hover:shadow-[#EDC00155] hover:text-gray-100 bg-gray-700 bg-[#EDC001] transition-all duration-500 rounded-lg"
+          className="btn-ember h-12 w-full rounded-lg"
         >
-          <Instagram className="mr-2 text-black w-5 h-5" />
-          <p className="text-center font-bold text-black text-sm md:text-md">
+          <Instagram className="mr-2 w-5 h-5" />
+          <p className="text-center font-bold text-sm md:text-md">
             Vote on Instagram
           </p>
         </a>
@@ -103,10 +103,10 @@ export function Vote() {
           href={currentData.fbLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full h-12 flex items-center justify-center hover:shadow-md hover:shadow-[#EDC00155] hover:text-gray-100 bg-gray-700 bg-[#EDC001] transition-all duration-500 rounded-lg"
+          className="btn-ember h-12 w-full rounded-lg"
         >
-          <Facebook className="mr-2 text-black w-5 h-5" />
-          <p className="text-center font-bold text-black text-sm md:text-md">
+          <Facebook className="mr-2 w-5 h-5" />
+          <p className="text-center font-bold text-sm md:text-md">
             Vote on Facebook
           </p>
         </a>
@@ -121,7 +121,7 @@ export function Vote() {
       <div className="text-gray-300 leading-6 text-left text-md sm:text-lg font-normal mt-4">
         (Only the likes and shares of the original post will be considered.)
       </div>
-      <div className="text-gray-300 leading-6 text-left text-md sm:text-lg font-bold mt-6 text-[#EDC001]">
+      <div className="text-gray-300 leading-6 text-left text-md sm:text-lg font-bold mt-6 text-ember">
         Vote for them on the Grand Finale!
       </div>
       <div className="text-gray-300 leading-6 text-left text-md sm:text-lg font-bold mt-2">

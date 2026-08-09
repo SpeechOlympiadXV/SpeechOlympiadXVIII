@@ -50,7 +50,7 @@ export function AboutPage({}: AboutPageProps) {
         >
           <div className="w-full pb-2">
             <p className="font-light text-justify pt-1 leading-normal">
-              <span className="font-semibold text-xl text-[#EDC001] drop-shadow-lg">
+              <span className="font-semibold text-xl text-ember drop-shadow-lg">
                 Speech Olympiad
               </span>
               {' '}stands as the flagship occasion hosted by the Gavel Club of University of Moratuwa. 
