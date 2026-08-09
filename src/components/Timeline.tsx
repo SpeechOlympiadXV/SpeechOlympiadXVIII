@@ -1,46 +1,42 @@
-import { useState } from 'react'
+import { useMemo } from 'react'
 
 interface Stage {
   id: number
   name: string
+  /** Machine-readable, drives which stage is "next". */
+  isoDate: string
+  /** What the user sees. */
   date: string
-  upcoming: boolean
-  lineStyle: string
-  diamondStyle: string
-  highlightStyle?: 'gold' | 'silver'
 }
+
+/** done = already happened · next = the soonest still ahead · later = after that */
+type StageStatus = 'done' | 'next' | 'later'
+
+const STAGES: Stage[] = [
+  { id: 1, name: 'Preliminary Round', isoDate: '2026-09-06', date: '6th September, 2026' },
+  { id: 2, name: 'Semi Finals', isoDate: '2026-09-20', date: '20th September, 2026' },
+  { id: 3, name: 'Finals', isoDate: '2026-10-01', date: '1st October, 2026' },
+]
 
 interface CompetitionTimelineProps { }
 
 export function CompetitionTimeline({ }: CompetitionTimelineProps) {
-  const [stages] = useState<Stage[]>([
-    {
-      id: 1,
-      name: 'Preliminary Round',
-      date: '6th September, 2026',
-      upcoming: true,
-      lineStyle: '',
-      diamondStyle: 'bg-[#141414] border-ember/45',
-    },
-    {
-      id: 2,
-      name: 'Semi Finals',
-      date: '20th September, 2026',
-      upcoming: true,
-      lineStyle: '',
-      diamondStyle: 'bg-[#141414] border-ember/45',
-      highlightStyle: 'silver',
-    },
-    {
-      id: 3,
-      name: 'Finals',
-      date: '1st October, 2026',
-      upcoming: true,
-      lineStyle: '',
-      diamondStyle: 'border-ember node-active',
-      highlightStyle: 'gold',
-    },
-  ])
+  // One source of truth for emphasis. Previously two competing ideas ran in
+  // parallel — `upcoming` (time) drove the nodes while `highlightStyle`
+  // (gold/silver medals) drove the cards, so the lit node and the lit card
+  // were on different rows. Status is now derived from the date, which also
+  // means the highlight advances on its own as rounds pass.
+  const statuses = useMemo<StageStatus[]>(() => {
+    const today = new Date().toISOString().slice(0, 10)
+    const nextIndex = STAGES.findIndex((s) => s.isoDate >= today)
+    return STAGES.map((_, i) => {
+      if (nextIndex === -1) return 'done'
+      if (i < nextIndex) return 'done'
+      return i === nextIndex ? 'next' : 'later'
+    })
+  }, [])
+
+  const stages = STAGES
 
   return (
     <div className="p-9 my-9 bg-[#121212]/80 backdrop-blur-sm rounded-xl w-full border border-[#282828]">
@@ -57,25 +53,35 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
       {/* Timeline Container */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative">
-          {stages.map((stage, index) => (
+          {stages.map((stage, index) => {
+            const status = statuses[index]
+            const isNext = status === 'next'
+            const isDone = status === 'done'
+
+            return (
             <div
               key={stage.name}
-              className="relative my-8 w-full sm:w-[100%] mx-auto"
+              className="relative my-8 w-full sm:w-full mx-auto"
             >
-              {/* Connector. A single flat tone rather than a per-segment
-                  gradient — each stage previously ran from-ember/20 to-ember,
-                  so the line snapped back to 20% at every junction and read
-                  as a patchy stripe. */}
+              {/* Connector. One flat tone rather than a per-segment gradient —
+                  each stage previously ran from-ember/20 to-ember, so the line
+                  snapped back to 20% at every junction and read as a patchy
+                  stripe. Segments after the next round dim out. */}
               <div
-                className={`absolute overflow-visible top-12 sm:left-[52%] md:left-[51.5%] lg:left-[50.5%] xl:left-[48.5%] transform sm:-translate-x-1/2 w-px bg-ember/25 ${
+                className={`absolute overflow-visible top-12 sm:left-[52%] md:left-[51.5%] lg:left-[50.5%] xl:left-[48.5%] transform sm:-translate-x-1/2 w-px ${
                   stage.id === stages.length ? 'h-0' : 'h-[120%]'
-                }`}
+                } ${isDone || isNext ? 'bg-ember/30' : 'bg-white/10'}`}
               />
 
-              {/* Node. Hollow by default so the ember reads as an outline;
-                  the highlighted stage fills and glows. */}
+              {/* Node. Hollow by default; the next round fills and breathes. */}
               <div
-                className={`absolute top-12 sm:left-[52%] md:left-[51.5%] lg:left-[50.5%] xl:left-[48.5%] transform -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rotate-45 border ${stage.diamondStyle}`}
+                className={`absolute top-12 sm:left-[52%] md:left-[51.5%] lg:left-[50.5%] xl:left-[48.5%] transform -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 rotate-45 border ${
+                  isNext
+                    ? 'border-ember node-active'
+                    : isDone
+                    ? 'bg-ember/30 border-ember/40'
+                    : 'bg-[#141414] border-white/20'
+                }`}
               />
 
               {/* Content Box */}
@@ -86,30 +92,31 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
                       }`}
                   >
                     <div
-                      className={`ml-0 w-full sm:w-[45%] p-6 flex flex-col mb-5 rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${stage.id % 2 === 0 ? 'sm:text-end' : ''
-                        } ${stage.highlightStyle === 'gold'
-                          ? 'bg-gradient-to-br from-[#282828] to-ember/27 backdrop-blur-md border-ember/50 shadow-[0_0_20px_rgba(255,122,24,0.18)]'
-                          : stage.highlightStyle === 'silver'
-                          ? 'bg-gradient-to-br from-[#2a2a2a] to-[#c0c0c044] backdrop-blur-md border-[#c0c0c0]/60 shadow-[0_0_20px_rgba(192,192,192,0.2)]'
-                          : 'bg-[#1e1e1e] backdrop-blur-sm border border-[#4a4a4a] shadow-lg'
-                        }`}
+                      className={`ml-0 w-full sm:w-[45%] p-6 flex flex-col mb-5 rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+                        stage.id % 2 === 0 ? 'sm:text-end' : ''
+                      } ${
+                        isNext
+                          ? 'bg-linear-to-br from-[#241608] to-ember/15 border-ember/55 shadow-[0_0_24px_rgba(255,122,24,0.22)]'
+                          : isDone
+                          ? 'bg-[#1a1a1a] border-white/10 opacity-70'
+                          : 'bg-[#1e1e1e] border-[#3a3a3a] shadow-lg'
+                      }`}
                     >
+                      {isNext && (
+                        <span className="eyebrow mb-2 text-ember">Next up</span>
+                      )}
                       <h3
-                        className={`heading-sub lg:text-3xl mb-2 ${stage.highlightStyle
-                            ? 'text-transparent bg-clip-text'
-                            : 'text-gray-200'
-                          }`}
-                        style={
-                          stage.highlightStyle === 'gold' ? { backgroundImage: 'linear-gradient(to bottom right, var(--color-ember-light) 0%, var(--color-ember) 50%, var(--color-ember-deep) 100%)' } :
-                          stage.highlightStyle === 'silver' ? { backgroundImage: 'linear-gradient(to bottom right, #ffffff 0%, #c0c0c0 50%, #808080 100%)' } :
-                          {}
-                        }
+                        className={`heading-sub lg:text-3xl mb-2 ${
+                          isNext ? 'text-ember-light' : 'text-gray-200'
+                        }`}
                       >
                         {stage.name}
                       </h3>
                       <time
-                        className={`text-sm xl:text-base font-light ${stage.highlightStyle ? 'text-gray-200' : 'text-gray-400'
-                          }`}
+                        dateTime={stage.isoDate}
+                        className={`text-sm xl:text-base font-light ${
+                          isNext ? 'text-gray-200' : 'text-gray-400'
+                        }`}
                       >
                         {stage.date}
                       </time>
@@ -118,7 +125,8 @@ export function CompetitionTimeline({ }: CompetitionTimelineProps) {
                 </div>
               </div>
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 
