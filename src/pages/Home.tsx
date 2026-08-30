@@ -114,7 +114,7 @@ export function HomePage({ }: HomePageProps) {
         <Doodle />
 
         {/* Registration CTA Section */}
-        <RegistrationCTA />
+        {/* <RegistrationCTA /> */}
 
         {/* Features Section */}
         <div className="mb-16">

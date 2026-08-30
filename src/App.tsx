@@ -81,7 +81,7 @@ export default function App() {
           <Route path="/amirthavarshani" element={<Vote />} />
           <Route path="/neelayadhakshi" element={<Vote />} />
           <Route path="/afrah" element={<Vote />} />*/}
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/register" element={<Register />} /> */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
