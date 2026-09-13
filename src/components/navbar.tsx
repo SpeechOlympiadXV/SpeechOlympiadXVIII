@@ -18,7 +18,7 @@ const navigation: NavItem[] = [
   { name: 'About', href: '/about', current: false, className: 'text-white' },
   { name: "Champion's Story", href: "/champions-story", current: false, className: 'text-white' },
   { name: 'Technical Tips', href: '/technical-tips', current: false, className: 'text-white' },
-  /*{ name: 'Finalists', href: '/finalists', current: false, className: 'text-white' },*/
+  { name: 'Semi-Finalists', href: '/semifinalists', current: false, className: 'text-white' },
   { name: 'Gallery', href: '/gallery', current: false, className: 'text-white' },
   { name: 'Rules & Regulations', href: '/rules', current: false, className: 'text-white' },
   { name: 'Blogs', href: '/blogs', current: false, className: 'text-white' },

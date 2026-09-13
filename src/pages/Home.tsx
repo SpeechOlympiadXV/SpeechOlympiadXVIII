@@ -15,7 +15,7 @@ import { Blogs } from './Blog.tsx'
 import { PageTechnicalTips } from './TechTips.tsx'
 import { ChampionsStory } from './ChampionsStory.tsx'
 // import { BookletSection } from '../components/BookletSection.tsx'
-// import { SemiFinalists } from './SemiFinalists.tsx'
+import { SemiFinalists } from './SemiFinalists.tsx'
 // import { Finalists } from './Finalists.tsx'
 
 // Image imports - Testimonials
@@ -145,9 +145,9 @@ export function HomePage({ }: HomePageProps) {
         {/* <BookletSection /> */}
 
         {/* Semi Finalists Section */}
-        {/* <div className="mb-16">
+        <div className="mb-16">
           <SemiFinalists />
-        </div> */}
+        </div>
 
         {/* Finalists Section */}
         {/* <div className="mb-16">
