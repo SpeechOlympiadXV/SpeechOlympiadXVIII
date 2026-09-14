@@ -12,8 +12,8 @@ import { PageTechnicalTips } from '@/pages/TechTips'
 import { Gallery } from '@/pages/Gallery'
 import { Blogs } from '@/pages/Blog'
 import { Rules } from '@/pages/Rules'
-//import { Finalists } from '@/pages/Finalists'
-// import { SemiFinalists } from '@/pages/SemiFinalists'
+// import { Finalists } from '@/pages/Finalists'
+import { SemiFinalists } from '@/pages/SemiFinalists'
 import { Vote } from '@/pages/Vote'
 import { Register } from '@/pages/Register'
 import { NotFoundPage } from '@/pages/Page404'
@@ -74,8 +74,8 @@ export default function App() {
             element={<><PageTitle>Blogs</PageTitle><Blogs /></>}
           />
           <Route path="/rules" element={<Rules />} />
-          {/*<Route path="/semifinalists" element={<SemiFinalists />} />
-          <Route path="/finalists" element={<Finalists />} />
+          <Route path="/semifinalists" element={<SemiFinalists />} />
+          {/*<Route path="/finalists" element={<Finalists />} />
           <Route path="/thulasithan" element={<Vote />} />
           <Route path="/aloka" element={<Vote />} />
           <Route path="/amirthavarshani" element={<Vote />} />
