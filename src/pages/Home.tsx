@@ -7,7 +7,7 @@ import { Hero } from '../components/Hero.tsx'
 import { Feature } from '../components/Feature.tsx'
 import { Doodle } from '../components/Doodle.tsx'
 import { RegistrationCTA } from '../components/RegistrationCTA.tsx'
-//import { PartnersDisplay } from '../components/Partners.tsx'
+import { PartnersDisplay } from '../components/Partners.tsx'
 import { CompetitionTimeline } from '../components/Timeline.tsx'
 import { AppGallery } from '../components/Gallery.tsx'
 import { AppTestimonialCard } from '../components/Testimonial.tsx'
@@ -131,7 +131,7 @@ export function HomePage({ }: HomePageProps) {
         </div>
 
         {/* Partners Section */}
-        {/* <PartnersDisplay /> */}
+        <PartnersDisplay />
 
         {/* Timeline Section */}
         <CompetitionTimeline />
