@@ -8,6 +8,7 @@ import { Feature } from '../components/Feature.tsx'
 import { Doodle } from '../components/Doodle.tsx'
 import { RegistrationCTA } from '../components/RegistrationCTA.tsx'
 import { PartnersDisplay } from '../components/Partners.tsx'
+import { PartnerMessages } from '../components/PartnerMessages.tsx'
 import { CompetitionTimeline } from '../components/Timeline.tsx'
 import { AppGallery } from '../components/Gallery.tsx'
 import { AppTestimonialCard } from '../components/Testimonial.tsx'
@@ -155,6 +156,9 @@ export function HomePage({ }: HomePageProps) {
 
         {/* Partners Section */}
         <PartnersDisplay />
+
+        {/* Partner Messages Section */}
+        <PartnerMessages />
 
         {/* Technical Tips Section */}
         <div className="mb-16">

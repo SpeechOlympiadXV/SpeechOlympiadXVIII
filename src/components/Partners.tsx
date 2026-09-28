@@ -18,9 +18,9 @@ interface Partner {
   isTop?: boolean
 }
 
-interface PartnersDisplayProps {}
+interface PartnersDisplayProps { }
 
-export function PartnersDisplay({}: PartnersDisplayProps) {
+export function PartnersDisplay({ }: PartnersDisplayProps) {
   const [partners] = useState<Partner[]>([
     {
       id: 1,
@@ -76,9 +76,9 @@ export function PartnersDisplay({}: PartnersDisplayProps) {
       <div className="w-full bg-[#121212]/80 backdrop-blur-sm rounded-2xl p-12 lg:p-16 shadow-2xl">
         {/* Header */}
         <div className="w-full flex flex-col items-start mb-12">
-          <h1 className="heading-page text-white lg:text-5xl xl:text-6xl text-center w-full lg:text-left">
+          <h2 className="heading-section text-white text-center w-full lg:text-left mb-6">
             Our Partners
-          </h1>
+          </h2>
         </div>
 
         {/* Top Partner Section */}
