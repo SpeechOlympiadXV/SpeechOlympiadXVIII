@@ -11,7 +11,7 @@ export function PartnerMessages() {
         {/* Header */}
         <div className="w-full flex flex-col items-start mb-8">
           <h2 className="heading-section text-white text-center w-full lg:text-left mb-6">
-            Partner's Messages
+            Partners' Messages
           </h2>
         </div>
 
