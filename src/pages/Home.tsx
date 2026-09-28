@@ -130,8 +130,7 @@ export function HomePage({ }: HomePageProps) {
           ))}
         </div>
 
-        {/* Partners Section */}
-        <PartnersDisplay />
+
 
         {/* Timeline Section */}
         <CompetitionTimeline />
@@ -153,6 +152,9 @@ export function HomePage({ }: HomePageProps) {
         {/* <div className="mb-16">
           <Finalists />
         </div> */}
+
+        {/* Partners Section */}
+        <PartnersDisplay />
 
         {/* Technical Tips Section */}
         <div className="mb-16">
