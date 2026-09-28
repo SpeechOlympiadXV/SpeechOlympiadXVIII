@@ -23,6 +23,8 @@ export function PartnerMessages() {
               <Image
                 src={message1}
                 alt="Partner Message 1"
+                width={1080}
+                height={1350}
                 className="w-full h-auto object-cover"
               />
             </div>
