@@ -1,8 +1,8 @@
 import Image from './Image'
 
 // You will need to save the provided images to these locations
-import message1 from '../assets/images/partners/message1.jpeg'
-import message2 from '../assets/images/partners/message2.jpeg'
+import message1 from '../assets/images/partners/message1.webp'
+import message2 from '../assets/images/partners/message2.webp'
 
 export function PartnerMessages() {
   return (
