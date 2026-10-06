@@ -20,6 +20,7 @@ const navigation: NavItem[] = [
   { name: 'Technical Tips', href: '/technical-tips', current: false, className: 'text-white' },
   { name: 'Semi-Finalists', href: '/semifinalists', current: false, className: 'text-white' },
   { name: 'Gallery', href: '/gallery', current: false, className: 'text-white' },
+  { name: 'Souvenir', href: '/souvenir', current: false, className: 'text-white' },
   { name: 'Rules & Regulations', href: '/rules', current: false, className: 'text-white' },
   { name: 'Blogs', href: '/blogs', current: false, className: 'text-white' },
   /* { name: 'Register', href: '/register', current: false, isButton: true }, */
