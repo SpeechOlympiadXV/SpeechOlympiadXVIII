@@ -17,6 +17,7 @@ import { SemiFinalists } from '@/pages/SemiFinalists'
 import { Vote } from '@/pages/Vote'
 import { Register } from '@/pages/Register'
 import { NotFoundPage } from '@/pages/Page404'
+import { Souvenir } from '@/pages/Souvenir'
 
 // Sanity setup moved to lib/sanity.ts
 
@@ -69,6 +70,10 @@ export default function App() {
             element={<><PageTitle>Technical Tips</PageTitle><PageTechnicalTips /></>}
           />
           <Route path="/gallery" element={<Gallery />} />
+          <Route
+            path="/souvenir"
+            element={<><PageTitle>Souvenir</PageTitle><Souvenir /></>}
+          />
           <Route
             path="/blogs"
             element={<><PageTitle>Blogs</PageTitle><Blogs /></>}

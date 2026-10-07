@@ -17,6 +17,7 @@ import { PageTechnicalTips } from './TechTips.tsx'
 import { ChampionsStory } from './ChampionsStory.tsx'
 // import { BookletSection } from '../components/BookletSection.tsx'
 import { SemiFinalists } from './SemiFinalists.tsx'
+import { Souvenir } from './Souvenir.tsx'
 // import { Finalists } from './Finalists.tsx'
 
 // Image imports - Testimonials
@@ -227,6 +228,11 @@ export function HomePage({ }: HomePageProps) {
             <AppGallery images={galleryImages} showLink={true} />
           </div>
         </section>
+
+        {/* Souvenir Section */}
+        <div className="mb-16">
+          <Souvenir />
+        </div>
       </div>
     </>
   )
